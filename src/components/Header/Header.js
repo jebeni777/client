@@ -43,7 +43,7 @@ const Header = props => {
           noWrap
           className={classes.title}
         >
-          What ails you?
+          Comfort Foods
         </Typography>
         <IconButton color="inherit">
           <Badge badgeContent={4} color="secondary">

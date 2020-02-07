@@ -14,6 +14,7 @@ import Setting from "./containers/Setting";
 import MainLayout from "./layouts/MainLayout";
 import EmptyLayout from "./layouts/EmptyLayout";
 import Ailment from "./containers/Ailment";
+import Chooser from "./containers/Chooser";
 
 const NotFound = () => {
   return <div>NotFound</div>;
@@ -58,6 +59,7 @@ class App extends Component {
             <Switch>
               {/* <DashboardRoute path="/dashboard" component={Home} /> */}
               <DashboardRoute path="/ailment/:id" component={Ailment} />
+              <DashboardRoute path="/chooser" component={Chooser} />
               <DashboardRoute path="/setting" component={Setting} />
               <DashboardRoute exact path="/" component={Home} />
               <EmptyRoute component={NotFound} />

@@ -16,6 +16,7 @@ const drawerWidth = 240;
 
 const styles = theme => ({
   drawerPaper: {
+    // backgroundColor: "#B9BFE4",
     position: "fixed",
     top: theme.spacing.unit * 8,
     whiteSpace: "nowrap",
@@ -40,7 +41,8 @@ const styles = theme => ({
 
 const myStyle = {
   height: "1.5em",
-  weight: "1.5em"
+  weight: "1.5em",
+
 }
 
 const Sidebar = props => {

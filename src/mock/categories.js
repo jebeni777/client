@@ -121,7 +121,7 @@ const categories = [
         id: "digestive",
         name: "digestive",
         title: "Digestive",
-        image: "./stomach.svg",
+        image: "./stomach.jpeg",
         imageAltText: "",
         nutrients: [],
         foods: [

@@ -1,5 +1,5 @@
 import React from "react";
-// import Button from "@material-ui/core/Button";
+import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
@@ -19,38 +19,61 @@ const Home = props => {
     padding: "1em",
     lineHeight: "1.5em"
   }
+  const btnStyle = {
+    margin: "1em",
+    padding: "1.5em",
+  }
+
   return (
     <div
       style={{
-        display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        backgroundImage: `url('/Background.jpg')`
+
       }}
     >
+      <h5>
+        Choose your ailment to learn which foods naturally comfort.
+      </h5>
+      <Link to="/chooser">
+        <Button
+          variant="contained"
+          color="primary"
+          name="ailments"
+          type="button"
+          style={btnStyle}
+
+        >
+          What ails you?
+      </Button>
+      </Link>
+      <h5>
+        Select below to go straight to ingrediets and how to use them.
+      </h5>
+      <Button
+        variant="contained"
+        color="primary"
+        name="foods"
+        type="button"
+        style={btnStyle}
+      >
+        Look for ingredients and recipes
+      </Button>
+      <h5>
+        Select below to learn more about nutrients and how they contribute.
+      </h5>
+      <Button
+        variant="contained"
+        color="primary"
+        name="nutrients"
+        type="button"
+        style={btnStyle}
+      >
+        Learn about nutrients?
+      </Button>
       {/* <Card>
         <CardContent> */}
-      <ul>
-        {categories.map(category => {
-          return (
 
-            <li
-              style={myStyle}
-            >
-              <Link to={`/ailment/${category.id}`}
-                key={category.id}
-              >
-                <h2 style={{ padding: "1em" }}>{category.title}</h2>
-
-                <img src={category.image} alt={category.imageAltText} style={{ objectFit: "scale-down" }} />
-                <h4>Helpful foods</h4>
-                {category.foods.join(", ")}
-              </Link>
-            </li>)
-
-        })
-        }
-      </ul>
       {/* </CardContent>
 
       </Card>

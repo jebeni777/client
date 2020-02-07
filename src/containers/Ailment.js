@@ -6,14 +6,14 @@ const Ailment = () => {
     let category;
     const path = window.location.pathname.split("/");
     const cat = path[2];
-    console.log(cat);
-    console.log(data);
+    // console.log(cat);
+    // console.log(data);
     data.forEach(item => {
         if (item.id == cat) {
             category = item;
         }
     })
-    console.log(category);
+    // console.log(category);
     return (
 
         < div >
