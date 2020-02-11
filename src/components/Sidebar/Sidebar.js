@@ -5,8 +5,6 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import HeartIcon from '@material-ui/icons/FavoriteBorder';
-import JointsIcon from '@material-ui/icons/DirectionsWalk';
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import stomach from "../../assets/stomach.svg";
@@ -71,7 +69,7 @@ const Sidebar = props => {
         <Link to="/">
           <ListItem button>
             <ListItemIcon>
-              <img src={home} style={myStyle} />
+              <img src={home} alt="home" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
@@ -79,7 +77,7 @@ const Sidebar = props => {
         <Link to="/chooser">
           <ListItem button>
             <ListItemIcon>
-              <img src={ailment} style={myStyle} />
+              <img src={ailment} alt="ailment" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Ailments" />
           </ListItem>
@@ -87,7 +85,7 @@ const Sidebar = props => {
         <Link to="/nutrients">
           <ListItem button>
             <ListItemIcon>
-              <img src={nutrient} style={myStyle} />
+              <img src={nutrient} alt="nutrient" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Nutrients" />
           </ListItem>
@@ -95,7 +93,7 @@ const Sidebar = props => {
         <Link to="/foods">
           <ListItem button>
             <ListItemIcon>
-              <img src={food} style={myStyle} />
+              <img src={food} alt="foods" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Foods" />
           </ListItem>
@@ -103,7 +101,7 @@ const Sidebar = props => {
         <Link to="/digestive">
           <ListItem button>
             <ListItemIcon>
-              <img src={stomach} style={myStyle} />
+              <img src={stomach} alt="digestive" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Digestive" />
           </ListItem>
@@ -111,7 +109,7 @@ const Sidebar = props => {
         <Link to="/respiratory">
           <ListItem button>
             <ListItemIcon>
-              <img src={lungs} style={myStyle} />
+              <img src={lungs} alt="respiratory" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Respiratory" />
           </ListItem>
@@ -119,7 +117,7 @@ const Sidebar = props => {
         <Link to="/heart">
           <ListItem button>
             <ListItemIcon>
-              <img src={heart} style={myStyle} />
+              <img src={heart} alt="heart" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Heart" />
           </ListItem>
@@ -127,7 +125,7 @@ const Sidebar = props => {
         <Link to="/bones">
           <ListItem button>
             <ListItemIcon>
-              <img src={bones} style={myStyle} />
+              <img src={bones} alt="bones" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Bones" />
           </ListItem>
@@ -135,7 +133,7 @@ const Sidebar = props => {
         <Link to="/joints">
           <ListItem button>
             <ListItemIcon>
-              <img src={joints} style={myStyle} />
+              <img src={joints} alt="joints" style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Joints" />
           </ListItem>

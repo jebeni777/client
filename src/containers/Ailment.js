@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import data from "../mock/categories";
 import { Link } from "react-router-dom";
 // import createTypography from "@material-ui/core/styles/createTypography";
@@ -10,7 +10,7 @@ const Ailment = () => {
     // console.log(cat);
     // console.log(data);
     data.forEach(item => {
-        if (item.id == cat) {
+        if (item.id === cat) {
             category = item;
         }
     })
@@ -32,7 +32,8 @@ const Ailment = () => {
                             key={food.id}
                         >
                             <li>
-                                {food.title}
+                                {/* <h4>{food.title}</h4>
+                                {food.foods.join(", ")} */}
                             </li>
                         </Link>
                     )

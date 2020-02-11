@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import nutrients from "../mock/mockNutrients";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";

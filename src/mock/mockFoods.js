@@ -48,10 +48,15 @@ const foods = [
         ]
     },
     {
-        id: "kale",
-        name: "kale",
-        title: "Kale",
-        nutrients: [],
+        id: "dark-chocolate",
+        name: "dark-chocolate",
+        title: "Dark-chocolate",
+        nutrients: [
+            "iron",
+            "copper",
+            "magnesium",
+            "manganese"
+        ],
         foods: [
 
         ]

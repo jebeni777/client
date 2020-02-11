@@ -1,24 +1,24 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Typography from "@material-ui/core/Typography";
+// import Card from "@material-ui/core/Card";
+// import CardContent from "@material-ui/core/CardContent";
+// import CardActions from "@material-ui/core/CardActions";
+// import Typography from "@material-ui/core/Typography";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import categories from "../mock/categories";
+// import categories from "../mock/categories";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 
 const Home = props => {
-  const myStyle = {
-    border: "1px Solid Gray",
-    listStyleType: "none",
-    boxShadow: "2px 2px grey",
-    marginBottom: "2em",
-    padding: "1em",
-    lineHeight: "1.5em"
-  }
+  // const myStyle = {
+  //   border: "1px Solid Gray",
+  //   listStyleType: "none",
+  //   boxShadow: "2px 2px grey",
+  //   marginBottom: "2em",
+  //   padding: "1em",
+  //   lineHeight: "1.5em"
+  // }
   const btnStyle = {
     margin: "1em",
     padding: "1.5em",

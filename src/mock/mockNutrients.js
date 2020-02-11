@@ -61,7 +61,14 @@ const nutrients = [
             "anti-inflammatory",
         ],
         foods: [
-
+            "dark chocolate",
+            "avocados",
+            "nuts",
+            "legumes",
+            "tofu",
+            "seeds",
+            "whole grains",
+            "fatty fishes - salmon, mackerel, halibut",
         ],
     },
     {
@@ -81,6 +88,8 @@ const nutrients = [
         foods: [
             "cottage cheese",
             "seeds - poppy, chai, sesame, celery",
+            "tofu",
+
 
         ]
     },
