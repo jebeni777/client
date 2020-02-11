@@ -57,12 +57,7 @@ const Chooser = props => {
                 </CardContent>
 
             </Card>
-            <Card>
-                <CardContent>
 
-
-                </CardContent>
-            </Card>
             {/*<Card>
           <CardContent>
             <ul style={{ listStyleType: "none" }}>

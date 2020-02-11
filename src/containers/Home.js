@@ -48,29 +48,33 @@ const Home = props => {
       </Button>
       </Link>
       <h5>
-        Select below to go straight to ingrediets and how to use them.
+        Select below to go straight to ingredients and recipes.
       </h5>
-      <Button
-        variant="contained"
-        color="primary"
-        name="foods"
-        type="button"
-        style={btnStyle}
-      >
-        Look for ingredients and recipes
+      <Link to="/foods">
+        <Button
+          variant="contained"
+          color="primary"
+          name="foods"
+          type="button"
+          style={btnStyle}
+        >
+          Look for ingredients and recipes
       </Button>
+      </Link>
       <h5>
         Select below to learn more about nutrients and how they contribute.
       </h5>
-      <Button
-        variant="contained"
-        color="primary"
-        name="nutrients"
-        type="button"
-        style={btnStyle}
-      >
-        Learn about nutrients?
+      <Link to="/nutrients">
+        <Button
+          variant="contained"
+          color="primary"
+          name="nutrients"
+          type="button"
+          style={btnStyle}
+        >
+          Learn about nutrients?
       </Button>
+      </Link>
       {/* <Card>
         <CardContent> */}
 

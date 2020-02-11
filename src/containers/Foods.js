@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import nutrients from "../mock/mockNutrients";
+import foods from "../mock/mockFoods";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { Link } from "react-router-dom";
 // import createTypography from "@material-ui/core/styles/createTypography";
 
-const Nutrients = () => {
+const Foods = () => {
     const myStyle = {
         border: "1px Solid Gray",
         listStyleType: "none",
@@ -37,21 +37,22 @@ const Nutrients = () => {
             <Card>
                 <CardContent>
                     <ul style={{ listStyleType: "none" }}>
-                        {nutrients.map(nutrient => {
+                        {foods.map(ingredient => {
                             return (
 
 
-                                <Link to={`/mock/${nutrient.id}`}
-                                    key={nutrient.id}
+                                <Link to={`/mock/${ingredient.id}`}
+                                    key={ingredient.id}
                                 >
                                     <li
                                         style={myStyle}
                                     >
-                                        <h2 style={{ padding: "1em" }}>{nutrient.title}</h2>
+                                        <h2 style={{ padding: "1em" }}>{ingredient.title}</h2>
 
-                                        {/* <img src={nutrient.image} alt={nutrient.imageAltText} style={{ objectFit: "scale-down" }} /> */}
-                                        <h4>Where to find it</h4>
-                                        {nutrient.foods.join(", \n")}
+                                        {/* <img src={ingredient.image} alt={ingredient.imageAltText} style={{ objectFit: "scale-down" }} /> */}
+
+                                        {ingredient.foods.join(", \n")}
+                                        <h4>Popular recipes</h4>
                                     </li>
                                 </Link>
                             )
@@ -67,4 +68,4 @@ const Nutrients = () => {
     )
 };
 
-export default Nutrients;
+export default Foods;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import data from "../mock/categories";
+import { Link } from "react-router-dom";
 // import createTypography from "@material-ui/core/styles/createTypography";
 
 const Ailment = () => {
@@ -21,9 +22,23 @@ const Ailment = () => {
                 <h2 style={{ padding: "1em" }}>{category.title}</h2>
 
             <img src={category.imageLoad} alt={category.imageAltText} style={{ objectFit: "scale-down" }} />
-            <h4>Helpful foods</h4>
-            {category.foods.join(", ")}
+            <h4>Helpful foods (choose a food for helpful ways to use)</h4>
+            {/* {category.foods.join(", ")} */}
+            <ul style={{ listStyleType: "none" }}>
+                {category.foods.map((food, i) => {
+                    console.log(food)
+                    return (
+                        <Link to={`/foods/{food.id}`}
+                            key={food.id}
+                        >
+                            <li>
+                                {food.title}
+                            </li>
+                        </Link>
+                    )
+                })}
 
+            </ul>
         </div >
     )
 };

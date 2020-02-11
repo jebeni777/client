@@ -1,5 +1,3 @@
-
-
 const categories = [
 
     {
@@ -30,14 +28,14 @@ const categories = [
         image: "./bones.jpeg",
         imageAltText: "",
         nutrients: [
-            "vitamin C",
+            "vitamin-C",
             "protein",
             "calcium",
-            "vitamin D",
-            "vitamin K",
+            "vitamin-D",
+            "vitamin-K",
             "magnesium",
             "zinc",
-            "omega-3 fatty acids"
+            "omega-3"
         ],
         foods: [
             "walnuts",
@@ -62,7 +60,10 @@ const categories = [
         image: "./memory.jpeg",
         imageAltText: "memory",
         imageLoad: "../../public/memory.jpeg",
-        nutrients: [],
+        nutrients: [
+            "vitamin-C",
+
+        ],
         foods: [
             "fatty fish",
             "coffee",
@@ -83,7 +84,9 @@ const categories = [
         title: "Heart",
         image: "./heart.jpeg",
         imageAltText: "heart",
-        nutrients: [],
+        nutrients: [
+            "magnesium",
+        ],
         foods: [
             "dark green leafy",
             "whole grains",
@@ -125,7 +128,7 @@ const categories = [
         imageAltText: "",
         nutrients: [],
         foods: [
-            "yogurt",
+            "yogurt - also loaded with probiotic bacteria",
             "apples",
             "fennel",
             "kefir",

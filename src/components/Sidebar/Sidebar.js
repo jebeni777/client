@@ -10,13 +10,21 @@ import JointsIcon from '@material-ui/icons/DirectionsWalk';
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import stomach from "../../assets/stomach.svg";
+import bones from "../../assets/bones.svg";
+import joints from "../../assets/joints.svg";
+import heart from "../../assets/heart.svg";
+import lungs from "../../assets/lungs.svg";
+import home from "../../assets/home.svg";
+import food from "../../assets/food.svg";
+import nutrient from "../../assets/nutrient.svg";
+import ailment from "../../assets/ailment.svg";
 
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   drawerPaper: {
-    // backgroundColor: "#B9BFE4",
+    backgroundColor: "#B9BFE4",
     position: "fixed",
     top: theme.spacing.unit * 8,
     whiteSpace: "nowrap",
@@ -40,8 +48,9 @@ const styles = theme => ({
 });
 
 const myStyle = {
-  height: "1.5em",
-  weight: "1.5em",
+  height: "1.7em",
+  weight: "1.7em",
+  backgroundColor: "#FFF"
 
 }
 
@@ -59,42 +68,26 @@ const Sidebar = props => {
       open={open}
     >
       <List>
-        <Link to="/joints">
+        <Link to="/">
           <ListItem button>
             <ListItemIcon>
-              <JointsIcon />
+              <img src={home} style={myStyle} />
             </ListItemIcon>
-            <ListItemText primary="Joints" />
+            <ListItemText primary="Home" />
           </ListItem>
         </Link>
-        <Link to="/heart">
+        <Link to="/chooser">
           <ListItem button>
             <ListItemIcon>
-              <HeartIcon />
+              <img src={ailment} style={myStyle} />
             </ListItemIcon>
-            <ListItemText primary="Heart" />
-          </ListItem>
-        </Link>
-        <Link to="/memory">
-          <ListItem button>
-            <ListItemIcon>
-              <i class="fas fa-brain"></i>
-            </ListItemIcon>
-            <ListItemText primary="Memory" />
-          </ListItem>
-        </Link>
-        <Link to="/bones">
-          <ListItem button>
-            <ListItemIcon>
-              <i class="fas fa-bone"></i>
-            </ListItemIcon>
-            <ListItemText primary="Bones" />
+            <ListItemText primary="Ailments" />
           </ListItem>
         </Link>
         <Link to="/nutrients">
           <ListItem button>
             <ListItemIcon>
-              <i class="fas fa-drumstick-bite"></i>
+              <img src={nutrient} style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Nutrients" />
           </ListItem>
@@ -102,7 +95,7 @@ const Sidebar = props => {
         <Link to="/foods">
           <ListItem button>
             <ListItemIcon>
-              <i class="fas fa-carrot"></i>
+              <img src={food} style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Foods" />
           </ListItem>
@@ -115,12 +108,36 @@ const Sidebar = props => {
             <ListItemText primary="Digestive" />
           </ListItem>
         </Link>
-        <Link to="/Respiratory">
+        <Link to="/respiratory">
           <ListItem button>
             <ListItemIcon>
-              <i class="fas fa-user-injured"></i>
+              <img src={lungs} style={myStyle} />
             </ListItemIcon>
             <ListItemText primary="Respiratory" />
+          </ListItem>
+        </Link>
+        <Link to="/heart">
+          <ListItem button>
+            <ListItemIcon>
+              <img src={heart} style={myStyle} />
+            </ListItemIcon>
+            <ListItemText primary="Heart" />
+          </ListItem>
+        </Link>
+        <Link to="/bones">
+          <ListItem button>
+            <ListItemIcon>
+              <img src={bones} style={myStyle} />
+            </ListItemIcon>
+            <ListItemText primary="Bones" />
+          </ListItem>
+        </Link>
+        <Link to="/joints">
+          <ListItem button>
+            <ListItemIcon>
+              <img src={joints} style={myStyle} />
+            </ListItemIcon>
+            <ListItemText primary="Joints" />
           </ListItem>
         </Link>
 

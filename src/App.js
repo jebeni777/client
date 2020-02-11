@@ -15,6 +15,8 @@ import MainLayout from "./layouts/MainLayout";
 import EmptyLayout from "./layouts/EmptyLayout";
 import Ailment from "./containers/Ailment";
 import Chooser from "./containers/Chooser";
+import Nutrients from "./containers/Nutrients";
+import Foods from "./containers/Foods";
 
 const NotFound = () => {
   return <div>NotFound</div>;
@@ -48,7 +50,7 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
 
 class App extends Component {
   render() {
-    console.log("Hello again")
+    // console.log("Hello again")
     const { settings } = this.props;
 
     return (
@@ -60,6 +62,10 @@ class App extends Component {
               {/* <DashboardRoute path="/dashboard" component={Home} /> */}
               <DashboardRoute path="/ailment/:id" component={Ailment} />
               <DashboardRoute path="/chooser" component={Chooser} />
+              <DashboardRoute path="/foods" component={Foods} />
+              <DashboardRoute path="/nutrients" component={Nutrients} />
+              <DashboardRoute path="/foods/:id" component={Foods} />
+              {/* <DashboardRoute path="/nutrients/:id" component={Nutrients} /> */}
               <DashboardRoute path="/setting" component={Setting} />
               <DashboardRoute exact path="/" component={Home} />
               <EmptyRoute component={NotFound} />
