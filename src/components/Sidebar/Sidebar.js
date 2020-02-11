@@ -7,11 +7,11 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
-import stomach from "../../assets/stomach.svg";
-import bones from "../../assets/bones.svg";
-import joints from "../../assets/joints.svg";
-import heart from "../../assets/heart.svg";
-import lungs from "../../assets/lungs.svg";
+// import stomach from "../../assets/stomach.svg";
+// import bones from "../../assets/bones.svg";
+// import joints from "../../assets/joints.svg";
+// import heart from "../../assets/heart.svg";
+// import lungs from "../../assets/lungs.svg";
 import home from "../../assets/home.svg";
 import food from "../../assets/food.svg";
 import nutrient from "../../assets/nutrient.svg";
@@ -98,7 +98,7 @@ const Sidebar = props => {
             <ListItemText primary="Foods" />
           </ListItem>
         </Link>
-        <Link to="/digestive">
+        {/* <Link to="/digestive">
           <ListItem button>
             <ListItemIcon>
               <img src={stomach} alt="digestive" style={myStyle} />
@@ -137,7 +137,7 @@ const Sidebar = props => {
             </ListItemIcon>
             <ListItemText primary="Joints" />
           </ListItem>
-        </Link>
+        </Link> */}
 
       </List>
     </Drawer>
