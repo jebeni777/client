@@ -48,11 +48,14 @@ const Foods = () => {
                                         style={myStyle}
                                     >
                                         <h2 style={{ padding: "1em" }}>{ingredient.title}</h2>
-
+                                        <h4>Health benefits</h4>
+                                        {ingredient.benefits.join(",  \n")}
                                         {/* <img src={ingredient.image} alt={ingredient.imageAltText} style={{ objectFit: "scale-down" }} /> */}
-
-                                        {ingredient.foods.join(", \n")}
+                                        {/* <h4>Nutrients</h4>
+                                        {ingredient.nutrients} */}
                                         <h4>Popular recipes</h4>
+                                        {ingredient.foods.join(",  \n")}
+
                                     </li>
                                 </Link>
                             )
