@@ -63,7 +63,7 @@ const nutrients = [
         foods: [
             "dark chocolate",
             "avocados",
-            "nuts",
+            "walnuts",
             "legumes",
             "tofu",
             "seeds",

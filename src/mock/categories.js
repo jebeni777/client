@@ -4,9 +4,10 @@ const categories = [
         id: "joints",
         name: "joints",
         title: "Joints",
-        image: "./joints.jpeg",
+        image: "../joints.jpeg",
         imageAltText: "",
         imageLoad: "",
+        description: "",
         nutients: [],
         foods: [
             "fatty fish",
@@ -25,8 +26,9 @@ const categories = [
         id: "bones",
         name: "bones",
         title: "Bones",
-        image: "./bones.jpeg",
+        image: "../bones.jpeg",
         imageAltText: "",
+        description: "",
         nutrients: [
             "vitamin-C",
             "protein",
@@ -57,9 +59,9 @@ const categories = [
         id: "memory",
         name: "memory",
         title: "Memory",
-        image: "./memory.jpeg",
+        image: "../memory.jpeg",
         imageAltText: "memory",
-        imageLoad: "../../public/memory.jpeg",
+        description: "",
         nutrients: [
             "vitamin-C",
 
@@ -82,8 +84,9 @@ const categories = [
         id: "heart",
         name: "heart",
         title: "Heart",
-        image: "./heart.jpeg",
+        image: "../heart.jpeg",
         imageAltText: "heart",
+        description: "",
         nutrients: [
             "magnesium",
         ],
@@ -109,8 +112,9 @@ const categories = [
         id: "respiratory",
         name: "respiratory",
         title: "Respiratory",
-        image: "./lungs.jpeg",
+        image: "../lungs.jpeg",
         imageAltText: "",
+        description: "",
         nutrients: [],
         foods: [
             "pears",
@@ -124,8 +128,9 @@ const categories = [
         id: "digestive",
         name: "digestive",
         title: "Digestive",
-        image: "./stomach.jpeg",
+        image: "../stomach.jpeg",
         imageAltText: "",
+        description: "",
         nutrients: [],
         foods: [
             "yogurt - also loaded with probiotic bacteria",

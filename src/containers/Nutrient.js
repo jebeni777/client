@@ -1,36 +1,39 @@
 import React from "react";
-import data from "../mock/categories";
+import data from "../mock/mockNutrients";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import { Link } from "react-router-dom";
-
-
 // import createTypography from "@material-ui/core/styles/createTypography";
 
-const Ailment = () => {
-    let category;
+const Nutrient = () => {
+    const myStyle = {
+        border: "1px Solid Gray",
+        listStyleType: "none",
+        boxShadow: "2px 2px grey",
+        marginBottom: "2em",
+        padding: "1em",
+        lineHeight: "1.5em"
+    }
+    let nutrient;
     const path = window.location.pathname.split("/");
-    const cat = path[2];
-    console.log(cat);
+    const nut = path[2];
+    console.log(nut);
     console.log(data);
     data.forEach(item => {
-        if (item.id === cat) {
-            category = item;
+        if (item.id === nut) {
+            nutrient = item;
         }
     })
-    console.log(category);
-
+    console.log(nutrient);
     return (
 
         < div >
-            <h1 style={{ padding: "1em" }}>{category.title}</h1>
-            {/* <img src={category.imageLoad} alt={category.imageAltText} style={{ objectFit: "scale-down" }} /> */}
-            <img src={category.image} alt={category.imageAltText} />
-
+            <h1 style={{ padding: "1em" }}>{nutrient.title}</h1>
             <h4>Helpful foods (choose a food for helpful ways to use)</h4>
-            {/* {category.foods.join(", ")} */}
+            {/* {nutrient.foods.join(", ")} */}
             <ul style={{ listStyleType: "none" }}>
-                {category.foods.map((food, i) => {
+                {nutrient.foods.map((food, i) => {
                     console.log(food)
-
                     return (
                         <Link to={`/foods/${food}`}
                             key={food}
@@ -47,4 +50,4 @@ const Ailment = () => {
     )
 };
 
-export default Ailment;
+export default Nutrient;
