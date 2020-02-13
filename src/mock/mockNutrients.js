@@ -23,7 +23,7 @@ const nutrients = [
     {
         id: "vitamin-C",
         name: "vitamin-C",
-        title: "vitamin-C",
+        title: "Vitamin-C",
         benefits: [
             "strong antioxidant that can strengthen your body’s natural defenses",
             "may help battle high blood pressure",

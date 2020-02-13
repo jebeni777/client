@@ -3,6 +3,7 @@ import foods from "../mock/mockFoods";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { Link } from "react-router-dom";
+import nutrients from "../mock/mockNutrients";
 // import createTypography from "@material-ui/core/styles/createTypography";
 
 const Foods = () => {
@@ -11,61 +12,64 @@ const Foods = () => {
         listStyleType: "none",
         boxShadow: "2px 2px grey",
         marginBottom: "2em",
-        padding: "1em",
+        padding: "0.5em",
         lineHeight: "1.5em"
     }
 
-    // const path = window.location.pathname.split("/");
-    // const cat = path[2];
-    // console.log(cat);
-    // console.log(data);
-    // data.forEach(item => {
-    //     if (item.id == cat) {
-    //         category = item;
-    //     }
-    // })
-    // console.log(category);
+
     return (
-
         < div >
-            {/* "Query based on: {category.id}"
-                <h2 style={{ padding: "1em" }}>{category.title}</h2>
+            <>
+                <Card style={myStyle} >
+                    <CardContent>
+                        <div style={myStyle}>
 
-            <img src={category.imageLoad} alt={category.imageAltText} style={{ objectFit: "scale-down" }} />
-            <h4>Helpful foods</h4>
-            {category.foods.join(", ")} */}
-            <Card>
-                <CardContent>
-                    <ul style={{ listStyleType: "none" }}>
-                        {foods.map(ingredient => {
-                            return (
+                            <ul style={{ listStyleType: "none" }}>
+                                {foods.map(ingredient => {
+                                    return (
+                                        <>
+                                            <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
+                                            <h4>Health benefits</h4>
+                                            {ingredient.benefits.join(",  \n")}
+                                            <h4>Nutrients</h4>
+                                            <ul style={{ listStyleType: "none" }} >
+                                                {ingredient.nutrients.map((nutrient) => {
+                                                    console.log(nutrient)
 
+                                                    return (
+                                                        <Link to={`/foods/${ingredient.nutrient}`}
+                                                            key={nutrient}
+                                                        >
+                                                            <li>{nutrient}</li>
+                                                        </Link>
+                                                    )
+                                                })}
+                                            </ul>
+                                            <h4>Popular recipes</h4>
+                                            <ul style={{ listStyleType: "none" }}>
+                                                {ingredient.recipes.map((recipe) => {
+                                                    console.log(recipe)
 
-                                <Link to={`/mock/${ingredient.id}`}
-                                    key={ingredient.id}
-                                >
-                                    <li
-                                        style={myStyle}
-                                    >
-                                        <h2 style={{ padding: "1em" }}>{ingredient.title}</h2>
-                                        <h4>Health benefits</h4>
-                                        {ingredient.benefits.join(",  \n")}
-                                        {/* <img src={ingredient.image} alt={ingredient.imageAltText} style={{ objectFit: "scale-down" }} /> */}
-                                        {/* <h4>Nutrients</h4>
-                                        {ingredient.nutrients} */}
-                                        <h4>Popular recipes</h4>
-                                        {ingredient.foods.join(",  \n")}
+                                                    return (
 
-                                    </li>
-                                </Link>
-                            )
+                                                        <Link to={`/foods/${ingredient}`}
+                                                            key={recipe}
+                                                        >
+                                                            <li>{recipe}</li>
+                                                        </Link>
+                                                    )
+                                                })}
+                                            </ul>
+                                        </>
+                                    )
+                                })
+                                }
+                            </ul>
+                        </div>
+                    </CardContent>
+                </Card>
+            </>
 
-                        })
-                        }
-                    </ul>
-
-                </CardContent>
-            </Card>
 
         </div >
     )

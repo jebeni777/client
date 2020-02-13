@@ -12,52 +12,49 @@ import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 
 const NutriChooser = props => {
-    // const myStyle = {
-    //     border: "1px Solid Gray",
-    //     listStyleType: "none",
-    //     boxShadow: "2px 2px grey",
-    //     marginBottom: "2em",
-    //     padding: "1em",
-    //     lineHeight: "1.5em"
-    // }
+    const myStyle = {
+        border: "1px Solid Gray",
+        listStyleType: "none",
+        boxShadow: "2px 2px grey",
+        marginBottom: "2em",
+        padding: "1em",
+        lineHeight: "1.5em"
+    }
 
 
 
     return (
         <div
-            style={{
-                alignItems: "center",
-                justifyContent: "center",
+        // style={{
+        //     alignItems: "center",
+        //     justifyContent: "center",
 
-            }}
+        // }}
         >
-            <Card>
-                <CardContent>
-                    <ul style={{ listStyleType: "none" }}>
-                        {nutrients.map(nutrient => {
-                            return (
-                                <>
+            <ul style={{ listStyleType: "none" }}>
+                {nutrients.map(nutrient => {
+                    return (
+                        <>
+                            <Card style={myStyle}>
+                                <CardContent>
                                     <Link to={`/nutrients/${nutrient.id}`}
                                         key={nutrient.id}
                                     >
-                                        <h2 style={{ padding: "1em" }}>{nutrient.title}</h2>
+                                        <h2 style={{ padding: "0.5em" }}>{nutrient.title}</h2>
                                     </Link>
-                                    <li
-                                    // style={myStyle}
-                                    >
-                                        <h5>{nutrient.description}</h5>
-                                        <h4>Helpful foods</h4>
-                                        {nutrient.foods.join(", ")}
+                                    <li>
+                                        <h4 style={{ padding: "0.5em" }}>Why it helps</h4>
+                                        <h5>{nutrient.benefits}</h5>
                                     </li>
-                                </>
-                            )
+                                </CardContent>
 
-                        })
-                        }
-                    </ul>
-                </CardContent>
+                            </Card>
+                        </>
+                    )
 
-            </Card>
+                })
+                }
+            </ul>
 
 
         </div >

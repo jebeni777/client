@@ -41,7 +41,6 @@ const Ailment = () => {
                         </Link>
                     )
                 })}
-
             </ul>
         </div >
     )

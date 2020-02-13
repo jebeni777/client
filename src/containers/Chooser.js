@@ -45,11 +45,8 @@ const Chooser = props => {
                     style={myStyle}
                   >
                     <h2 style={{ padding: "1em" }}>{category.title}</h2>
-
                     <img src={category.image} alt={category.imageAltText} />
                     <h5>{category.description}</h5>
-                    {/* <h4>Helpful foods</h4>
-                    {category.foods.join(", ")} */}
                   </li>
                 </Link>
               )
