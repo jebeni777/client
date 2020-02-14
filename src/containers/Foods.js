@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import nutrients from "../mock/mockNutrients";
 // import createTypography from "@material-ui/core/styles/createTypography";
 
+
 const Foods = () => {
     const myStyle = {
         border: "1px Solid Gray",

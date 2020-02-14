@@ -1,62 +1,71 @@
 import React from "react";
-// import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-// import CardActions from "@material-ui/core/CardActions";
-// import Typography from "@material-ui/core/Typography";
-// import { makeStyles } from '@material-ui/core/styles';
+import CardActions from "@material-ui/core/CardActions";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from '@material-ui/core/styles';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import categories from "../mock/categories";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 
 const Chooser = props => {
-  const myStyle = {
-    border: "1px Solid Gray",
-    listStyleType: "none",
-    boxShadow: "2px 2px grey",
-    marginBottom: "2em",
-    padding: "1em",
-    lineHeight: "1.5em"
-  }
-
-
-
+  // const myStyle = {
+  //   border: "1px Solid Gray",
+  //   listStyleType: "none",
+  //   boxShadow: "2px 2px grey",
+  //   marginBottom: "2em",
+  //   padding: "1em",
+  //   lineHeight: "1.5em"
+  // }
   return (
-    <div
-      style={{
-        alignItems: "center",
-        justifyContent: "center",
 
-      }}
-    >
-      <Card>
-        <CardContent>
-          <ul style={{ listStyleType: "none" }}>
-            {categories.map(category => {
-              return (
+    <div>
+      {/* <ul style={{ listStyleType: "none" }}> */}
+      <Grid
+        container
+        direction="row"
+        justify-content="space-evenly"
+        alignItems="center"
+      >
+
+        {categories.map(category => {
+          return (
+
+            <Grid item xs={6} sm={4}>
+
+              <Link to={`/ailment/${category.id}`}
+                key={category.id}
+              >
+                <Card>
+                  <CardContent style={{ justifyContent: "center" }}>
+                    {/* <CardActions > */}
 
 
-                <Link to={`/ailment/${category.id}`}
-                  key={category.id}
-                >
-                  <li
-                    style={myStyle}
-                  >
-                    <h2 style={{ padding: "1em" }}>{category.title}</h2>
-                    <img src={category.image} alt={category.imageAltText} />
-                    <h5>{category.description}</h5>
-                  </li>
-                </Link>
-              )
+                    <div
+                    // style={myStyle}
+                    >
+                      <h2 >{category.title}</h2>
+                      <img src={category.image} alt={category.imageAltText} />
+                      <h5>{category.description}</h5>
+                    </div>
 
-            })
-            }
-          </ul>
-        </CardContent>
+                    {/* </CardActions> */}
+                  </CardContent>
 
-      </Card>
+                </Card>
+              </Link>
+            </Grid>
+          )
+
+        })
+        }
+      </Grid>
+
+      {/* </ul> */}
 
       {/*<Card>
           <CardContent>

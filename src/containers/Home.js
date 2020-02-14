@@ -33,7 +33,7 @@ const Home = props => {
 
       }}
     >
-      <iframe height="250" width="350" src={video} align="right"></iframe>
+      <iframe height="250" width="350" src={video} align="right" title="video"></iframe>
       <h5>
         Choose your ailment to learn which foods naturally comfort.
       </h5>

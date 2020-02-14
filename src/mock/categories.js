@@ -1,59 +1,20 @@
 const categories = [
 
     {
-        id: "joints",
-        name: "joints",
-        title: "Joints",
-        image: "../joints.jpeg",
-        imageAltText: "",
-        imageLoad: "",
-        description: "",
-        nutients: [],
-        foods: [
-            "fatty fish",
-            "garlic",
-            "ginger",
-            "broccoli",
-            "walnuts",
-            "berries",
-            "green leafy",
-            "grapes",
-            "olive oil",
-            "tart cherry juice"
-        ],
-    },
-    {
-        id: "bones",
-        name: "bones",
-        title: "Bones",
-        image: "../bones.jpeg",
+        id: "respiratory",
+        name: "respiratory",
+        title: "Respiratory",
+        image: "../lungs.jpeg",
         imageAltText: "",
         description: "",
-        nutrients: [
-            "vitamin-C",
-            "protein",
-            "calcium",
-            "vitamin-D",
-            "vitamin-K",
-            "magnesium",
-            "zinc",
-            "omega-3"
-        ],
+        nutrients: [],
         foods: [
-            "walnuts",
-            "chai seeds",
-            "pumpkin seeds",
-            "green leafy",
-            "fatty fish",
-            "cheese",
-            "sauerkraut",
-            "seeds like poppy, chai, sesame, celery",
-            "yogurt",
-            "sardines",
-            "canned salmon",
-            "beans and lentils",
-
-        ]
+            "pears",
+            "matcha",
+            "sweet potatoes",
+            "black cumin",
+            "fish"
+        ],
     },
     {
         id: "memory",
@@ -109,19 +70,25 @@ const categories = [
         ],
     },
     {
-        id: "respiratory",
-        name: "respiratory",
-        title: "Respiratory",
-        image: "../lungs.jpeg",
+        id: "joints",
+        name: "joints",
+        title: "Joints",
+        image: "../joints.jpeg",
         imageAltText: "",
+        imageLoad: "",
         description: "",
-        nutrients: [],
+        nutients: [],
         foods: [
-            "pears",
-            "matcha",
-            "sweet potatoes",
-            "black cumin",
-            "fish"
+            "fatty fish",
+            "garlic",
+            "ginger",
+            "broccoli",
+            "walnuts",
+            "berries",
+            "green leafy",
+            "grapes",
+            "olive oil",
+            "tart cherry juice"
         ],
     },
     {
@@ -150,6 +117,39 @@ const categories = [
             "salmon",
             "bone broth",
             "peppermint"
+        ]
+    },
+    {
+        id: "bones",
+        name: "bones",
+        title: "Bones",
+        image: "../bones.jpeg",
+        imageAltText: "",
+        description: "",
+        nutrients: [
+            "vitamin-C",
+            "protein",
+            "calcium",
+            "vitamin-D",
+            "vitamin-K",
+            "magnesium",
+            "zinc",
+            "omega-3"
+        ],
+        foods: [
+            "walnuts",
+            "chai seeds",
+            "pumpkin seeds",
+            "green leafy",
+            "fatty fish",
+            "cheese",
+            "sauerkraut",
+            "seeds like poppy, chai, sesame, celery",
+            "yogurt",
+            "sardines",
+            "canned salmon",
+            "beans and lentils",
+
         ]
     }
 
