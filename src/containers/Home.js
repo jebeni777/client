@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 // import categories from "../mock/categories";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
+import video from "../assets/video.mp4";
 
 const Home = props => {
   // const myStyle = {
@@ -32,6 +33,7 @@ const Home = props => {
 
       }}
     >
+      <iframe height="250" width="350" src={video} align="right"></iframe>
       <h5>
         Choose your ailment to learn which foods naturally comfort.
       </h5>
