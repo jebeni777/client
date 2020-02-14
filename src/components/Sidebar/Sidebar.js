@@ -65,7 +65,7 @@ const Sidebar = props => {
       }}
       open={open}
     >
-      <List>
+      <List style={{ margin: "0.5em" }}>
         <Link to="/">
           <ListItem button>
             <ListItemIcon>
