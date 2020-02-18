@@ -15,7 +15,8 @@ const FoodChooser = props => {
         marginBottom: "2em",
         padding: "1em",
         lineHeight: "1.5em",
-        maxWidth: "11em"
+        maxWidth: "12em",
+        minWidth: "12em",
     }
 
     const imgStyle = {
@@ -38,7 +39,7 @@ const FoodChooser = props => {
                                 key={foodCat.id}
                             >
                                 <div style={cardStyle}>
-                                    <h2 >{foodCat.title}</h2>
+                                    <h2 style={{ padding: "0.5em" }}>{foodCat.title}</h2>
                                     <img src={foodCat.image} alt={foodCat.imageAltText} style={imgStyle} />
                                     <h5>{foodCat.description}</h5>
                                 </div>

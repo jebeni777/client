@@ -1,16 +1,14 @@
 import React from "react";
 import foods from "../mock/mockFoods";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import { Link } from "react-router-dom";
-import nutrients from "../mock/mockNutrients";
 import Grid from '@material-ui/core/Grid';
-// import createTypography from "@material-ui/core/styles/createTypography";
+
 
 
 const Foods = () => {
     const cardStyle = {
         border: "1px Solid Gray",
+        borderRadius: "0.5em",
         listStyleType: "none",
         boxShadow: "2px 2px grey",
         marginBottom: "2em",
@@ -33,11 +31,6 @@ const Foods = () => {
                 justify="center"
             >
                 <>
-                    {/* <Card style={cardStyle} >
-                    <CardContent> */}
-                    {/* <div style={cardStyle}> */}
-
-                    {/* <ul style={{ listStyleType: "none" }}> */}
                     {foods.map(ingredient => {
                         return (
                             <Grid item xs>
@@ -47,7 +40,7 @@ const Foods = () => {
                                     <h4>Health benefits</h4>
                                     {ingredient.benefits.join(",  \n")}
                                     <h4>Nutrients</h4>
-                                    {/* <ul style={{ listStyleType: "none" }} > */}
+
                                     {ingredient.nutrients.map((nutrient) => {
                                         console.log(nutrient)
 
@@ -59,7 +52,7 @@ const Foods = () => {
                                             </Link>
                                         )
                                     })}
-                                    {/* </ul> */}
+
                                     <h4>Popular recipes</h4>
                                     {/* <ul style={{ listStyleType: "none" }}> */}
                                     {ingredient.recipes.map((recipe) => {
@@ -74,17 +67,14 @@ const Foods = () => {
                                             </Link>
                                         )
                                     })}
-                                    {/* </ul> */}
+
                                 </div>
                             </Grid>
 
                         )
                     })
                     }
-                    {/* </ul> */}
-                    {/* </div> */}
-                    {/* </CardContent>
-                </Card> */}
+
                 </>
             </Grid>
 

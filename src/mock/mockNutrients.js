@@ -3,6 +3,8 @@ const nutrients = [
         id: "calcium",
         name: "calcium",
         title: "Calcium",
+        image: "../calcium.jpeg",
+        imageAltText: "calcium",
         benefits: [
             "build and maintain strong bones",
             "heart, muscles and nerves also need calcium to function properly",
@@ -24,6 +26,8 @@ const nutrients = [
         id: "vitamin-C",
         name: "vitamin-C",
         title: "Vitamin-C",
+        image: "../vit-c.jpeg",
+        imageAltText: "vitamin-C",
         benefits: [
             "strong antioxidant that can strengthen your body’s natural defenses",
             "may help battle high blood pressure",
@@ -50,6 +54,8 @@ const nutrients = [
         id: "magnesium",
         name: "magnesium",
         title: "Magnesium",
+        image: "../magnesium.jpeg",
+        imageAltText: "magnesium",
         benefits: [
             "bone health",
             "cardiovascular health",
@@ -75,6 +81,8 @@ const nutrients = [
         id: "omega-3",
         name: "omega-3",
         title: "Omega-3",
+        image: "../omega-3.jpeg",
+        imageAltText: "omega-3",
         benefits: [],
         foods: [
             "seeds - poppy, chai, sesame, celery"
@@ -84,6 +92,8 @@ const nutrients = [
         id: "protein",
         name: "protein",
         title: "Protein",
+        image: "../protein.jpeg",
+        imageAltText: "protein",
         benefits: [],
         foods: [
             "cottage cheese",
@@ -97,6 +107,8 @@ const nutrients = [
         id: "vitamin-K",
         name: "vitamin-K",
         title: "Vitamin-K",
+        image: "../vit-k.jpeg",
+        imageAltText: "vitamin-k",
         benefits: [],
         foods: [
             "rhubarb",
@@ -106,6 +118,8 @@ const nutrients = [
         id: "vitamin-D",
         name: "vitamin-D",
         title: "Vitamin-D",
+        image: "../vit-d.jpeg",
+        imageAltText: "vitamin-d",
         benefits: [],
         foods: [],
     },
@@ -113,6 +127,8 @@ const nutrients = [
         id: "vitamin-E",
         name: "vitamin-E",
         title: "Vitamin-E",
+        image: "../vit-e.jpeg",
+        imageAltText: "vitamin-e",
         benefits: [],
         foods: [
             "almonds",
@@ -130,6 +146,8 @@ const nutrients = [
         id: "zink",
         name: "zink",
         title: "Zink",
+        image: "../zinc.jpeg",
+        imageAltText: "zinc",
         benefits: "",
         foods: [
 
