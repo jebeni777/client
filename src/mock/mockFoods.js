@@ -3,7 +3,7 @@ const foods = [
         id: "walnuts",
         name: "walnuts",
         title: "Walnuts",
-        category: "nuts",
+        category: "fruit",
         image: "../walnuts.jpeg",
         imageAltText: "walnuts",
         benefits: [
@@ -29,7 +29,7 @@ const foods = [
         id: "kale",
         name: "kale",
         title: "Kale",
-        category: "dark leafy green",
+        category: "vegetable",
         image: "../kale.jpeg",
         imageAltText: "kale",
         benefits: [
@@ -79,7 +79,7 @@ const foods = [
         id: "beans",
         name: "beans",
         title: "Beans",
-        category: "beans and lentils",
+        category: "vegetable",
         image: "../beans.jpeg",
         imageAltText: "beans",
         benefits: [
@@ -104,7 +104,7 @@ const foods = [
         id: "lentils",
         name: "lentils",
         title: "lentils",
-        category: "beans and lentils",
+        category: "vegetable",
         image: "../lentils.jpeg",
         imageAltText: "lentils",
         benefits: [
@@ -129,7 +129,7 @@ const foods = [
         id: "dark-chocolate",
         name: "dark-chocolate",
         title: "Dark-chocolate",
-        category: "nuts",
+        category: "sugar",
         image: "../dark-choc.jpeg",
         imageAltText: "dark-chocolate",
         benefits: [

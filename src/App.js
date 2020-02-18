@@ -64,7 +64,7 @@ class App extends Component {
               <DashboardRoute path="/ailment/:id" exact component={Ailment} />
               <DashboardRoute path="/chooser" exact component={Chooser} />
               <DashboardRoute path="/foodChooser" exact component={FoodChooser} />
-              <DashboardRoute path="/foods" exact component={Foods} />
+              <DashboardRoute path="/foods/:category" exact component={Foods} />
               <DashboardRoute path="/foods/:id" exact component={Ingredient} />
               <DashboardRoute path="/nutrients" exact component={NutriChooser} />
               <DashboardRoute path="/nutrients/:id" exact component={Nutrient} />

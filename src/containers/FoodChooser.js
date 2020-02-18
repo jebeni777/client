@@ -35,7 +35,7 @@ const FoodChooser = props => {
                 {foodCats.map(foodCat => {
                     return (
                         <Grid item xs>
-                            <Link to={`/ailment/${foodCat.id}`}
+                            <Link to={`/foods/${foodCat.name}`}
                                 key={foodCat.id}
                             >
                                 <div style={cardStyle}>

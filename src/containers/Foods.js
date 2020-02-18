@@ -23,6 +23,18 @@ const Foods = () => {
 
     }
 
+    let foodCat;
+    const path = window.location.pathname.split("/");
+    const cat = path[2];
+    console.log(cat);
+    console.log(foods);
+    foods.forEach(item => {
+        if (item.category === cat) {
+            foodCat = cat;
+        }
+    })
+    console.log(foodCat);
+
     return (
         < div >
             <Grid
@@ -32,46 +44,49 @@ const Foods = () => {
             >
                 <>
                     {foods.map(ingredient => {
-                        return (
-                            <Grid item xs>
-                                <div style={cardStyle}>
-                                    <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
-                                    <img src={ingredient.image} alt={ingredient.imageAltText} style={imgStyle} />
-                                    <h4>Health benefits</h4>
-                                    {ingredient.benefits.join(",  \n")}
-                                    <h4>Nutrients</h4>
+                        if (ingredient.category === foodCat) {
+                            return (
+                                <Grid item xs>
+                                    <div style={cardStyle}>
+                                        <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
+                                        <img src={ingredient.image} alt={ingredient.imageAltText} style={imgStyle} />
+                                        <h4>Health benefits</h4>
+                                        {ingredient.benefits.join(",  \n")}
+                                        <h4>Nutrients</h4>
 
-                                    {ingredient.nutrients.map((nutrient) => {
-                                        console.log(nutrient)
+                                        {ingredient.nutrients.map((nutrient) => {
+                                            console.log(nutrient)
 
-                                        return (
-                                            <Link to={`/foods/${ingredient.nutrient}`}
-                                                key={nutrient}
-                                            >
-                                                <li>{nutrient}</li>
-                                            </Link>
-                                        )
-                                    })}
+                                            return (
+                                                <Link to={`/nutrients/${nutrient}`}
+                                                    key={nutrient}
+                                                >
+                                                    <li>{nutrient}</li>
+                                                </Link>
+                                            )
+                                        })}
 
-                                    <h4>Popular recipes</h4>
-                                    {/* <ul style={{ listStyleType: "none" }}> */}
-                                    {ingredient.recipes.map((recipe) => {
-                                        console.log(recipe)
+                                        <h4>Popular recipes</h4>
+                                        {/* <ul style={{ listStyleType: "none" }}> */}
+                                        {ingredient.recipes.map((recipe) => {
+                                            console.log(recipe)
 
-                                        return (
+                                            return (
 
-                                            <Link to={`/foods/${ingredient}`}
-                                                key={recipe}
-                                            >
-                                                <li>{recipe}</li>
-                                            </Link>
-                                        )
-                                    })}
+                                                <Link to={`/foods/${ingredient}`}
+                                                    key={recipe}
+                                                >
+                                                    <li>{recipe}</li>
+                                                </Link>
+                                            )
+                                        })}
 
-                                </div>
-                            </Grid>
+                                    </div>
+                                </Grid>
 
-                        )
+                            )
+                        }
+
                     })
                     }
 
