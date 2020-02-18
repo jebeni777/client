@@ -17,6 +17,7 @@ import Nutrient from "./containers/Nutrient";
 import Ingredient from "./containers/Ingredient";
 import Foods from "./containers/Foods";
 import NutriChooser from "./containers/NutriChooser";
+import FoodChooser from "./containers/FoodChooser";
 
 
 const NotFound = () => {
@@ -62,6 +63,7 @@ class App extends Component {
             <Switch>
               <DashboardRoute path="/ailment/:id" exact component={Ailment} />
               <DashboardRoute path="/chooser" exact component={Chooser} />
+              <DashboardRoute path="/foodChooser" exact component={FoodChooser} />
               <DashboardRoute path="/foods" exact component={Foods} />
               <DashboardRoute path="/foods/:id" exact component={Ingredient} />
               <DashboardRoute path="/nutrients" exact component={NutriChooser} />

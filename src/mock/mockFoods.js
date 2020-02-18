@@ -3,6 +3,9 @@ const foods = [
         id: "walnuts",
         name: "walnuts",
         title: "Walnuts",
+        category: "nuts",
+        image: "../walnuts.jpeg",
+        imageAltText: "walnuts",
         benefits: [
             "May Help Lower Blood Pressure",
             "Supports Weight Control",
@@ -26,6 +29,9 @@ const foods = [
         id: "kale",
         name: "kale",
         title: "Kale",
+        category: "dark leafy green",
+        image: "../kale.jpeg",
+        imageAltText: "kale",
         benefits: [
             "Is Among The Most Nutrient-Dense Foods on The Planet",
             "Is Loaded With Powerful Antioxidants Like Quercetin and Kaempferol",
@@ -49,6 +55,9 @@ const foods = [
         id: "yogurt",
         name: "yogurt",
         title: "Yogurt",
+        category: "dairy",
+        image: "../yogurt.jpeg",
+        imageAltText: "yogurt",
         benefits: [
             "Protects against osteoporosis ",
             "Relieves irritable bowel disease",
@@ -70,6 +79,9 @@ const foods = [
         id: "beans",
         name: "beans",
         title: "Beans",
+        category: "beans and lentils",
+        image: "../beans.jpeg",
+        imageAltText: "beans",
         benefits: [
             "May Help Lower Blood Pressure",
             "Supports Weight Control",
@@ -92,6 +104,9 @@ const foods = [
         id: "lentils",
         name: "lentils",
         title: "lentils",
+        category: "beans and lentils",
+        image: "../lentils.jpeg",
+        imageAltText: "lentils",
         benefits: [
             "May Help Lower Blood Pressure",
             "Supports Weight Control",
@@ -114,6 +129,9 @@ const foods = [
         id: "dark-chocolate",
         name: "dark-chocolate",
         title: "Dark-chocolate",
+        category: "nuts",
+        image: "../dark-choc.jpeg",
+        imageAltText: "dark-chocolate",
         benefits: [
             "May Help Lower Blood Pressure",
             "Supports Weight Control",
