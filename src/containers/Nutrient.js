@@ -38,28 +38,30 @@ const Nutrient = () => {
                 direction="row"
                 justify="center"
             >
-                <>
-                    <h1 style={{ padding: "1em" }}>{nutrient.title}</h1>
-                    <img src={nutrient.image} alt={nutrient.imageAltText} style={imgStyle} />
-                    <h4>Helpful foods (choose a food for helpful ways to use)</h4>
-                    {nutrient.foods.map((food, i) => {
-                        console.log(food)
-                        return (
-                            <Grid item xs>
-                                <div style={cardStyle}>
-                                    <Link to={`/foods/${food}`}
-                                        key={food}
-                                    >
-                                        <li>
+                <Grid item xs>
+                    <div style={cardStyle}>
 
-                                            {food}
-                                        </li>
-                                    </Link>
-                                </div>
-                            </Grid>
-                        )
-                    })}
-                </>
+                        <h1 style={{ padding: "1em" }}>{nutrient.title}</h1>
+                        <img src={nutrient.image} alt={nutrient.imageAltText} style={imgStyle} />
+                        <h4>Helpful foods (choose a food for helpful ways to use)</h4>
+                        {nutrient.foods.map((food) => {
+                            console.log(food)
+                            return (
+
+
+                                <Link to={`/foods/${food}`}
+                                    key={food}
+                                >
+                                    <li>
+
+                                        {food}
+                                    </li>
+                                </Link>
+                            )
+                        })}
+                    </div>
+                </Grid>
+
             </Grid>
         </div >
     )
