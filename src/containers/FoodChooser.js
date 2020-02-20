@@ -5,6 +5,7 @@ import foodCats from "../mock/foodCategories";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 import Grid from '@material-ui/core/Grid';
+import 'typeface-roboto';
 
 const FoodChooser = props => {
     const cardStyle = {

@@ -11,7 +11,7 @@ const nutrients = [
             "some studies suggest that calcium along with D may protect against cancer, diabetes and high blood pressure",
         ],
         foods: [
-            "dark green leafy",
+            "kale",
             "milk",
             "yogurt - also loaded with probiotic bacteria",
             "cheese - parmesan has the most - softer cheeses less",
@@ -143,9 +143,9 @@ const nutrients = [
         ],
     },
     {
-        id: "zink",
-        name: "zink",
-        title: "Zink",
+        id: "zinc",
+        name: "zinc",
+        title: "Zinc",
         image: "../zinc.jpeg",
         imageAltText: "zinc",
         benefits: "",

@@ -46,8 +46,8 @@ const styles = theme => ({
 });
 
 const imgStyle = {
-  height: "1.7em",
-  weight: "1.7em",
+  height: "2em",
+  weight: "2em",
   // backgroundColor: "#FFF"
 
 }
