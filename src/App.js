@@ -15,9 +15,11 @@ import Ailment from "./containers/Ailment";
 import Chooser from "./containers/Chooser";
 import Nutrient from "./containers/Nutrient";
 import Ingredient from "./containers/Ingredient";
-import Foods from "./containers/Foods";
+import Foods from "./containers/FoodsByCat";
 import NutriChooser from "./containers/NutriChooser";
 import FoodChooser from "./containers/FoodChooser";
+import Recipe from "./containers/Recipe";
+
 
 
 const NotFound = () => {
@@ -50,6 +52,17 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
   );
 };
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => {
+        console.log('Registered!', reg);
+      }).catch(err => {
+        console.log('Registration failed:', err);
+      });
+  });
+}
+
 class App extends Component {
   render() {
     // console.log("Hello again")
@@ -68,6 +81,7 @@ class App extends Component {
               <DashboardRoute path="/foods/:id" exact component={Ingredient} />
               <DashboardRoute path="/nutrients" exact component={NutriChooser} />
               <DashboardRoute path="/nutrients/:id" exact component={Nutrient} />
+              <DashboardRoute path="/recipe/:id" exact component={Recipe} />
               <DashboardRoute path="/setting" exact component={Setting} />
               <DashboardRoute exact path="/" component={Home} />
               <EmptyRoute component={NotFound} />
