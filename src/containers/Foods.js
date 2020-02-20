@@ -1,11 +1,38 @@
 import React from "react";
 import foods from "../mock/mockFoods";
 import { Link } from "react-router-dom";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
+import makeStyles from '@material-ui/core/styles';
+import 'typeface-roboto';
+
+const useStyles = makeStyles({
+    root: {
+        minWidth: 275,
+        maxWidth: 275,
+
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 18,
+    },
+    pos: {
+        marginBottom: 12,
+    },
+
+});
 
 
 
-const Foods = () => {
+function Foods() {
+    const classes = useStyles();
     const cardStyle = {
         border: "1px Solid Gray",
         borderRadius: "0.5em",
@@ -23,17 +50,17 @@ const Foods = () => {
 
     }
 
-    let foodCat;
-    const path = window.location.pathname.split("/");
-    const cat = path[2];
-    console.log(cat);
-    console.log(foods);
-    foods.forEach(item => {
-        if (item.category === cat) {
-            foodCat = cat;
-        }
-    })
-    console.log(foodCat);
+    // let foodCat;
+    // const path = window.location.pathname.split("/");
+    // const cat = path[2];
+    // console.log(cat);
+    // console.log(foods);
+    // foods.forEach(item => {
+    //     if (item.category === cat) {
+    //         foodCat = cat;
+    //     }
+    // })
+    // console.log(foodCat);
 
     return (
         < div >
@@ -44,12 +71,16 @@ const Foods = () => {
             >
                 <>
                     {foods.map(ingredient => {
-                        if (ingredient.category === foodCat) {
-                            return (
-                                <Grid item xs>
-                                    <div style={cardStyle}>
+
+                        return (
+                            <Grid item xs>
+                                <Card className={classes.root} variant="outlined">
+                                    <CardContent>
+
+                                        {/* <Link to={`/foods/${ingredient.id}`}> */}
                                         <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
                                         <img src={ingredient.image} alt={ingredient.imageAltText} style={imgStyle} />
+                                        {/* </Link> */}
                                         <h4>Health benefits</h4>
                                         {ingredient.benefits.join(",  \n")}
                                         <h4>Nutrients</h4>
@@ -80,13 +111,12 @@ const Foods = () => {
                                                 </Link>
                                             )
                                         })}
+                                    </CardContent>
 
-                                    </div>
-                                </Grid>
+                                </Card>
+                            </Grid>
 
-                            )
-                        }
-
+                        )
                     })
                     }
 

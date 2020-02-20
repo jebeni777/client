@@ -1,17 +1,40 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-// import Card from "@material-ui/core/Card";
-// import CardContent from "@material-ui/core/CardContent";
-// import CardActions from "@material-ui/core/CardActions";
-// import Typography from "@material-ui/core/Typography";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from '@material-ui/core/styles';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // import categories from "../mock/categories";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 import video from "../assets/video.mp4";
+import 'typeface-roboto';
 
-const Home = props => {
+const useStyles = makeStyles({
+  root: {
+    minWidth: 275,
+    maxWidth: 275,
+
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 18,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+
+});
+
+function Home(props) {
+  const classes = useStyles;
   // const myStyle = {
   //   border: "1px Solid Gray",
   //   listStyleType: "none",
@@ -34,9 +57,9 @@ const Home = props => {
       }}
     >
       <iframe height="250" width="350" src={video} align="right" title="video"></iframe>
-      <h5>
+      <Typography className={classes.title}>
         Choose your ailment to learn which foods naturally comfort.
-      </h5>
+      </Typography>
       <Link to="/chooser">
         <Button
           variant="contained"
@@ -49,10 +72,10 @@ const Home = props => {
           What ails you?
       </Button>
       </Link>
-      <h5>
-        Select below to go straight to ingredients and recipes.
-      </h5>
-      <Link to="/foods">
+      <Typography className={classes.title}>
+        Select below to go straight to ingredients or recipes.
+        </Typography>
+      <Link to="/foodChooser">
         <Button
           variant="contained"
           color="primary"
@@ -60,7 +83,18 @@ const Home = props => {
           type="button"
           style={btnStyle}
         >
-          Look for ingredients and recipes
+          Look for ingredients
+      </Button>
+      </Link>
+      <Link to="/recipe">
+        <Button
+          variant="contained"
+          color="primary"
+          name="recipe"
+          type="button"
+          style={btnStyle}
+        >
+          Jump to recipes
       </Button>
       </Link>
       <h5>
