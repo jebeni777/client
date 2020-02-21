@@ -112,7 +112,7 @@ const categories = [
             "miso",
             "ginger",
             "kimchi",
-            "dark green vegetables",
+            "kale",
             "sauerkraut",
             "salmon",
             "bone broth",

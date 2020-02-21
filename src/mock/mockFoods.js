@@ -153,6 +153,7 @@ const foods = [
         id: "",
         name: "",
         title: "",
+        category: "",
         benefits: [],
         nutrients: [],
         recipes: [],
