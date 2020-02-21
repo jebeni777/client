@@ -46,15 +46,16 @@ const styles = theme => ({
 });
 
 const imgStyle = {
-  height: "2em",
-  weight: "2em",
+  height: "2.5em",
+  weight: "2.5em",
   // backgroundColor: "#FFF"
 
 }
 
-const Sidebar = props => {
+function Sidebar(props) {
   const { open, classes } = props;
   return (
+
     <Drawer
       variant="permanent"
       classes={{
@@ -93,52 +94,11 @@ const Sidebar = props => {
         <Link to="/foodChooser">
           <ListItem button>
             <ListItemIcon>
-              <img src={food} alt="foods" style={imgStyle} />
+              <img src={food} alt="foods" style={{ height: "3em", weight: "3em" }} />
             </ListItemIcon>
             <ListItemText primary="Foods" />
           </ListItem>
         </Link>
-        {/* <Link to="/digestive">
-          <ListItem button>
-            <ListItemIcon>
-              <img src={stomach} alt="digestive" style={imgStyle} />
-            </ListItemIcon>
-            <ListItemText primary="Digestive" />
-          </ListItem>
-        </Link>
-        <Link to="/respiratory">
-          <ListItem button>
-            <ListItemIcon>
-              <img src={lungs} alt="respiratory" style={imgStyle} />
-            </ListItemIcon>
-            <ListItemText primary="Respiratory" />
-          </ListItem>
-        </Link>
-        <Link to="/heart">
-          <ListItem button>
-            <ListItemIcon>
-              <img src={heart} alt="heart" style={imgStyle} />
-            </ListItemIcon>
-            <ListItemText primary="Heart" />
-          </ListItem>
-        </Link>
-        <Link to="/bones">
-          <ListItem button>
-            <ListItemIcon>
-              <img src={bones} alt="bones" style={imgStyle} />
-            </ListItemIcon>
-            <ListItemText primary="Bones" />
-          </ListItem>
-        </Link>
-        <Link to="/joints">
-          <ListItem button>
-            <ListItemIcon>
-              <img src={joints} alt="joints" style={imgStyle} />
-            </ListItemIcon>
-            <ListItemText primary="Joints" />
-          </ListItem>
-        </Link> */}
-
       </List>
     </Drawer>
   );
