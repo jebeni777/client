@@ -75,7 +75,7 @@ function Home(props) {
       <Typography className={classes.title}>
         Select below to go straight to ingredients or recipes.
         </Typography>
-      <Link to="/foodChooser">
+      <Link to="/foodsByCat">
         <Button
           variant="contained"
           color="primary"
@@ -111,71 +111,6 @@ function Home(props) {
           Learn about nutrients?
       </Button>
       </Link>
-      {/* <Card>
-        <CardContent> */}
-
-      {/* </CardContent>
-
-      </Card>
-      <Card>
-        <CardContent>
-
-
-        </CardContent>
-      </Card> */}
-      {/*<Card>
-        <CardContent>
-          <ul style={{ listStyleType: "none" }}>
-            <li>
-              <Link to="/Heart">Heart</Link>
-            </li>
-            <img src={heart} alt={heart} />
-          </ul>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent>
-          <ul style={{ listStyleType: "none" }}>
-            <li>
-              <Link to="/Lungs">Lungs</Link>
-            </li>
-            <img src={lungs} alt={lungs} />
-          </ul>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent>
-          <ul style={{ listStyleType: "none" }}>
-            <li>
-              <Link to="/Memory">Memory</Link>
-            </li>
-            <img src={memory} alt={memory} />
-          </ul>
-        </CardContent>
-      </Card >
-      <Card>
-        <CardContent>
-          <ul style={{ listStyleType: "none" }}>
-            <li>
-              <Link to="/Stomach">Stomach</Link>
-            </li>
-            <img src={stomach} alt={stomach} />
-          </ul>
-        </CardContent>
-      </Card > */}
-      {/* <li>
-              <Link to="/Bones">Bones</Link>
-
-            </li>
-            <li>
-              <Link to="/">Nutrients</Link>
-            </li>
-            <li>
-              <Link to="/">Ingredients</Link>
-            </li>
-            <li>
-              <Link to="/">Recipes</Link>
-            </li> */}
 
     </div >
   );

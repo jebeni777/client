@@ -33,16 +33,16 @@ const useStyles = makeStyles({
 
 function Foods() {
     const classes = useStyles();
-    const cardStyle = {
-        border: "1px Solid Gray",
-        borderRadius: "0.5em",
-        listStyleType: "none",
-        boxShadow: "2px 2px grey",
-        marginBottom: "2em",
-        padding: "0.5em",
-        lineHeight: "1.5em",
-        maxWidth: "15em"
-    }
+    // const cardStyle = {
+    //     border: "1px Solid Gray",
+    //     borderRadius: "0.5em",
+    //     listStyleType: "none",
+    //     boxShadow: "2px 2px grey",
+    //     marginBottom: "2em",
+    //     padding: "0.5em",
+    //     lineHeight: "1.5em",
+    //     maxWidth: "15em"
+    // }
 
     const imgStyle = {
         height: "8em",
@@ -77,10 +77,10 @@ function Foods() {
                                 <Card className={classes.root} variant="outlined">
                                     <CardContent>
 
-                                        {/* <Link to={`/foods/${ingredient.id}`}> */}
-                                        <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
-                                        <img src={ingredient.image} alt={ingredient.imageAltText} style={imgStyle} />
-                                        {/* </Link> */}
+                                        <Link to={`/foods/${ingredient.id}`}>
+                                            <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
+                                            <img src={ingredient.image} alt={ingredient.imageAltText} style={imgStyle} />
+                                        </Link>
                                         <h4>Health benefits</h4>
                                         {ingredient.benefits.join(",  \n")}
                                         <h4>Nutrients</h4>

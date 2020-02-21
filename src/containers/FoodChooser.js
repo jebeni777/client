@@ -34,9 +34,10 @@ const FoodChooser = props => {
                 justify="center"
             >
                 {foodCats.map(foodCat => {
+                    console.log(foodCat);
                     return (
                         <Grid item xs>
-                            <Link to={`/foods/${foodCat.name}`}
+                            <Link to={`/foods/category/${foodCat.name}`}
                                 key={foodCat.id}
                             >
                                 <div style={cardStyle}>

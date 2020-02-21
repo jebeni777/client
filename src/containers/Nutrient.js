@@ -7,7 +7,6 @@ import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
-import 'typeface-roboto';
 
 const useStyles = makeStyles({
     root: {
@@ -74,13 +73,14 @@ function Nutrient() {
                             {/* <h1 style={{ padding: "1em" }}>{nutrient.title}</h1> */}
                             <img src={nutrient.image} alt={nutrient.imageAltText} style={imgStyle} />
                             <h4>Helpful foods (choose a food for helpful ways to use)</h4>
-                            {nutrient.foods.map((food, i) => {
+                            {nutrient.foods.map((food) => {
+
                                 console.log(food)
                                 return (
 
 
                                     <Link to={`/foods/${food}`}
-                                        key={food}
+                                        key={food.id}
                                     >
                                         <li>
 

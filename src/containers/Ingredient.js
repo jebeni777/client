@@ -16,22 +16,32 @@ const Ingredients = () => {
         padding: "1em",
         lineHeight: "1.5em"
     }
+
+    const imgStyle = {
+        height: "8em",
+        width: "8em",
+
+    }
+
     let ingredient;
     const path = window.location.pathname.split("/");
     const cat = path[2];
     console.log(cat);
     console.log(data);
+
     data.forEach(item => {
-        if (item.id === cat) {
+        console.log(item)
+        if (item.name === cat) {
             ingredient = item;
         }
     })
-    console.log(ingredient);
+    console.log('Hello? ', ingredient);
     return (
         < div style={myStyle}>
 
 
             <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
+            <img src={ingredient.image} alt={ingredient.imageAltText} style={imgStyle} />
             <h4>Health benefits</h4>
             {ingredient.benefits.join(",  \n")}
             <h4>Nutrients</h4>
@@ -40,7 +50,7 @@ const Ingredients = () => {
                     console.log(nutrient)
 
                     return (
-                        <Link to={`/foods/${nutrient}`}
+                        <Link to={`/nutrients/${nutrient}`}
                             key={nutrient}
                         >
                             <li>{nutrient}</li>
