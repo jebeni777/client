@@ -28,7 +28,8 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 18,
+    fontSize: 22,
+    padding: 10,
   },
   pos: {
     marginBottom: 17,
@@ -88,7 +89,7 @@ function Chooser(props) {
         }
       </Grid>
       <>
-        <h1>More helpful information</h1>
+        <Typography className={classes.title}>More helpful information</Typography>
         <ReactTinyLink
           cardSize="small"
           showGraphic={true}
@@ -96,6 +97,15 @@ function Chooser(props) {
           minLine={1}
           url="https://stantonmigraineprotocol.com/"
         />
+        <br />
+        <ReactTinyLink
+          cardSize="small"
+          showGraphic={true}
+          maxLine={2}
+          minLine={1}
+          url="https://www.youtube.com/watch?v=wYRZGFFYqWo"
+        />
+
       </>
 
     </div >

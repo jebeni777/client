@@ -24,7 +24,7 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 18,
+        fontSize: 22,
     },
     pos: {
         marginBottom: 17,
@@ -55,7 +55,7 @@ function Ailment() {
                     {/* <h1 style={{ padding: "1em" }}>{category.title}</h1> */}
                     {/* <img src={category.imageLoad} alt={category.imageAltText} style={{ objectFit: "scale-down" }} /> */}
                     <img src={category.image} alt={category.imageAltText} />
-                    <Typography variant="body1" component="h4">Helpful foods (choose a food for helpful ways to use)</Typography>
+                    <Typography variant="body1" component="h2">Helpful foods (choose a food for helpful ways to use)</Typography>
                     {/* <h4>Helpful foods (choose a food for helpful ways to use)</h4> */}
                     {/* {category.foods.join(", ")} */}
                     <Typography variant="body2" component="ul"></Typography>
