@@ -18,6 +18,7 @@ import Ingredient from "./containers/Ingredient";
 import Foods from "./containers/FoodsByCat";
 import NutriChooser from "./containers/NutriChooser";
 import FoodChooser from "./containers/FoodChooser";
+import FoodsByCat from "./containers/FoodsByCat";
 import Recipe from "./containers/Recipe";
 
 
@@ -74,16 +75,25 @@ class App extends Component {
         <div style={{ height: "100vh" }}>
           <Router>
             <Switch>
-              <DashboardRoute path="/ailment/:id" exact component={Ailment} />
+              <DashboardRoute exact path="/" component={Home} />
+
               <DashboardRoute path="/chooser" exact component={Chooser} />
-              <DashboardRoute path="/foodChooser" exact component={FoodChooser} />
-              <DashboardRoute path="/foods/:category" exact component={Foods} />
+              <DashboardRoute path="/ailment/:id" exact component={Ailment} />
+
+
+              <DashboardRoute path="/foods" exact component={Foods} />
               <DashboardRoute path="/foods/:id" exact component={Ingredient} />
+              <DashboardRoute path="/foods/category/:id" exact component={FoodsByCat} />
+              <DashboardRoute path="/foodChooser" exact component={FoodChooser} />
+
+
+
+
+
               <DashboardRoute path="/nutrients" exact component={NutriChooser} />
               <DashboardRoute path="/nutrients/:id" exact component={Nutrient} />
               <DashboardRoute path="/recipe/:id" exact component={Recipe} />
               <DashboardRoute path="/setting" exact component={Setting} />
-              <DashboardRoute exact path="/" component={Home} />
               <EmptyRoute component={NotFound} />
             </Switch>
           </Router>
