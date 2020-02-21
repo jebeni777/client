@@ -53,17 +53,6 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => {
-        console.log('Registered!', reg);
-      }).catch(err => {
-        console.log('Registration failed:', err);
-      });
-  });
-}
-
 class App extends Component {
   render() {
     // console.log("Hello again")
@@ -92,7 +81,7 @@ class App extends Component {
 
               <DashboardRoute path="/nutrients" exact component={NutriChooser} />
               <DashboardRoute path="/nutrients/:id" exact component={Nutrient} />
-              <DashboardRoute path="/recipe/:id" exact component={Recipe} />
+              <DashboardRoute path="/recipe" exact component={Recipe} />
               <DashboardRoute path="/setting" exact component={Setting} />
               <EmptyRoute component={NotFound} />
             </Switch>

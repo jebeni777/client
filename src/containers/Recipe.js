@@ -16,6 +16,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import paella from '../assets/paella.jpg';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function Recipes() {
+function Recipe() {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
@@ -66,7 +67,7 @@ function Recipes() {
             />
             <CardMedia
                 className={classes.media}
-                image="/static/images/cards/paella.jpg"
+                image={paella}
                 title="Paella dish"
             />
             <CardContent>
@@ -124,4 +125,4 @@ function Recipes() {
     );
 }
 
-export default Recipes;
+export default Recipe;
