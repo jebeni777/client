@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import categories from "../mock/categories";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 import Card from "@material-ui/core/Card";
@@ -12,6 +11,11 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import 'typeface-roboto';
 import { ReactTinyLink } from 'react-tiny-link';
+import client from '../client';
+import imageUrlBuilder from "@sanity/image-url";
+import myConfigSanityClient from '../client';
+
+const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +44,8 @@ const useStyles = makeStyles({
 
 function Chooser(props) {
   const classes = useStyles();
+  const [ailmentCat, setAilmentCat] = useState([]);
+
   // const cardStyle = {
   //   border: "1px Solid Gray",
   //   borderRadius: "0.5em",
@@ -57,6 +63,24 @@ function Chooser(props) {
 
   }
 
+  useEffect(() => {
+    onLoad()
+  }, [])
+  async function onLoad() {
+    try {
+      const ailment = await client.fetch(`
+        *[_type == 'categories-ailments']{
+          title, slug, image, imageAltText}`)
+      console.log("testing: ", ailment)
+      setAilmentCat(ailment)
+    } catch (e) {
+      if (e !== "No current user") {
+        alert(e)
+      }
+    }
+    // setIsLoading(false);
+  }
+
   return (
     <div>
       <Grid
@@ -65,19 +89,21 @@ function Chooser(props) {
         justify="center"
       >
 
-        {categories.map(category => {
+        {ailmentCat.map((category, index) => {
+          function urlFor(_ref) {
+            return builder.image(_ref)
+          }
           return (
 
             <Grid item xs>
-              <Link to={`/ailment/${category.id}`}
+              <Link to={`/ailment/${category.slug.current}`}
                 key={category.id}
               >
 
                 <Card className={classes.root} variant="outlined">
                   <CardContent>
                     <Typography className={classes.title}>{category.title}</Typography>
-                    {/* <h2 >{category.title}</h2> */}
-                    <img src={category.image} alt={category.imageAltText} style={imgStyle} />
+                    <img src={urlFor(category.image.asset._ref)} alt={category.imageAltText} style={imgStyle} />
                     <h5>{category.description}</h5>
                   </CardContent>
                 </Card>
