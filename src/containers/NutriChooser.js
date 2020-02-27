@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import nutrients from "../mock/mockNutrients";
@@ -14,6 +14,11 @@ import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
 import NutriCard from "../components/NutriCard";
+import client from "../client";
+import myConfigSanityClient from "../client";
+import imageUrlBuilder from "@sanity/image-url";
+
+const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
@@ -40,11 +45,30 @@ const useStyles = makeStyles({
 
 function NutriChooser() {
     const classes = useStyles();
+    const [nutriChoose, setNutriChoose] = useState([]);
 
     const imgStyle = {
         height: "8em",
         width: "8em",
 
+    }
+
+    useEffect(() => {
+        onLoad()
+    }, [])
+    async function onLoad() {
+        try {
+            const nutrient = await client.fetch(`
+            *[_type == 'nutrient']{
+                title, slug, mainImage, imageAltText}`)
+            console.log("nutrient test: ", nutrient)
+            setNutriChoose(nutrient)
+        } catch (e) {
+            if (e !== "No current user") {
+                alert(e)
+            }
+        }
+        // setIsLoading(false);
     }
 
     return (
@@ -54,21 +78,24 @@ function NutriChooser() {
                 direction="row"
                 justify="center"
             >
-                {nutrients.map(nutrient => {
+                {nutriChoose.map((nutrient, index) => {
+                    function urlFor(_ref) {
+                        return builder.image(_ref)
+                    }
                     // let expanded = false;
                     // console.log('Expanded? ', expanded)
                     return (
                         <Grid item xs>
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
-                                    <Link to={`/nutrients/${nutrient.id}`}
+                                    <Link to={`/nutrients/${nutrient.slug.current}`}
                                         key={nutrient.id}
                                     >
                                         <Typography className={classes.title} >
                                             {nutrient.title}
                                         </Typography>
                                     </Link>
-                                    <img src={nutrient.image} alt={nutrient.imageAltText} style={imgStyle} />
+                                    <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
                                     <Typography variant="body1" component="h2">Possible Benefits</Typography>
                                     <Typography variant="body2" component="h5">
                                         {nutrient.benefits}
