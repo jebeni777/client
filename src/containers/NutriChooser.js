@@ -96,10 +96,7 @@ function NutriChooser() {
                                         </Typography>
                                     </Link>
                                     <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
-                                    <Typography variant="body1" component="h2">Possible Benefits</Typography>
-                                    <Typography variant="body2" component="h5">
-                                        {nutrient.benefits}
-                                    </Typography>
+
                                 </CardContent>
                             </Card>
                             {/* <NutriCard nutrient={nutrient} /> */}
