@@ -1,12 +1,15 @@
-import React from "react";
-import data from "../mock/mockNutrients";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
+import client from '../client';
+import myConfigSanityClient from '../client';
+import imageUrlBuilder from "@sanity/image-url";
+
+const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
@@ -28,34 +31,39 @@ const useStyles = makeStyles({
 
 });
 
-function Nutrient() {
+const imgStyle = {
+    height: "8em",
+    width: "8em",
+
+};
+
+export default function Nutrient() {
+    const path = window.location.pathname.split("/");
+    const nut = path[path.length - 1];
+    const [nutriSingle, setNutriSingle] = useState([]);
+    const [nutrientChose] = useState(nut);
     const classes = useStyles();
-    // const cardStyle = {
-    //     border: "1px Solid Gray",
-    //     listStyleType: "none",
-    //     boxShadow: "2px 2px grey",
-    //     marginBottom: "2em",
-    //     padding: "1em",
-    //     lineHeight: "1.5em"
-    // }
 
-    const imgStyle = {
-        height: "8em",
-        width: "8em",
 
+
+    useEffect(() => {
+        onLoad()
+    }, [])
+    async function onLoad() {
+        try {
+            const nutrient = await client.fetch(`
+            *[_type == 'nutrient']{
+                title, slug, mainImage, imageAltText, ingredients, body}`)
+            // console.log("testing one nutrient: ", nutrient)
+            setNutriSingle(nutrient)
+        } catch (e) {
+            if (e !== "No current user") {
+                alert(e)
+            }
+        }
+        // setIsLoading(false);
     }
 
-    let nutrient;
-    const path = window.location.pathname.split("/");
-    const nut = path[2];
-    console.log(nut);
-    console.log(data);
-    data.forEach(item => {
-        if (item.id === nut) {
-            nutrient = item;
-        }
-    })
-    console.log(nutrient);
     return (
 
         < div >
@@ -64,39 +72,56 @@ function Nutrient() {
                 direction="row"
                 justify="center"
             >
-                <Grid item xs>
-                    <Card className={classes.root} variant="outlined">
-                        <CardContent>
-                            <Typography className={classes.title}>
-                                {nutrient.title}
-                            </Typography>
-                            {/* <h1 style={{ padding: "1em" }}>{nutrient.title}</h1> */}
-                            <img src={nutrient.image} alt={nutrient.imageAltText} style={imgStyle} />
-                            <h4>Helpful foods (choose a food for helpful ways to use)</h4>
-                            {nutrient.foods.map((food) => {
+                {nutriSingle.map((nutrient, index) => {
+                    console.log(nutrient);
+                    function urlFor(_ref) {
+                        return builder.image(_ref)
+                    }
+                    if (nutrient.slug.current === nutrientChose) {
 
-                                console.log(food)
-                                return (
+                        return (
+                            < Grid item xs >
+                                <Card className={classes.root} variant="outlined">
+                                    <CardContent>
+                                        <h1>
+                                            {nutrient.title}
+                                        </h1>
+                                        {/* <h1 style={{ padding: "1em" }}>{nutrient.title}</h1> */}
+                                        <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
+                                        <h2>Possible Benefits</h2>
+                                        {nutrient.body[0].children[0].text}
+                                        {/* <Typography variant="body2" component="p">
+                                            {nutrient.body}
+                                        </Typography> */}
+                                        <br />
+                                        <br />
+                                        <h4>Helpful foods (choose a food for helpful ways to use)</h4>
+                                        {nutrient.ingredients.map((food) => {
+
+                                            console.log(food)
+                                            return (
 
 
-                                    <Link to={`/foods/${food}`}
-                                        key={food.id}
-                                    >
-                                        <li>
+                                                <Link to={`/ingredient/${food}`}
+                                                    key={food.id}
+                                                >
+                                                    <li>
 
-                                            {food}
-                                        </li>
-                                    </Link>
-                                )
-                            })}
+                                                        {food}
+                                                    </li>
+                                                </Link>
+                                            )
+                                        })}
 
-                        </CardContent>
-                    </Card>
-                </Grid>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
 
+
+                        )
+                    }
+                })}
             </Grid>
         </div >
     )
 };
-
-export default Nutrient;
