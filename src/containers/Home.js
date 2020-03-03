@@ -33,20 +33,13 @@ const useStyles = makeStyles({
 
 });
 
+const btnStyle = {
+  margin: "1em",
+  padding: "1.5em",
+}
+
 function Home(props) {
   const classes = useStyles;
-  // const myStyle = {
-  //   border: "1px Solid Gray",
-  //   listStyleType: "none",
-  //   boxShadow: "2px 2px grey",
-  //   marginBottom: "2em",
-  //   padding: "1em",
-  //   lineHeight: "1.5em"
-  // }
-  const btnStyle = {
-    margin: "1em",
-    padding: "1.5em",
-  }
 
   return (
     <div
@@ -75,7 +68,7 @@ function Home(props) {
       <Typography className={classes.title}>
         Select below to go straight to ingredients or recipes.
         </Typography>
-      <Link to="/foodsByCat">
+      <Link to="/foodChooser">
         <Button
           variant="contained"
           color="primary"
@@ -84,17 +77,6 @@ function Home(props) {
           style={btnStyle}
         >
           Look for ingredients
-      </Button>
-      </Link>
-      <Link to="/recipe">
-        <Button
-          variant="contained"
-          color="primary"
-          name="recipe"
-          type="button"
-          style={btnStyle}
-        >
-          Jump to recipes
       </Button>
       </Link>
       <h5>
