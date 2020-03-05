@@ -51,7 +51,7 @@ function Home(props) {
     >
       <iframe height="250" width="350" src={video} align="right" title="video"></iframe>
       <Typography className={classes.title}>
-        Choose your ailment to learn which foods naturally comfort.
+        Choose your ailment to learn which foods naturally comfort and creative ways to add them to things you may already eat.
       </Typography>
       <Link to="/chooser">
         <Button
@@ -66,7 +66,7 @@ function Home(props) {
       </Button>
       </Link>
       <Typography className={classes.title}>
-        Select below to go straight to ingredients or recipes.
+        Select below to go straight to ingredients.
         </Typography>
       <Link to="/foodChooser">
         <Button
@@ -79,9 +79,9 @@ function Home(props) {
           Look for ingredients
       </Button>
       </Link>
-      <h5>
+      <Typography className={classes.title}>
         Select below to learn more about nutrients and how they contribute.
-      </h5>
+      </Typography>
       <Link to="/nutrients">
         <Button
           variant="contained"
