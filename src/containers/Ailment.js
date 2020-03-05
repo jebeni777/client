@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import data from "../mock/categories";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import 'typeface-roboto';
+import client from "../client";
+import imageUrlBuilder from "@sanity/image-url";
+import myConfigSanityClient from "../client";
+
+const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
@@ -25,6 +29,8 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 22,
+        fontWeight: "bold",
+        padding: "0.5em"
     },
     pos: {
         marginBottom: 17,
@@ -32,52 +38,81 @@ const useStyles = makeStyles({
 
 });
 
-function Ailment() {
+export default function Ailment() {
     const classes = useStyles();
-    let category;
     const path = window.location.pathname.split("/");
-    const cat = path[2];
-    console.log(cat);
-    console.log(data);
-    data.forEach(item => {
-        if (item.id === cat) {
-            category = item;
-        }
-    })
+    const category = path[path.length - 1];
     console.log(category);
+    const [ailment, setAilment] = useState([]);
+
+    useEffect(() => {
+        onLoad()
+    }, [])
+    async function onLoad() {
+        try {
+            const ailment = await client.fetch(`
+            *[_type == 'ailments']{
+                title, slug, image, imageAltText, body, nutrients, foods}`)
+            console.log("ailment: ", ailment)
+            setAilment(ailment)
+        } catch (e) {
+            if (e !== "No current user") {
+                alert(e)
+            }
+        }
+        // setIsLoading(false);
+    }
 
     return (
 
         < div >
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title}>{category.title}</Typography>
-                    {/* <h1 style={{ padding: "1em" }}>{category.title}</h1> */}
-                    {/* <img src={category.imageLoad} alt={category.imageAltText} style={{ objectFit: "scale-down" }} /> */}
-                    <img src={category.image} alt={category.imageAltText} />
-                    <Typography variant="body1" component="h2">Helpful foods (choose a food for helpful ways to use)</Typography>
-                    {/* <h4>Helpful foods (choose a food for helpful ways to use)</h4> */}
-                    {/* {category.foods.join(", ")} */}
-                    <Typography variant="body2" component="ul"></Typography>
-                    <ul style={{ listStyleType: "none" }}>
-                        {category.foods.map((food, i) => {
-                            console.log(food)
+            {ailment.map((ailment, index) => {
+                function urlFor(_ref) {
+                    return builder.image(_ref)
+                }
+                if (ailment.slug.current === category) {
 
-                            return (
-                                <Link to={`/foods/${food}`}
-                                    key={food}
-                                >
-                                    <li>
-                                        {food}
-                                    </li>
-                                </Link>
-                            )
-                        })}
-                    </ul>
-                </CardContent>
-            </Card>
+                    return (
+
+                        <Card className={classes.root} variant="outlined">
+                            <CardContent>
+                                <Typography className={classes.title}>{ailment.title}</Typography>
+                                <img src={urlFor(ailment.image)} alt={ailment.imageAltText} />
+
+                                <Typography variant="h6">Nutrients that can help</Typography>
+                                {ailment.nutrients.map(nutrient => {
+                                    console.log(nutrient)
+                                    return (
+                                        <Link to={`/nutrients/${nutrient}`}
+                                            key={nutrient}
+                                        >
+                                            <li>
+                                                {nutrient}
+                                            </li>
+                                        </Link>
+                                    )
+                                })}
+
+                                <Typography variant="h6">Foods that can help (choose a food for creative ways to use)</Typography>
+                                {ailment.foods.map((food, i) => {
+                                    console.log(food)
+                                    return (
+                                        <Link to={`/foods/${food}`}
+                                            key={food}
+                                        >
+                                            <li>
+                                                {food}
+                                            </li>
+                                        </Link>
+                                    )
+                                })}
+
+                            </CardContent>
+                        </Card>
+                    )
+                }
+            })
+            }
         </div >
     )
 };
-
-export default Ailment;
