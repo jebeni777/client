@@ -1,13 +1,16 @@
-import React from "react";
-import foods from "../mock/mockFoods";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import 'typeface-roboto';
+import client from "../client";
+import myConfigSanityClient from "../client";
+import imageUrlBuilder from "@sanity/image-url";
+
+const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
@@ -32,36 +35,35 @@ const useStyles = makeStyles({
     },
 });
 
+const imgStyle = {
+    height: "8em",
+    width: "8em",
+
+}
+
 export default function FoodsByCat() {
     const classes = useStyles();
-    // const cardStyle = {
-    //     border: "1px Solid Gray",
-    //     borderRadius: "0.5em",
-    //     listStyleType: "none",
-    //     boxShadow: "2px 2px grey",
-    //     marginBottom: "2em",
-    //     padding: "0.5em",
-    //     lineHeight: "1.5em",
-    //     maxWidth: "15em"
-    // }
-
-    const imgStyle = {
-        height: "8em",
-        width: "8em",
-
-    }
-
-    let foodCat;
     const path = window.location.pathname.split("/");
-    const cat = path[3];
-    console.log(cat);
-    foods.forEach(item => {
-        console.log(item.category);
-        if (item.category === cat) {
-            foodCat = cat;
+    const foodCat = path[path.length - 1];
+    const [foods, setFoods] = useState([]);
+
+    useEffect(() => {
+        onLoad()
+    }, [])
+    async function onLoad() {
+        try {
+            const ingredient = await client.fetch(`
+            *[_type == 'ingredient']{
+                title, slug, mainImage, imageAltText, category, body, nutrients, uses}`)
+            console.log("ingredients before category: ", ingredient)
+            setFoods(ingredient)
+        } catch (e) {
+            if (e !== "No current user") {
+                alert(e)
+            }
         }
-    })
-    console.log(foodCat);
+        // setIsLoading(false);
+    }
 
     return (
         < div >
@@ -72,7 +74,12 @@ export default function FoodsByCat() {
             >
                 <>
                     {foods.map(ingredient => {
-                        if (ingredient.category === foodCat) {
+                        console.log("ingredient for category: ", ingredient)
+                        function urlFor(_ref) {
+                            return builder.image(_ref)
+                        }
+                        if (ingredient.slug.current === foodCat) {
+                            console.log(foodCat)
                             return (
                                 <Grid item xs>
                                     <Card className={classes.root} variant="outlined">
@@ -84,7 +91,7 @@ export default function FoodsByCat() {
                                                     {ingredient.title}
                                                 </Typography>
                                                 {/* <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2> */}
-                                                <img src={ingredient.image} alt={ingredient.imageAltText} style={imgStyle} />
+                                                <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
                                             </Link>
                                             <h4>Health benefits</h4>
                                             {ingredient.benefits.join(",  \n")}
@@ -102,7 +109,7 @@ export default function FoodsByCat() {
                                                 )
                                             })}
 
-                                            <h4>Popular recipes</h4>
+                                            <h4>Creative uses</h4>
                                             {/* <ul style={{ listStyleType: "none" }}> */}
                                             {ingredient.recipes.map((recipe) => {
                                                 console.log(recipe)
