@@ -19,7 +19,7 @@ import Foods from "./containers/FoodsByCat";
 import NutriChooser from "./containers/NutriChooser";
 import FoodChooser from "./containers/FoodChooser";
 import FoodsByCat from "./containers/FoodsByCat";
-import Recipe from "./containers/Recipe";
+// import Recipe from "./containers/Recipe";
 
 
 
@@ -69,19 +69,14 @@ class App extends Component {
               <DashboardRoute path="/chooser" exact component={Chooser} />
               <DashboardRoute path="/ailment/:id" exact component={Ailment} />
 
-
               <DashboardRoute path="/foods" exact component={Foods} />
               <DashboardRoute path="/foods/:id" exact component={Ingredient} />
               <DashboardRoute path="/foods/category/:id" exact component={FoodsByCat} />
               <DashboardRoute path="/foodChooser" exact component={FoodChooser} />
 
-
-
-
-
               <DashboardRoute path="/nutrients" exact component={NutriChooser} />
               <DashboardRoute path="/nutrients/:id" exact component={Nutrient} />
-              <DashboardRoute path="/recipe" exact component={Recipe} />
+              {/* <DashboardRoute path="/recipe" exact component={Recipe} /> */}
               <DashboardRoute path="/setting" exact component={Setting} />
               <EmptyRoute component={NotFound} />
             </Switch>

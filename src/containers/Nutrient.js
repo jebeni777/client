@@ -95,21 +95,21 @@ export default function Nutrient() {
                                         </Typography> */}
                                         <br />
                                         <br />
-                                        <h4>Helpful foods (choose a food for helpful ways to use)</h4>
+                                        <h4>Helpful foods</h4>
                                         {nutrient.ingredients.map((food) => {
 
                                             console.log(food)
                                             return (
 
 
-                                                <Link to={`/ingredient/${food}`}
-                                                    key={food.id}
-                                                >
-                                                    <li>
+                                                // <Link to={`/ingredient/${food}`}
+                                                //     key={food.id}
+                                                // >
+                                                <li>
 
-                                                        {food}
-                                                    </li>
-                                                </Link>
+                                                    {food}
+                                                </li>
+                                                // </Link>
                                             )
                                         })}
 

@@ -131,7 +131,7 @@ const nutrients = [
         title: "Zinc",
         image: "../zinc.jpeg",
         imageAltText: "zinc",
-        benefits: "Zince can help boost your immune system, accelerates wound healing, it may reduce the risk of certain age-related diseases. It can help treat acne, and also decreases inflammation.",
+        benefits: "Zinc can help boost your immune system, accelerates wound healing, it may reduce the risk of certain age-related diseases. It can help treat acne, and also decreases inflammation.",
         foods: [
 
         ],
