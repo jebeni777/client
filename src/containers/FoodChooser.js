@@ -1,29 +1,41 @@
 import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import foodCats from "../mock/foodCategories";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 import Grid from '@material-ui/core/Grid';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import 'typeface-roboto';
 import client from '../client';
 import myConfigSanityClient from '../client';
 import imageUrlBuilder from '@sanity/image-url';
+import { makeStyles } from "@material-ui/core/styles";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
-const cardStyle = {
-    border: "1px Solid Gray",
-    borderRadius: "0.5em",
-    listStyleType: "none",
-    boxShadow: "2px 2px grey",
-    marginBottom: "2em",
-    padding: "1em",
-    lineHeight: "1.5em",
-    maxWidth: "12em",
-    minWidth: "12em",
-}
-
+const useStyles = makeStyles({
+    root: {
+        minWidth: 275,
+        maxWidth: 275,
+        minHeight: "100%",
+        borderRadius: 10,
+        alignContent: "center",
+        backgroundColor: "#FFF",
+        marginBottom: 0,
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 22,
+    },
+    pos: {
+        marginBottom: 0,
+    },
+});
 const imgStyle = {
     height: "8em",
     width: "8em",
@@ -31,7 +43,7 @@ const imgStyle = {
 }
 
 function FoodChooser(props) {
-
+    const classes = useStyles();
     const [foodCat, setFoodCat] = useState([]);
 
     useEffect(() => {
@@ -66,15 +78,19 @@ function FoodChooser(props) {
                     }
                     return (
                         <Grid item xs>
-                            <Link to={`/foods/category/${foodCat.slug.current}`}
-                                key={foodCat.id}
-                            >
-                                <div style={cardStyle}>
-                                    <h2 style={{ padding: "0.5em" }}>{foodCat.title}</h2>
-                                    <img src={urlFor(foodCat.image.asset._ref)} alt={foodCat.imageAltText} style={imgStyle} />
-                                    <h5>{foodCat.description}</h5>
-                                </div>
-                            </Link>
+                            <Card className={classes.root} variant="outlined">
+                                <CardContent>
+                                    <Link to={`/foods/category/${foodCat.slug.current}`}
+                                        key={foodCat.id}
+                                    >
+                                        <div>
+                                            <h2 style={{ padding: "0.5em" }}>{foodCat.title}</h2>
+                                            <img src={urlFor(foodCat.image.asset._ref)} alt={foodCat.imageAltText} style={imgStyle} />
+                                            <h5>{foodCat.description}</h5>
+                                        </div>
+                                    </Link>
+                                </CardContent>
+                            </Card>
                         </Grid>
                     )
                 })
