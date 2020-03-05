@@ -48,7 +48,7 @@ const imgStyle = {
 
 function Chooser(props) {
   const classes = useStyles();
-  const [ailmentCat, setAilmentCat] = useState([]);
+  const [category, setCategory] = useState([]);
 
   useEffect(() => {
     onLoad()
@@ -56,10 +56,10 @@ function Chooser(props) {
   async function onLoad() {
     try {
       const ailment = await client.fetch(`
-        *[_type == 'categories-ailments']{
-          title, slug, image, imageAltText}`)
+        *[_type == 'ailments']{
+          title, slug, image, imageAltText, body}`)
       console.log("testing: ", ailment)
-      setAilmentCat(ailment)
+      setCategory(ailment)
     } catch (e) {
       if (e !== "No current user") {
         alert(e)
@@ -76,25 +76,27 @@ function Chooser(props) {
         justify="center"
       >
 
-        {ailmentCat.map((category, index) => {
+        {category.map((category, index) => {
+          console.log("mapped category: ", category)
           function urlFor(_ref) {
             return builder.image(_ref)
           }
           return (
 
             <Grid item xs>
-              <Link to={`/ailment/${category.slug.current}`}
-                key={category.id}
-              >
+              <Card className={classes.root} variant="outlined">
+                <CardContent>
+                  <Typography></Typography>
+                  <Link to={`/ailment/${category.slug.current}`}
+                    key={category.id}
+                  >
 
-                <Card className={classes.root} variant="outlined">
-                  <CardContent>
                     <Typography className={classes.title}>{category.title}</Typography>
                     <img src={urlFor(category.image.asset._ref)} alt={category.imageAltText} style={imgStyle} />
-                    <h5>{category.description}</h5>
-                  </CardContent>
-                </Card>
-              </Link>
+                  </Link>
+                  <h5>{category.body[0].children[0].text}</h5>
+                </CardContent>
+              </Card>
             </Grid>
           )
 
@@ -117,6 +119,14 @@ function Chooser(props) {
           maxLine={2}
           minLine={1}
           url="https://www.youtube.com/watch?v=wYRZGFFYqWo"
+        />
+        <br />
+        <ReactTinyLink
+          cardSize="small"
+          showGraphic={true}
+          maxLine={2}
+          minLine={1}
+          url="https://societyhealth.org/top-joint-health-supplement-guide/?gclid=EAIaIQobChMIxrrJ9JD_5wIVQh6tBh2Q2QQBEAAYAiAAEgIwMfD_BwE"
         />
 
       </>
