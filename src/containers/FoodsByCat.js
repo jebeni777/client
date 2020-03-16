@@ -45,6 +45,7 @@ export default function FoodsByCat() {
     const classes = useStyles();
     const path = window.location.pathname.split("/");
     const foodCat = path[path.length - 1];
+    console.log(foodCat);
     const [foods, setFoods] = useState([]);
 
     useEffect(() => {
@@ -67,76 +68,69 @@ export default function FoodsByCat() {
 
     return (
         < div >
-            <Grid
-                container
-                direction="row"
-                justify="center"
-            >
-                <>
-                    {foods.map(ingredient => {
-                        console.log("ingredient for category: ", ingredient)
-                        function urlFor(_ref) {
-                            return builder.image(_ref)
-                        }
-                        if (ingredient.slug.current === foodCat) {
-                            console.log(foodCat)
-                            return (
-                                <Grid item xs>
-                                    <Card className={classes.root} variant="outlined">
-                                        <CardContent>
-                                            <Link to={`/foods/${ingredient.id}`}
-                                                key={ingredient.id}
-                                            >
-                                                <Typography className={classes.title}>
-                                                    {ingredient.title}
-                                                </Typography>
-                                                {/* <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2> */}
-                                                <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
-                                            </Link>
-                                            <h4>Health benefits</h4>
-                                            {ingredient.benefits.join(",  \n")}
-                                            <h4>Nutrients</h4>
+            {foods.map(ingredient => {
+                console.log("this is foodCat now: ", ingredient.uses)
+                function urlFor(_ref) {
+                    return builder.image(_ref)
+                }
+                if (ingredient.category.toLowerCase() === foodCat) {
+                    console.log("this is ingredient.category now: ", ingredient)
+                    return (
+                        <Grid
+                            container
+                            direction="row"
+                            justify="center"
+                        >
+                            <Grid item xs>
+                                <Card className={classes.root} variant="outlined">
+                                    <CardContent>
+                                        <Link to={`/foods/${ingredient.id}`}
+                                            key={ingredient.id}
+                                        >
+                                            <Typography className={classes.title}>
+                                                {ingredient.title}
+                                            </Typography>
+                                            {/* <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2> */}
+                                            <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
+                                        </Link>
+                                        <h4>Nutrients</h4>
 
-                                            {ingredient.nutrients.map((nutrient) => {
-                                                console.log(nutrient)
+                                        {ingredient.nutrients.map((nutrient) => {
+                                            console.log(nutrient)
 
-                                                return (
-                                                    <Link to={`/nutrients/${nutrient}`}
-                                                        key={nutrient}
-                                                    >
-                                                        <li>{nutrient}</li>
-                                                    </Link>
-                                                )
-                                            })}
+                                            return (
+                                                <Link to={`/nutrients/${nutrient}`}
+                                                    key={nutrient}
+                                                >
+                                                    <li>{nutrient}</li>
+                                                </Link>
+                                            )
+                                        })}
 
-                                            <h4>Creative uses</h4>
-                                            {/* <ul style={{ listStyleType: "none" }}> */}
-                                            {ingredient.recipes.map((recipe) => {
-                                                console.log(recipe)
+                                        <h4>Creative uses</h4>
+                                        {/* <ul style={{ listStyleType: "none" }}> */}
+                                        {ingredient.uses.map((uses) => {
+                                            console.log(uses)
 
-                                                return (
+                                            return (
 
-                                                    <Link to={`/foods/${ingredient}`}
-                                                        key={recipe}
-                                                    >
-                                                        <li>{recipe}</li>
-                                                    </Link>
-                                                )
-                                            })}
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
+                                                // <Link to={`/foods/${uses}`}
+                                                //     key={uses}
+                                                // >
+                                                <li key={uses}>{uses}</li>
+                                                // </Link>
+                                            )
+                                        })}
+                                    </CardContent>
+                                </Card>
+                            </Grid>
 
-                            )
-                        }
-
-                    })
-                    }
-
-                </>
-            </Grid>
-
-
+                        </Grid>
+                    )
+                    // }
+                }
+            })
+            }
         </div >
     )
 };
