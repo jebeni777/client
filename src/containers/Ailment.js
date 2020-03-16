@@ -83,7 +83,7 @@ export default function Ailment() {
                                 {ailment.nutrients.map(nutrient => {
                                     console.log(nutrient)
                                     return (
-                                        <Link to={`/nutrients/${nutrient}`}
+                                        <Link to={`/nutrients/${nutrient.toLowerCase()}`}
                                             key={nutrient}
                                         >
                                             <li>

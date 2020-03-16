@@ -73,7 +73,7 @@ export default function FoodsByCat() {
                 function urlFor(_ref) {
                     return builder.image(_ref)
                 }
-                if (ingredient.category.toLowerCase() === foodCat) {
+                if (ingredient.category === foodCat) {
                     console.log("this is ingredient.category now: ", ingredient)
                     return (
                         <Grid
@@ -90,16 +90,13 @@ export default function FoodsByCat() {
                                             <Typography className={classes.title}>
                                                 {ingredient.title}
                                             </Typography>
-                                            {/* <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2> */}
                                             <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
                                         </Link>
-                                        <h4>Nutrients</h4>
-
-                                        {ingredient.nutrients.map((nutrient) => {
+                                        <Typography variant="h6">Nutrients</Typography>
+                                        {ingredient.nutrients.map(nutrient => {
                                             console.log(nutrient)
-
                                             return (
-                                                <Link to={`/nutrients/${nutrient}`}
+                                                <Link to={`/nutrients/${nutrient.toLowerCase()}`}
                                                     key={nutrient}
                                                 >
                                                     <li>{nutrient}</li>
