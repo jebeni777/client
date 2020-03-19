@@ -19,6 +19,7 @@ import Foods from "./containers/FoodsByCat";
 import NutriChooser from "./containers/NutriChooser";
 import FoodChooser from "./containers/FoodChooser";
 import FoodsByCat from "./containers/FoodsByCat";
+import User from "./containers/User";
 // import Recipe from "./containers/Recipe";
 
 
@@ -78,6 +79,7 @@ class App extends Component {
               <DashboardRoute path="/nutrients/:id" exact component={Nutrient} />
               {/* <DashboardRoute path="/recipe" exact component={Recipe} /> */}
               <DashboardRoute path="/setting" exact component={Setting} />
+              <DashboardRoute path="/user" exact component={User} />
               <EmptyRoute component={NotFound} />
             </Switch>
           </Router>
