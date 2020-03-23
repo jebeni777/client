@@ -66,11 +66,11 @@ export default function Ailment() {
     return (
 
         < div >
-            {ailment.map((ailment, index) => {
+            {ailment.map(ailment => {
                 function urlFor(_ref) {
                     return builder.image(_ref)
                 }
-                if (ailment.slug.current === category) {
+                if (ailment.slug.current === category.toLowerCase()) {
 
                     return (
 
@@ -93,17 +93,17 @@ export default function Ailment() {
                                     )
                                 })}
 
-                                <Typography variant="h6">Foods that can help (choose a food for creative ways to use)</Typography>
-                                {ailment.foods.map((food, i) => {
+                                <Typography variant="h6">Helpful foods</Typography>
+                                {ailment.foods.map(food => {
                                     console.log(food)
                                     return (
-                                        <Link to={`/foods/${food}`}
-                                            key={food}
-                                        >
-                                            <li>
-                                                {food}
-                                            </li>
-                                        </Link>
+                                        // <Link to={`/foods/${food}`}
+                                        //     key={food}
+                                        // >
+                                        <li>
+                                            {food}
+                                        </li>
+                                        // </Link>
                                     )
                                 })}
 

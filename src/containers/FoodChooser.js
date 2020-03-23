@@ -96,10 +96,7 @@ function FoodChooser(props) {
                 })
                 }
             </Grid>
-            <>
-                <h1>More helpful information</h1>
-                {/* <h3><a href="https://stantonmigraineprotocol.com/">Magraine Help</a></h3> */}
-            </>
+
         </div >
     );
 };
