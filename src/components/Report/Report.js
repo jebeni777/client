@@ -11,7 +11,8 @@ import myConfigSanityClient from '../../client';
 const builder = imageUrlBuilder(myConfigSanityClient);
 
 export default (props) => {
-    const [ailments] = useState(props)
+    console.log("this is begining:", props);
+    const [ailments] = useState(props);
     const [details, setDetails] = useState([]);
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export default (props) => {
 
     return (
         <div>
-            {console.log(props)}
+            {console.log("this is details: ", details)}
             {details.map(data => {
                 function urlFor(_ref) {
                     return builder.image(_ref)
@@ -46,12 +47,13 @@ export default (props) => {
                                 {props.ailments.map((currAil, i) => {
 
                                     if (data.slug.current === currAil) {
+                                        // debugger
                                         console.log("and ailments after if: ", currAil);
                                         return (
                                             <tr key={i}>
-                                                <td>{currAil.name}</td>
-                                                <td>{currAil.foods}</td>
-                                                <td>{currAil.nutrients}</td>
+                                                <td>{data.title}</td>
+                                                <td>{data.foods}</td>
+                                                <td>{data.nutrients}</td>
                                             </tr>
                                         )
 

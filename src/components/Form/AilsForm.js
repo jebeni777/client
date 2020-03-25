@@ -21,6 +21,7 @@ export default function AilsForm(props) {
     const [ailsSelect, setAilsSelect] = useState(initState);
     const [ails, setAils] = useState([]);
     console.log("this is before: ", ails);
+
     const handleChange = (e) => {
 
         // if (!ails.indexOf(e.target.name)) {

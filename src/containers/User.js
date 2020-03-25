@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useMemo } from 'react';
 import Report from '../components/Report/Report';
 import AilsForm from '../components/Form/AilsForm';
-import FoodList from '../components/List/FoodList';
+// import FoodList from '../components/List/FoodList';
 import client from '../client';
 
 export default () => {
@@ -17,23 +17,23 @@ export default () => {
     // }
 
     const showReport = (e) => {
-
-        async function onLoad() {
-            try {
-                const ailment = await client.fetch(`
-                *[_type == 'ailments']{
-                    title, slug, body, nutrients, foods}`)
-                console.log("ailment: ", ailment);
-                setAilments(ailment)
-            } catch (e) {
-                if (e !== "No current user") {
-                    alert(e)
-                }
-            }
-        }
-        // if (ailsSelect.name === ailment.current.slug)
-        console.log(ailsSelect);
-        setReport(true);
+        console.log("showReport e: ", e);
+        // async function onLoad() {
+        //     try {
+        //         const ailment = await client.fetch(`
+        //         *[_type == 'ailments']{
+        //             title, slug, body, nutrients, foods}`)
+        //         console.log("ailment: ", ailment);
+        //         setAilments(ailment)
+        //     } catch (e) {
+        //         if (e !== "No current user") {
+        //             alert(e)
+        //         }
+        //     }
+        // }
+        // // if (ailsSelect.name === ailment.current.slug)
+        // console.log(ailments);
+        setReport(e);
         setShowForm(false);
     }
 
@@ -96,6 +96,7 @@ export default () => {
     );
 
     const handleSubmit = (ails) => {
+        console.log("inside handleSubmit")
         console.log(ails);
         setAilsSelect(ails);
         showReport(true);
