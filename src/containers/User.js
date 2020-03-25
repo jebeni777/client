@@ -8,7 +8,7 @@ import client from '../client';
 export default () => {
     const [name, setName] = useState('');
     const [showForm, setShowForm] = useState(true);
-    const [report, setReport] = useState(false);
+    const [report, setReport] = useState([]);
     const [ailsSelect, setAilsSelect] = useState([]);
     const [ailments, setAilments] = useState([]);
 
@@ -17,7 +17,7 @@ export default () => {
     // }
 
     const showReport = (e) => {
-        e.preventDefault();
+
         async function onLoad() {
             try {
                 const ailment = await client.fetch(`
@@ -31,6 +31,8 @@ export default () => {
                 }
             }
         }
+        // if (ailsSelect.name === ailment.current.slug)
+        console.log(ailsSelect);
         setReport(true);
         setShowForm(false);
     }
@@ -70,7 +72,7 @@ export default () => {
     // }
 
     // function submitReport() {
-    //     var content = document.querySelector('select').value;
+    //     var content = document.querySelector('AilsSelect').value;
     //     if (content) {
     //         createReport({
     //             description: 'Fetch API POST example',
@@ -93,8 +95,13 @@ export default () => {
         [ailsSelect, name]
     );
 
-    const handleSubmit = (e) => {
-        setAilsSelect(e.target.value)
+    const handleSubmit = (ails) => {
+        console.log(ails);
+        setAilsSelect(ails);
+        showReport(true);
+
+        // <Report {...ails} />
+
     };
 
     const clearSelect = (e) => {
@@ -110,15 +117,15 @@ export default () => {
                     showReport={showReport}
                     onReset={() => clearSelect('')} />
             }
-            {view && view.length &&
+            {/* {view && view.length &&
                 <FoodList
                     ailsSelect={view}
                     showReport={showReport} />
-            }
+            } */}
             {view <= 0 &&
                 <h1>There are no items to display</h1>
             }
-            {report &&
+            {report && showReport &&
                 <Report ailments={ailsSelect}
                     closeReport={closeReport} />
             }

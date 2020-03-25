@@ -8,29 +8,55 @@ import Checkbox from '@material-ui/core/Checkbox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 
+const initState = {
+    bones: false,
+    joints: false,
+    memory: false,
+    respiratory: false,
+    digestive: false,
+    heart: false,
+}
 
 export default function AilsForm(props) {
-    const [ailsSelect, setAilSelect] = useState({
-        checkBones: false,
-        checkJoints: false,
-        checkMemory: false,
-        checkRespiratory: false,
-        checkDigestive: false,
-        checkHeart: false,
-    });
-
-
-
-    const onSubmit = (e) => {
-        e.preventDefault();
-        props.handleSubmit(e)
-        // this.props.onSave && this.props.onSave.call(this);
-    }
-
+    const [ailsSelect, setAilsSelect] = useState(initState);
+    const [ails, setAils] = useState([]);
+    console.log("this is before: ", ails);
     const handleChange = (e) => {
-        setAilSelect({ ...ailsSelect, [e.target.name]: e.target.checked })
-        // props.onChange && props.onChange(e.target);
+
+        // if (!ails.indexOf(e.target.name)) {
+        //     setAils(...ails, e.target.name)
+        // }
+        setAilsSelect({ ...ailsSelect, [e.target.name]: !ailsSelect[e.target.name] });
     }
+    console.log(ailsSelect);
+    const checkedObject = (ailsSelect) => {
+        const entries = Object.entries(ailsSelect)
+        console.log(entries);
+    }
+
+    console.log("this is after: ", ails);
+
+    const onSubmit = (ailsSelect) => {
+        const newArr = [];
+        for (let [key, value] of Object.entries(ailsSelect)) {
+            if (value) {
+                newArr.push(key);
+            }
+        }
+        props.handleSubmit(newArr);
+        console.log(ailsSelect);
+
+        // const entries = Object.entries(ailsSelect)
+        // console.log(entries);
+
+        //     if (ailsSelect) {
+        //         setAils.push(ailsSelect)
+        //     }
+        // props.handleSubmit(ails);
+    }
+
+    console.log(ails);
+
 
     const onReset = (e) => {
         e.preventDefault();
@@ -46,9 +72,9 @@ export default function AilsForm(props) {
                 control={
                     <Checkbox
                         value="start"
-                        checked={ailsSelect.checkBones}
+                        checked={ailsSelect.bones}
                         onChange={handleChange}
-                        name="checkBones"
+                        name="bones"
                         color="primary"
                     />
                 }
@@ -57,10 +83,10 @@ export default function AilsForm(props) {
             <FormControlLabel
                 control={
                     <Checkbox
-                        value="end"
-                        checked={ailsSelect.checkJoints}
+                        value="start"
+                        checked={ailsSelect.joints}
                         onChange={handleChange}
-                        name="checkJoints"
+                        name="joints"
                         color="primary"
                     />
                 }
@@ -70,9 +96,9 @@ export default function AilsForm(props) {
                 control={
                     <Checkbox
                         value="start"
-                        checked={ailsSelect.checkMemory}
+                        checked={ailsSelect.memory}
                         onChange={handleChange}
-                        name="checkMemory"
+                        name="memory"
                         color="primary"
                     />
                 }
@@ -82,9 +108,9 @@ export default function AilsForm(props) {
                 control={
                     <Checkbox
                         value="start"
-                        checked={ailsSelect.checkRespiratory}
+                        checked={ailsSelect.respiratory}
                         onChange={handleChange}
-                        name="checkRespiratory"
+                        name="respiratory"
                         color="primary"
                     />
                 }
@@ -94,9 +120,9 @@ export default function AilsForm(props) {
                 control={
                     <Checkbox
                         value="start"
-                        checked={ailsSelect.checkDigestive}
+                        checked={ailsSelect.digestive}
                         onChange={handleChange}
-                        name="checkDigestive"
+                        name="digestive"
                         color="primary"
                     />
                 }
@@ -106,15 +132,16 @@ export default function AilsForm(props) {
                 control={
                     <Checkbox
                         value="start"
-                        checked={ailsSelect.checkHeart}
+                        checked={ailsSelect.heart}
                         onChange={handleChange}
-                        name="checkHeart"
+                        name="heart"
                         color="primary"
                     />
                 }
                 label="Heart"
             />
-            <input type="submit" value="Submit Ailments" onClick={onSubmit} />
+            <button onClick={() => onSubmit(ailsSelect)}>Submit</button>
+
         </FormGroup>
 
         // <form onSubmit={onSubmit} onReset={onReset}>
