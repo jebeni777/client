@@ -64,7 +64,6 @@ export default function Ailment() {
     }
 
     return (
-
         < div >
             {ailment.map(ailment => {
                 function urlFor(_ref) {
@@ -80,11 +79,11 @@ export default function Ailment() {
                                 <img src={urlFor(ailment.image)} alt={ailment.imageAltText} />
 
                                 <Typography variant="h6">Nutrients that can help</Typography>
-                                {ailment.nutrients.map(nutrient => {
+                                {ailment.nutrients.map((nutrient, i) => {
                                     console.log(nutrient)
                                     return (
                                         <Link to={`/nutrients/${nutrient.toLowerCase()}`}
-                                            key={nutrient}
+                                            key={i}
                                         >
                                             <li>
                                                 {nutrient}
@@ -94,13 +93,13 @@ export default function Ailment() {
                                 })}
 
                                 <Typography variant="h6">Helpful foods</Typography>
-                                {ailment.foods.map(food => {
+                                {ailment.foods.map((food, i) => {
                                     console.log(food)
                                     return (
                                         // <Link to={`/foods/${food}`}
                                         //     key={food}
                                         // >
-                                        <li>
+                                        <li key={i}>
                                             {food}
                                         </li>
                                         // </Link>

@@ -16,8 +16,8 @@ const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
-        maxWidth: 275,
+        minWidth: 160,
+        maxWidth: 160,
         minHeight: "100%",
         borderRadius: 10,
         alignContent: "center",
@@ -72,7 +72,7 @@ function FoodChooser(props) {
                 direction="row"
                 justify="center"
             >
-                {foodCat.map((foodCat, index) => {
+                {foodCat.map((foodCat, i) => {
                     function urlFor(_ref) {
                         return builder.image(_ref)
                     }
@@ -81,7 +81,7 @@ function FoodChooser(props) {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Link to={`/foods/category/${foodCat.slug.current}`}
-                                        key={foodCat.id}
+                                        key={i}
                                     >
                                         <div>
                                             <h2 style={{ padding: "0.5em" }}>{foodCat.title}</h2>

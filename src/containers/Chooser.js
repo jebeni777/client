@@ -76,7 +76,7 @@ function Chooser(props) {
         justify="center"
       >
 
-        {category.map((category, index) => {
+        {category.map((category, i) => {
           console.log("mapped category: ", category)
           function urlFor(_ref) {
             return builder.image(_ref)
@@ -86,11 +86,9 @@ function Chooser(props) {
             <Grid item xs>
               <Card className={classes.root} variant="outlined">
                 <CardContent>
-                  <Typography></Typography>
                   <Link to={`/ailment/${category.slug.current}`}
-                    key={category.id}
+                    key={i}
                   >
-
                     <Typography className={classes.title}>{category.title}</Typography>
                     <img src={urlFor(category.image.asset._ref)} alt={category.imageAltText} style={imgStyle} />
                   </Link>
@@ -99,7 +97,6 @@ function Chooser(props) {
               </Card>
             </Grid>
           )
-
         })
         }
       </Grid>
