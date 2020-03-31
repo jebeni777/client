@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import data from "../mock/categories";
+import { loadAilments } from '../store/actions/ailmentActions';
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -10,6 +10,8 @@ import 'typeface-roboto';
 import client from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 import myConfigSanityClient from "../client";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -38,23 +40,27 @@ const useStyles = makeStyles({
 
 });
 
-export default function Ailment() {
+function Ailment(props) {
     const classes = useStyles();
     const path = window.location.pathname.split("/");
     const category = path[path.length - 1];
     console.log(category);
     const [ailment, setAilment] = useState([]);
 
+    console.log("props.ailments: ", props.ailments)
+    console.log("props for everything ", props.everything)
+
     useEffect(() => {
         onLoad()
     }, [])
     async function onLoad() {
         try {
-            const ailment = await client.fetch(`
+            const ailments = await client.fetch(`
             *[_type == 'ailments']{
                 title, slug, image, imageAltText, body, nutrients, foods}`)
-            console.log("ailment: ", ailment)
-            setAilment(ailment)
+            console.log("ailments: ", ailments)
+            props.loadAilments(ailments)
+            setAilment(ailments)
         } catch (e) {
             if (e !== "No current user") {
                 alert(e)
@@ -65,7 +71,7 @@ export default function Ailment() {
 
     return (
         < div >
-            {ailment.map(ailment => {
+            {props.everything.ailments.map(ailment => {
                 function urlFor(_ref) {
                     return builder.image(_ref)
                 }
@@ -115,3 +121,24 @@ export default function Ailment() {
         </div >
     )
 };
+
+const mapStateToProps = state => {
+    return {
+        ailments: state.ailment,
+        everything: state
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(
+        {
+            loadAilments: (ailments) => loadAilments(ailments)
+        },
+        dispatch
+    );
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Ailment);
