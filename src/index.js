@@ -8,7 +8,7 @@ import store from "./store/configureStore";
 console.log("store: ", store);
 
 let data = store.getState();
-console.log("data: ", data);
+console.log("data from getState: ", data);
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { loadAilments } from '../store/actions/ailmentActions';
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 import Card from "@material-ui/core/Card";
@@ -50,16 +51,19 @@ function Chooser(props) {
   const classes = useStyles();
   const [category, setCategory] = useState([]);
 
+  console.log("props for ails in chooser: ", props.ailments)
+  // console.log("props for everything in chooser: ", props.everything)
+
   useEffect(() => {
     onLoad()
   }, [])
   async function onLoad() {
     try {
-      const ailment = await client.fetch(`
+      const ailments = await client.fetch(`
         *[_type == 'ailments']{
-          title, slug, image, imageAltText, body}`)
-      console.log("testing: ", ailment)
-      setCategory(ailment)
+          title, slug, image, imageAltText, body, nutrients, foods}`)
+      props.loadAilments(ailments)
+      setCategory(ailments)
     } catch (e) {
       if (e !== "No current user") {
         alert(e)
@@ -76,7 +80,9 @@ function Chooser(props) {
         justify="center"
       >
 
-        {category.map((category, i) => {
+        {props.ailments.map((category, i) => {
+          console.log("ailment after map in chooser: ", category)
+
           console.log("mapped category: ", category)
           function urlFor(_ref) {
             return builder.image(_ref)
@@ -86,7 +92,7 @@ function Chooser(props) {
             <Grid item xs>
               <Card className={classes.root} variant="outlined">
                 <CardContent>
-                  <Link to={`/ailment/${category.slug.current}`}
+                  <Link to={{ pathname: `/ailment/${category.slug.current}`, state: { here: category } }}
                     key={i}
                   >
                     <Typography className={classes.title}>{category.title}</Typography>
@@ -129,20 +135,20 @@ function Chooser(props) {
       </>
 
     </div >
-  );
+  )
 };
 
 const mapStateToProps = state => {
   return {
-    stepCounter: state.stepCounter
+    ailments: state.ailments,
+    everything: state
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      increment: () => increment(),
-      decrement: () => decrement()
+      loadAilments: (ailments) => loadAilments(ailments)
     },
     dispatch
   );

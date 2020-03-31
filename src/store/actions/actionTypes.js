@@ -2,5 +2,8 @@ export const CREATE_REPORT = "CREATE_REPORT";
 export const LOAD_AILMENTS = "LOAD_AILMENTS";
 export const LOAD_INGREDIENTS = "LOAD_INGREDIENTS";
 export const LOAD_NUTRIENTS = "LOAD_NUTRIENTS";
+export const LOAD_CHOOSER = "LOAD_CHOOSER";
+
+
 // export const BEGIN_API_CALL = " BEGIN_API_CALL";
 // export const API_CALL_ERROR = "API_CALL_ERROR";

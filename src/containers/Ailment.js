@@ -30,94 +30,66 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 22,
+        fontSize: 30,
         fontWeight: "bold",
         padding: "0.5em"
     },
     pos: {
-        marginBottom: 17,
+        marginBottom: "1em",
     },
+
 
 });
 
 function Ailment(props) {
     const classes = useStyles();
-    const path = window.location.pathname.split("/");
-    const category = path[path.length - 1];
-    console.log(category);
-    const [ailment, setAilment] = useState([]);
+    const ailment = props.location.state.here;
 
-    console.log("props.ailments: ", props.ailments)
+    console.log("props.ailments: ", props.location.state.here)
     console.log("props for everything ", props.everything)
+    console.log("ailment before return", ailment)
 
-    useEffect(() => {
-        onLoad()
-    }, [])
-    async function onLoad() {
-        try {
-            const ailments = await client.fetch(`
-            *[_type == 'ailments']{
-                title, slug, image, imageAltText, body, nutrients, foods}`)
-            console.log("ailments: ", ailments)
-            props.loadAilments(ailments)
-            setAilment(ailments)
-        } catch (e) {
-            if (e !== "No current user") {
-                alert(e)
-            }
-        }
-        // setIsLoading(false);
+    function urlFor(_ref) {
+        return builder.image(_ref)
     }
 
     return (
         < div >
-            {props.everything.ailments.map(ailment => {
-                function urlFor(_ref) {
-                    return builder.image(_ref)
-                }
-                if (ailment.slug.current === category.toLowerCase()) {
+            <Card className={classes.root} variant="outlined">
+                <CardContent>
+                    <Typography className={classes.title}>{ailment.title}</Typography>
+                    <Typography className={classes.pos}><img src={urlFor(ailment.image)} alt={ailment.imageAltText} /></Typography>
+                    <Typography className={classes.pos} variant="p">{ailment.body[0].children[0].text}</Typography>
+                    <Typography variant="h6">Nutrients that can help</Typography>
+                    {ailment.nutrients.map((nutrient, i) => {
+                        console.log(nutrient)
+                        return (
+                            <Link to={`/nutrients/${nutrient.toLowerCase()}`}
+                                key={i}
+                            >
+                                <li>
+                                    {nutrient}
+                                </li>
+                            </Link>
+                        )
+                    })}
 
-                    return (
+                    <Typography variant="h6">Helpful foods</Typography>
+                    {ailment.foods.map((food, i) => {
+                        console.log(food)
+                        return (
+                            // <Link to={`/foods/${food}`}
+                            //     key={food}
+                            // >
+                            <li key={i}>
+                                {food}
+                            </li>
+                            // </Link>
+                        )
+                    })}
 
-                        <Card className={classes.root} variant="outlined">
-                            <CardContent>
-                                <Typography className={classes.title}>{ailment.title}</Typography>
-                                <img src={urlFor(ailment.image)} alt={ailment.imageAltText} />
-
-                                <Typography variant="h6">Nutrients that can help</Typography>
-                                {ailment.nutrients.map((nutrient, i) => {
-                                    console.log(nutrient)
-                                    return (
-                                        <Link to={`/nutrients/${nutrient.toLowerCase()}`}
-                                            key={i}
-                                        >
-                                            <li>
-                                                {nutrient}
-                                            </li>
-                                        </Link>
-                                    )
-                                })}
-
-                                <Typography variant="h6">Helpful foods</Typography>
-                                {ailment.foods.map((food, i) => {
-                                    console.log(food)
-                                    return (
-                                        // <Link to={`/foods/${food}`}
-                                        //     key={food}
-                                        // >
-                                        <li key={i}>
-                                            {food}
-                                        </li>
-                                        // </Link>
-                                    )
-                                })}
-
-                            </CardContent>
-                        </Card>
-                    )
-                }
-            })
-            }
+                </CardContent>
+            </Card>
         </div >
     )
 };

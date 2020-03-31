@@ -13,7 +13,7 @@ import MainLayout from "./layouts/MainLayout";
 import EmptyLayout from "./layouts/EmptyLayout";
 import Ailment from "./containers/Ailment";
 import Chooser from "./containers/Chooser";
-import Nutrient from "./containers/Nutrient";
+import Nutrients from "./containers/Nutrient";
 import Ingredient from "./containers/Ingredient";
 import Foods from "./containers/FoodsByCat";
 import NutriChooser from "./containers/NutriChooser";
@@ -76,7 +76,7 @@ class App extends Component {
               <DashboardRoute path="/foodChooser" exact component={FoodChooser} />
 
               <DashboardRoute path="/nutrients" exact component={NutriChooser} />
-              <DashboardRoute path="/nutrients/:id" exact component={Nutrient} />
+              <DashboardRoute path="/nutrients/:id" exact component={Nutrients} />
               {/* <DashboardRoute path="/recipe" exact component={Recipe} /> */}
               <DashboardRoute path="/setting" exact component={Setting} />
               <DashboardRoute path="/user" exact component={User} />
