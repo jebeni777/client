@@ -5,6 +5,7 @@ import ailments from "./ailmentReducer";
 import ingredients from "./ingredientReducer";
 import nutrients from "./nutrientReducer";
 import chooser from "./chooserReducer";
+import foodChooser from "./foodChooserReducer";
 
 const reducers = combineReducers({
   stepCounter,
@@ -12,7 +13,8 @@ const reducers = combineReducers({
   ailments,
   ingredients,
   nutrients,
-  chooser
+  chooser,
+  foodChooser
 });
 
 export default reducers;

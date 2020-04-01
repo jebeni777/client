@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { loadFoodChooser } from '../store/actions/foodChooserActions';
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 import Grid from '@material-ui/core/Grid';
@@ -44,7 +45,10 @@ const imgStyle = {
 
 function FoodChooser(props) {
     const classes = useStyles();
-    const [foodCat, setFoodCat] = useState([]);
+    const [foodChooser, setFoodChooser] = useState([]);
+
+    console.log("props for foodChooser: ", props.foodChooser)
+    // console.log("everything: ", props.everything)
 
     useEffect(() => {
         onLoad()
@@ -54,8 +58,9 @@ function FoodChooser(props) {
             const foodGroups = await client.fetch(`
                 *[_type == 'categories-foods']{
                     title, slug, image, imageAltText}`)
-            console.log("foodCat testing: ", foodGroups);
-            setFoodCat(foodGroups);
+            console.log("foodGroups testing: ", foodGroups);
+            props.loadFoodChooser(foodGroups)
+            setFoodChooser(foodGroups);
         } catch (e) {
             if (e !== "No current user") {
                 alert(e)
@@ -72,7 +77,7 @@ function FoodChooser(props) {
                 direction="row"
                 justify="center"
             >
-                {foodCat.map((foodCat, i) => {
+                {props.foodChooser.map((foodGroup, i) => {
                     function urlFor(_ref) {
                         return builder.image(_ref)
                     }
@@ -80,13 +85,13 @@ function FoodChooser(props) {
                         <Grid item xs>
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
-                                    <Link to={`/foods/category/${foodCat.slug.current}`}
+                                    <Link to={`/foods/category/${foodGroup.slug.current}`}
                                         key={i}
                                     >
                                         <div>
-                                            <h2 style={{ padding: "0.5em" }}>{foodCat.title}</h2>
-                                            <img src={urlFor(foodCat.image.asset._ref)} alt={foodCat.imageAltText} style={imgStyle} />
-                                            <h5>{foodCat.description}</h5>
+                                            <h2 style={{ padding: "0.5em" }}>{foodGroup.title}</h2>
+                                            <img src={urlFor(foodGroup.image.asset._ref)} alt={foodGroup.imageAltText} style={imgStyle} />
+                                            <h5>{foodGroup.description}</h5>
                                         </div>
                                     </Link>
                                 </CardContent>
@@ -103,15 +108,14 @@ function FoodChooser(props) {
 
 const mapStateToProps = state => {
     return {
-        stepCounter: state.stepCounter
+        foodChooser: state.foodChooser
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            increment: () => increment(),
-            decrement: () => decrement()
+            loadFoodChooser: (foodChooser) => loadFoodChooser(foodChooser)
         },
         dispatch
     );
