@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import nutrients from "../mock/mockNutrients";
+import { loadNutrients } from "../store/actions/nutrientActions";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 import { makeStyles } from '@material-ui/core/styles';
@@ -43,26 +43,28 @@ const useStyles = makeStyles({
     },
 });
 
-function NutriChooser() {
+const imgStyle = {
+    height: "8em",
+    width: "8em",
+
+}
+
+function NutriChooser(props) {
     const classes = useStyles();
     const [nutriChoose, setNutriChoose] = useState([]);
 
-    const imgStyle = {
-        height: "8em",
-        width: "8em",
-
-    }
+    console.log("props.nutrients: ", props.nutrients)
 
     useEffect(() => {
         onLoad()
     }, [])
     async function onLoad() {
         try {
-            const nutrient = await client.fetch(`
+            const nutrients = await client.fetch(`
             *[_type == 'nutrient']{
-                title, slug, mainImage, imageAltText}`)
-            console.log("nutrient test: ", nutrient)
-            setNutriChoose(nutrient)
+                title, slug, mainImage, imageAltText, ingredients, body}`)
+            props.loadNutrients(nutrients)
+            setNutriChoose(nutrients)
         } catch (e) {
             if (e !== "No current user") {
                 alert(e)
@@ -78,7 +80,7 @@ function NutriChooser() {
                 direction="row"
                 justify="center"
             >
-                {nutriChoose.map((nutrient, index) => {
+                {props.nutrients.map((nutrient, index) => {
                     function urlFor(_ref) {
                         return builder.image(_ref)
                     }
@@ -88,7 +90,7 @@ function NutriChooser() {
                         <Grid item xs>
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
-                                    <Link to={`/nutrients/${nutrient.slug.current}`}
+                                    <Link to={{ pathname: `/nutrients/${nutrient.slug.current}`, state: { here: nutrient } }}
                                         key={nutrient.id}
                                     >
                                         <Typography className={classes.title} >
@@ -111,15 +113,15 @@ function NutriChooser() {
 
 const mapStateToProps = state => {
     return {
-        stepCounter: state.stepCounter
+        nutrients: state.nutrients,
+        everything: state
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            increment: () => increment(),
-            decrement: () => decrement()
+            loadNutrients: (nutrients) => loadNutrients(nutrients)
         },
         dispatch
     );

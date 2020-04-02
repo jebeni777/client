@@ -3,7 +3,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { loadAilments } from '../store/actions/ailmentActions';
 import { Link } from "react-router-dom";
-import { increment, decrement } from "../store/reducers/stepCounter";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -81,9 +80,6 @@ function Chooser(props) {
       >
 
         {props.ailments.map((category, i) => {
-          console.log("ailment after map in chooser: ", category)
-
-          console.log("mapped category: ", category)
           function urlFor(_ref) {
             return builder.image(_ref)
           }
