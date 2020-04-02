@@ -85,7 +85,7 @@ function FoodChooser(props) {
                         <Grid item xs>
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
-                                    <Link to={`/foods/category/${foodGroup.slug.current}`}
+                                    <Link to={{ pathname: `/foods/category/${foodGroup.slug.current}`, state: { here: foodGroup } }}
                                         key={i}
                                     >
                                         <div>
