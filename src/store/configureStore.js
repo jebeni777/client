@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import logger from "redux-logger";
-import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
+// import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import rootReducer from "./reducers";
 
 const store = createStore(rootReducer);

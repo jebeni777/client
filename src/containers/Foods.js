@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import foods from "../mock/mockFoods";
+import { loadIngredients, loadFoods } from '../store/actions/foodsActions';
+import { loadFoodsByGroup } from '../store/actions/foodsByGroupActions';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -26,41 +29,50 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 18,
+        fontSize: 30,
     },
     pos: {
         marginBottom: 12,
     },
 
+    top: {
+        marginTop: 12,
+    },
 });
 
 const imgStyle = {
     height: "8em",
     width: "8em",
-
 }
 
 function Foods() {
-    const [food, setFood] = useState([]);
-
     const classes = useStyles();
+    const foodGroup = props.location.state.here;
+    const [foods, setFoods] = useState([]);
+
+    console.log("foodGroup: ", props.location.state.here)
+    console.log("props everything: ", props.everything)
+    console.log("ingredient before return", ingredient)
 
     useEffect(() => {
         onLoad()
     }, [])
     async function onLoad() {
         try {
-            const food = await client.fetch(`
+            const foods = await client.fetch(`
             *[_type == 'ingredient']{
                 title, slug, mainImage, imageAltText, nutrients, uses}`)
-            console.log("food test: ", food)
-            setFood(food)
+            console.log("food test: ", foods)
+            setFoods(foods)
         } catch (e) {
             if (e !== "No current user") {
                 alert(e)
             }
         }
         // setIsLoading(false);
+    }
+    function urlFor(_ref) {
+        return builder.image(_ref)
     }
 
     return (
@@ -71,54 +83,56 @@ function Foods() {
                 justify="center"
             >
                 <>
-                    {food.map(ingredient => {
-                        function urlFor(_ref) {
-                            return builder.image(_ref)
-                        }
+                    {props.foods.map((ingredient, i) => {
+                        { console.log("ingredient after map", ingredient) }
                         return (
-                            <Grid item xs>
-                                <Card className={classes.root} variant="outlined">
-                                    <CardContent>
+                            {
+                                ingredient.category === foodGroup.slug.current &&
 
-                                        <Link to={`/foods/${ingredient.id}`}>
-                                            <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
-                                            <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
-                                        </Link>
-                                        <h4>Possible benefits</h4>
-                                        {nutrient.body[0].children[0].text}
-                                        {/* {ingredient.benefits.join(",  \n")} */}
-                                        <h4>Nutrients</h4>
+                                    <Grid item xs key={i}>
+                                        <Card className={classes.root} variant="outlined">
+                                            <CardContent>
 
-                                        {ingredient.nutrients.map((nutrient) => {
-                                            console.log(nutrient)
-
-                                            return (
-                                                <Link to={`/nutrients/${nutrient}`}
-                                                    key={nutrient}
-                                                >
-                                                    <li>{nutrient}</li>
+                                                <Link to={{ pathname: `/foods/${ingredient.id}`, state: { here: ingredient } }}>
+                                                    <h2 style={{ padding: "0.5em" }}>{ingredient.title}</h2>
+                                                    <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
                                                 </Link>
-                                            )
-                                        })}
+                                                <h4>Possible benefits</h4>
+                                                {nutrient.body[0].children[0].text}
+                                                {/* {ingredient.benefits.join(",  \n")} */}
+                                                <h4>Nutrients</h4>
 
-                                        <h4>Creative uses</h4>
+                                                {ingredient.nutrients.map((nutrient) => {
+                                                    console.log(nutrient)
 
-                                        {ingredient.uses.map(uses => {
-                                            console.log(uses)
+                                                    return (
+                                                        <Link to={`/nutrients/${nutrient}`}
+                                                            key={nutrient}
+                                                        >
+                                                            <li>{nutrient}</li>
+                                                        </Link>
+                                                    )
+                                                })}
 
-                                            return (
+                                                <h4>Creative uses</h4>
 
-                                                <Link to={`/foods/${ingredient}`}
-                                                    key={uses}
-                                                >
-                                                    <li>{uses}</li>
-                                                </Link>
-                                            )
-                                        })}
-                                    </CardContent>
+                                                {ingredient.uses.map(uses => {
+                                                    console.log(uses)
 
-                                </Card>
-                            </Grid>
+                                                    return (
+
+                                                        <Link to={`/foods/${ingredient}`}
+                                                            key={uses}
+                                                        >
+                                                            <li>{uses}</li>
+                                                        </Link>
+                                                    )
+                                                })}
+                                            </CardContent>
+
+                                        </Card>
+                                    </Grid>
+                            }
 
                         )
                     })
@@ -132,4 +146,25 @@ function Foods() {
     )
 };
 
-export default Foods;
+const mapStateToProps = state => {
+    return {
+        foods: state.foods,
+        ingredients: state.ingredient,
+        everything: state
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(
+        {
+            loadFoods: (foods) => loadFoods(foods),
+            loadIngredients: (ingredient) => loadIngredients(ingredient)
+        },
+        dispatch
+    );
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Foods);

@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { loadAilments } from '../store/actions/ailmentActions';
+import React from "react";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import 'typeface-roboto';
-import client from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 import myConfigSanityClient from "../client";
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -37,15 +33,16 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: "1em",
     },
-
-
+    top: {
+        marginTop: 12,
+    },
 });
 
 function Ailment(props) {
     const classes = useStyles();
     const ailment = props.location.state.here;
 
-    console.log("props.ailments: ", props.location.state.here)
+    console.log("props.location.state.here: ", props.location.state.here)
     console.log("props for everything ", props.everything)
     console.log("ailment before return", ailment)
 
@@ -59,12 +56,12 @@ function Ailment(props) {
                 <CardContent>
                     <Typography className={classes.title}>{ailment.title}</Typography>
                     <Typography className={classes.pos}><img src={urlFor(ailment.image)} alt={ailment.imageAltText} /></Typography>
-                    <Typography className={classes.pos} variant="p">{ailment.body[0].children[0].text}</Typography>
+                    <Typography className={classes.pos} variant="h6">{ailment.body[0].children[0].text}</Typography>
                     <Typography variant="h6">Nutrients that can help</Typography>
                     {ailment.nutrients.map((nutrient, i) => {
                         console.log(nutrient)
                         return (
-                            <Link to={`/nutrients/${nutrient.toLowerCase()}`}
+                            <Link to={{ pathname: `/nutrients/${nutrient.toLowerCase()}`, state: { here: nutrient.toLowerCase() } }}
                                 key={i}
                             >
                                 <li>
@@ -96,21 +93,10 @@ function Ailment(props) {
 
 const mapStateToProps = state => {
     return {
-        ailments: state.ailment,
-        everything: state
+        ailments: state.ailment
     };
-};
-
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            loadAilments: (ailments) => loadAilments(ailments)
-        },
-        dispatch
-    );
 };
 
 export default connect(
     mapStateToProps,
-    mapDispatchToProps
 )(Ailment);

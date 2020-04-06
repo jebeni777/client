@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { bindActionCreators } from "redux";
+import React from "react";
 import { connect } from "react-redux";
-import { loadFoodChooser } from '../store/actions/foodChooserActions';
 import { Link } from "react-router-dom";
-import { increment, decrement } from "../store/reducers/stepCounter";
+// import { increment, decrement } from "../store/reducers/stepCounter";
 import Grid from '@material-ui/core/Grid';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import 'typeface-roboto';
-import client from '../client';
 import myConfigSanityClient from '../client';
 import imageUrlBuilder from '@sanity/image-url';
 import { makeStyles } from "@material-ui/core/styles";
@@ -43,32 +40,11 @@ const imgStyle = {
 
 }
 
+function urlFor(_ref) {
+    return builder.image(_ref)
+}
 function FoodChooser(props) {
     const classes = useStyles();
-    const [foodChooser, setFoodChooser] = useState([]);
-
-    console.log("props for foodChooser: ", props.foodChooser)
-    // console.log("everything: ", props.everything)
-
-    useEffect(() => {
-        onLoad()
-    }, [])
-    async function onLoad() {
-        try {
-            const foodGroups = await client.fetch(`
-                *[_type == 'categories-foods']{
-                    title, slug, image, imageAltText}`)
-            console.log("foodGroups testing: ", foodGroups);
-            props.loadFoodChooser(foodGroups)
-            setFoodChooser(foodGroups);
-        } catch (e) {
-            if (e !== "No current user") {
-                alert(e)
-            }
-        }
-        // setIsLoading(false);
-    }
-
 
     return (
         <div>
@@ -78,14 +54,11 @@ function FoodChooser(props) {
                 justify="center"
             >
                 {props.foodChooser.map((foodGroup, i) => {
-                    function urlFor(_ref) {
-                        return builder.image(_ref)
-                    }
                     return (
-                        <Grid item xs>
+                        <Grid item xs key={i}>
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
-                                    <Link to={{ pathname: `/foods/category/${foodGroup.slug.current}`, state: { here: foodGroup } }}
+                                    <Link to={`/foods/category/${foodGroup.slug.current}`}
                                         key={i}
                                     >
                                         <div>
@@ -112,18 +85,6 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            loadFoodChooser: (foodChooser) => loadFoodChooser(foodChooser)
-        },
-        dispatch
-    );
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(FoodChooser);
+export default connect(mapStateToProps)(FoodChooser);
 
 

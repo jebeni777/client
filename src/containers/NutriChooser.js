@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { bindActionCreators } from "redux";
+import React, { useState } from "react";
 import { connect } from "react-redux";
-import { loadNutrients } from "../store/actions/nutrientActions";
 import { Link } from "react-router-dom";
-import { increment, decrement } from "../store/reducers/stepCounter";
+// import { increment, decrement } from "../store/reducers/stepCounter";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Button from '@material-ui/core/Button';
+// import CardActions from "@material-ui/core/CardActions";
+// import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
-import Collapse from '@material-ui/core/Collapse';
+// import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
-import NutriCard from "../components/NutriCard";
-import client from "../client";
 import myConfigSanityClient from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -55,23 +51,7 @@ function NutriChooser(props) {
 
     console.log("props.nutrients: ", props.nutrients)
 
-    useEffect(() => {
-        onLoad()
-    }, [])
-    async function onLoad() {
-        try {
-            const nutrients = await client.fetch(`
-            *[_type == 'nutrient']{
-                title, slug, mainImage, imageAltText, ingredients, body}`)
-            props.loadNutrients(nutrients)
-            setNutriChoose(nutrients)
-        } catch (e) {
-            if (e !== "No current user") {
-                alert(e)
-            }
-        }
-        // setIsLoading(false);
-    }
+
 
     return (
         <div>
@@ -90,7 +70,7 @@ function NutriChooser(props) {
                         <Grid item xs>
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
-                                    <Link to={{ pathname: `/nutrients/${nutrient.slug.current}`, state: { here: nutrient } }}
+                                    <Link to={`/nutrients/${nutrient.slug.current}`}
                                         key={nutrient.id}
                                     >
                                         <Typography className={classes.title} >
@@ -118,18 +98,10 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            loadNutrients: (nutrients) => loadNutrients(nutrients)
-        },
-        dispatch
-    );
-};
+
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(NutriChooser);
 
 
