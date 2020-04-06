@@ -4,5 +4,5 @@ export default {
     nutrients: [],
     foodChooser: [],
     foodByGroup: [],
-    apiCallsInProgress: 0
+    foods: []
 };

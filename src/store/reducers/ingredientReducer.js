@@ -1,6 +1,6 @@
-export default function foodByGroupReducer(state = [], action) {
+export default function ingredientReducer(state = [], action) {
     switch (action.type) {
-        case "LOAD_FOOD_BY_GROUP":
+        case "LOAD_INGREDIENTS":
             console.log("action object", action)
             return [...action.ingredients];
         default:

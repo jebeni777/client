@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -15,11 +15,19 @@ import Ailment from "./containers/Ailment";
 import Chooser from "./containers/Chooser";
 import Nutrients from "./containers/Nutrient";
 import Ingredient from "./containers/Ingredient";
-import Foods from "./containers/FoodsByCat";
+import Foods from "./containers/FoodsByGroup";
 import NutriChooser from "./containers/NutriChooser";
 import FoodChooser from "./containers/FoodChooser";
-import FoodsByCat from "./containers/FoodsByCat";
+import FoodsByGroup from "./containers/FoodsByGroup";
 import User from "./containers/User";
+import { CardActions } from "@material-ui/core";
+import { loadAilments } from "./store/actions/ailmentActions";
+import { loadIngredients } from "./store/actions/ingredientActions";
+import { loadFoodChooser } from "./store/actions/foodChooserActions";
+import { loadNutrients } from "./store/actions/nutrientActions";
+import client from "./client";
+import imageUrlBuilder from "@sanity/image-url";
+import myConfigSanityClient from "./client";
 // import Recipe from "./containers/Recipe";
 
 
@@ -29,6 +37,7 @@ const NotFound = () => {
 };
 
 const DashboardRoute = ({ component: Component, ...rest }) => {
+
   return (
     <Route
       {...rest}
@@ -54,48 +63,98 @@ const EmptyRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-class App extends Component {
-  render() {
-    // console.log("Hello again")
-    const { settings } = this.props;
+function App({
+  ailments,
+  chooser,
+  nutrients,
+  ingredients,
+  loadAilments,
+  loadNutrients,
+  loadIngredients,
+  loadFoodChooser,
+  history,
+  ...props
+}) {
+  useEffect(() => {
+    onLoad()
+  }, [])
+  async function onLoad() {
+    try {
+      const ailments = await client.fetch(`
+        *[_type == 'ailments']{
+          title, slug, image, imageAltText, body, nutrients, foods}`)
+      loadAilments(ailments)
+      const nutrients = await client.fetch(`
+            *[_type == 'nutrient']{
+                title, slug, mainImage, imageAltText, ingredients, body}`)
+      loadNutrients(nutrients)
+      const foodGroups = await client.fetch(`
+            *[_type == 'categories-foods']{
+                title, slug, image, imageAltText}`)
+      loadFoodChooser(foodGroups)
+      const ingredients = await client.fetch(`
+                *[_type == 'ingredient']{
+                    title, slug, mainImage, imageAltText, body, nutrients, uses}`)
+      loadIngredients(ingredients)
+    } catch (e) {
+      if (e !== "No current user") {
+        alert(e)
+      }
+    }
+    // setIsLoading(false);
+  };
 
-    return (
-      <MuiThemeProvider theme={settings.theme}>
-        <CssBaseline />
-        <div style={{ height: "100vh" }}>
-          <Router>
-            <Switch>
-              <DashboardRoute exact path="/" component={Home} />
+  const { settings } = props;
 
-              <DashboardRoute path="/chooser" exact component={Chooser} />
-              <DashboardRoute path="/ailment/:id" exact component={Ailment} />
+  return (
+    <MuiThemeProvider theme={settings.theme}>
+      <CssBaseline />
+      <div style={{ height: "100vh" }}>
+        <Router>
+          <Switch>
+            <DashboardRoute exact path="/" component={Home} />
 
-              <DashboardRoute path="/foods" exact component={Foods} />
-              <DashboardRoute path="/foods/:id" exact component={Ingredient} />
-              <DashboardRoute path="/foods/category/:id" exact component={FoodsByCat} />
-              <DashboardRoute path="/foodChooser" exact component={FoodChooser} />
+            <DashboardRoute path="/chooser" exact component={Chooser} />
+            <DashboardRoute path="/ailment/:id" exact component={Ailment} />
 
-              <DashboardRoute path="/nutrients" exact component={NutriChooser} />
-              <DashboardRoute path="/nutrients/:id" exact component={Nutrients} />
-              {/* <DashboardRoute path="/recipe" exact component={Recipe} /> */}
-              <DashboardRoute path="/setting" exact component={Setting} />
-              <DashboardRoute path="/user" exact component={User} />
-              <EmptyRoute component={NotFound} />
-            </Switch>
-          </Router>
-        </div>
-      </MuiThemeProvider>
-    );
-  }
+            {/* <DashboardRoute path="/foods" exact component={Foods} /> */}
+            <DashboardRoute path="/foods/:id" exact component={Ingredient} />
+            <DashboardRoute path="/foods/category/:id" exact component={FoodsByGroup} />
+            <DashboardRoute path="/foodChooser" exact component={FoodChooser} />
+
+            <DashboardRoute path="/nutrients" exact component={NutriChooser} />
+            <DashboardRoute path="/nutrients/:id" exact component={Nutrients} />
+            {/* <DashboardRoute path="/recipe" exact component={Recipe} /> */}
+            <DashboardRoute path="/setting" exact component={Setting} />
+            <DashboardRoute path="/user" exact component={User} />
+            <EmptyRoute component={NotFound} />
+          </Switch>
+        </Router>
+      </div>
+    </MuiThemeProvider>
+  );
 }
 
 const mapStateToProps = state => {
+  // debugger
   return {
     settings: state.settings,
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return (
+    {
+      loadAilments: (ailments) => dispatch(loadAilments(ailments)),
+      loadIngredients: (ingredients) => dispatch(loadIngredients(ingredients)),
+      loadFoodChooser: (foodGroups) => dispatch(loadFoodChooser(foodGroups)),
+      loadNutrients: (nutrients) => dispatch(loadNutrients(nutrients))
+
+    }
+  );
+};
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(App);

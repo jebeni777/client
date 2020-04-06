@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { loadNutrients } from '../store/actions/nutrientActions';
+// import { loadNutrients } from '../store/actions/nutrientActions';
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -43,72 +43,50 @@ const imgStyle = {
 
 };
 
-function Nutrients(props) {
+function urlFor(_ref) {
+    return builder.image(_ref)
+}
+
+function Nutrients({ nutrient, everything }) {
     const classes = useStyles();
-    const nutrient = props.location.state.here;
-    // const path = window.location.pathname.split("/");
-    // const nut = path[path.length - 1];
-    // const [nutriSingle, setNutriSingle] = useState([]);
-    // const [nutrientChose] = useState(nut);
-
-
-    console.log("props.nutrient: ", props.location.state.here)
-    console.log("props.everything again: ", props.everything)
+    console.log("props.everything again: ", everything)
     console.log("nutrient", nutrient)
 
-    // useEffect(() => {
-    //     onLoad()
-    // }, [])
-    // async function onLoad() {
-    //     try {
-    //         const nutrients = await client.fetch(`
-    //         *[_type == 'nutrient']{
-    //             title, slug, mainImage, imageAltText, ingredients, body}`)
-    //         props.loadNutrients(nutrients)
-    //         setNutriSingle(nutrients)
-    //     } catch (e) {
-    //         if (e !== "No current user") {
-    //             alert(e)
-    //         }
-    //     }
-    //     // setIsLoading(false);
-    // }
-    function urlFor(_ref) {
-        return builder.image(_ref)
-    }
+    if (!nutrient) {
+        return <div>Nutrient doesn't exist</div>
+    } else {
+        return (
+            < div >
+                <Card className={classes.root} variant="outlined">
+                    <CardContent>
+                        <Typography className={classes.title}>{nutrient.title}</Typography>
+                        <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
+                        <Typography className={classes.pos} variant="h6">Possible Benefits</Typography>
 
-    return (
-        < div >
-            <Card className={classes.root} variant="outlined">
-                <CardContent>
-                    <Typography className={classes.title}>{nutrient.title}</Typography>
-                    <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
-                    <Typography className={classes.pos} variant="h6">Possible Benefits</Typography>
+                        <Typography className={classes.top} variant="p">
+                            {nutrient.body[0].children[0].text}
+                        </Typography>
+                        <Typography className={classes.top} variant="h6">Helpful foods</Typography>
+                        {nutrient.ingredients.map((food) => {
 
-                    <Typography className={classes.top} variant="p">
-                        {nutrient.body[0].children[0].text}
-                    </Typography>
-                    <Typography className={classes.top} variant="h6">Helpful foods</Typography>
-                    {nutrient.ingredients.map((food) => {
-
-                        console.log(food)
-                        return (
+                            console.log(food)
+                            return (
 
 
-                            // <Link to={`/ingredient/${food}`}
-                            //     key={food.id}
-                            // >
-                            <li>
+                                // <Link to={`/ingredient/${food}`}
+                                //     key={food.id}
+                                // >
+                                <li>
 
-                                {food}
-                            </li>
-                            // </Link>
-                        )
-                    })}
+                                    {food}
+                                </li>
+                                // </Link>
+                            )
+                        })}
 
-                </CardContent>
-            </Card>
-            {/* <Grid
+                    </CardContent>
+                </Card>
+                {/* <Grid
                 container
                 direction="row"
                 justify="center"
@@ -127,26 +105,23 @@ function Nutrients(props) {
                     }
                 })}
             </Grid> */}
-        </div >
-    )
+            </div >
+        )
+    }
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
+    const nutrientName = props.location.state.here;
+    const nutrient = state.nutrients.find(nutrient => nutrient.slug.current === nutrientName);
+
     return {
-        nutrients: state.nutrients,
-        everything: state
+        nutrient,
+        nutrients: state.nutrients
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            loadNutrients: (nutrients) => loadNutrients(nutrients)
-        },
-    );
-};
+
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(Nutrients);

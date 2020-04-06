@@ -37,13 +37,14 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 17,
   },
-
+  top: {
+    marginTop: 12,
+  },
 });
 
 const imgStyle = {
   height: "11em",
   width: "11em",
-
 }
 
 function Chooser(props) {
@@ -53,23 +54,6 @@ function Chooser(props) {
   console.log("props for ails in chooser: ", props.ailments)
   // console.log("props for everything in chooser: ", props.everything)
 
-  useEffect(() => {
-    onLoad()
-  }, [])
-  async function onLoad() {
-    try {
-      const ailments = await client.fetch(`
-        *[_type == 'ailments']{
-          title, slug, image, imageAltText, body, nutrients, foods}`)
-      props.loadAilments(ailments)
-      setCategory(ailments)
-    } catch (e) {
-      if (e !== "No current user") {
-        alert(e)
-      }
-    }
-    // setIsLoading(false);
-  }
 
   return (
     <div>

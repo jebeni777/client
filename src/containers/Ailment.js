@@ -37,15 +37,16 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: "1em",
     },
-
-
+    top: {
+        marginTop: 12,
+    },
 });
 
 function Ailment(props) {
     const classes = useStyles();
     const ailment = props.location.state.here;
 
-    console.log("props.ailments: ", props.location.state.here)
+    console.log("props.location.state.here: ", props.location.state.here)
     console.log("props for everything ", props.everything)
     console.log("ailment before return", ailment)
 
@@ -64,7 +65,7 @@ function Ailment(props) {
                     {ailment.nutrients.map((nutrient, i) => {
                         console.log(nutrient)
                         return (
-                            <Link to={`/nutrients/${nutrient.toLowerCase()}`}
+                            <Link to={{ pathname: `/nutrients/${nutrient.toLowerCase()}`, state: { here: nutrient } }}
                                 key={i}
                             >
                                 <li>
@@ -96,8 +97,7 @@ function Ailment(props) {
 
 const mapStateToProps = state => {
     return {
-        ailments: state.ailment,
-        everything: state
+        ailments: state.ailment
     };
 };
 

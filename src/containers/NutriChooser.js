@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { loadNutrients } from "../store/actions/nutrientActions";
 import { Link } from "react-router-dom";
 import { increment, decrement } from "../store/reducers/stepCounter";
 import { makeStyles } from '@material-ui/core/styles';
@@ -55,23 +54,7 @@ function NutriChooser(props) {
 
     console.log("props.nutrients: ", props.nutrients)
 
-    useEffect(() => {
-        onLoad()
-    }, [])
-    async function onLoad() {
-        try {
-            const nutrients = await client.fetch(`
-            *[_type == 'nutrient']{
-                title, slug, mainImage, imageAltText, ingredients, body}`)
-            props.loadNutrients(nutrients)
-            setNutriChoose(nutrients)
-        } catch (e) {
-            if (e !== "No current user") {
-                alert(e)
-            }
-        }
-        // setIsLoading(false);
-    }
+
 
     return (
         <div>
@@ -118,18 +101,10 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            loadNutrients: (nutrients) => loadNutrients(nutrients)
-        },
-        dispatch
-    );
-};
+
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(NutriChooser);
 
 

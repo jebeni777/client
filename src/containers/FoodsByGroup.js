@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { loadFoodsByGroup } from '../store/actions/foodsByGroupActions';
 import { Link } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import Card from "@material-ui/core/Card";
@@ -9,6 +12,7 @@ import 'typeface-roboto';
 import client from "../client";
 import myConfigSanityClient from "../client";
 import imageUrlBuilder from "@sanity/image-url";
+import { loadFoods } from "../store/actions/foodsActions";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -33,6 +37,9 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 0,
     },
+    top: {
+        marginTop: 12,
+    },
 });
 
 const imgStyle = {
@@ -41,40 +48,23 @@ const imgStyle = {
 
 }
 
-export default function FoodsByCat() {
-    const classes = useStyles();
-    const path = window.location.pathname.split("/");
-    const foodCat = path[path.length - 1];
-    console.log(foodCat);
-    const [foods, setFoods] = useState([]);
+function urlFor(_ref) {
+    return builder.image(_ref)
+}
 
-    useEffect(() => {
-        onLoad()
-    }, [])
-    async function onLoad() {
-        try {
-            const ingredient = await client.fetch(`
-            *[_type == 'ingredient']{
-                title, slug, mainImage, imageAltText, category, body, nutrients, uses}`)
-            console.log("ingredients before category: ", ingredient)
-            setFoods(ingredient)
-        } catch (e) {
-            if (e !== "No current user") {
-                alert(e)
-            }
-        }
-        // setIsLoading(false);
-    }
+if (!foodGroups) {
+    return <div>Foodgroup doesn't exist</div>
+} else { }
+function FoodsByGroup(props) {
+    const classes = useStyles();
+
 
     return (
         < div >
-            {foods.map(ingredient => {
-                console.log("this is foodCat now: ", ingredient.uses)
-                function urlFor(_ref) {
-                    return builder.image(_ref)
-                }
-                if (ingredient.category === foodCat) {
-                    console.log("this is ingredient.category now: ", ingredient)
+            {props.foods.map(ingredient => {
+                console.log("ingredient after map: ", ingredient)
+                if (ingredient.category === foodGroup) {
+                    // console.log("this is ingredient.category now: ", ingredient)
                     return (
                         <Grid
                             container
@@ -84,7 +74,7 @@ export default function FoodsByCat() {
                             <Grid item xs>
                                 <Card className={classes.root} variant="outlined">
                                     <CardContent>
-                                        <Link to={`/foods/${ingredient.id}`}
+                                        <Link to={{ pathname: `/foods/${ingredient.id}`, state: { here: ingredient.category } }}
                                             key={ingredient.id}
                                         >
                                             <Typography className={classes.title}>
@@ -111,11 +101,10 @@ export default function FoodsByCat() {
 
                                             return (
 
-                                                // <Link to={`/foods/${uses}`}
-                                                //     key={uses}
-                                                // >
+
+
                                                 <li key={uses}>{uses}</li>
-                                                // </Link>
+
                                             )
                                         })}
                                     </CardContent>
@@ -131,3 +120,27 @@ export default function FoodsByCat() {
         </div >
     )
 };
+
+const mapStateToProps = state => {
+    debugger
+    return {
+        foods: state.foods,
+        foodsByGroup: state.foodGroup,
+        everything: state
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators(
+        {
+            loadFoodsByGroup: (foodsByGroup) => loadFoodsByGroup(foodsByGroup),
+            loadFoods: (foods) => loadFoods(foods)
+        },
+        dispatch
+    );
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(FoodsByGroup);
