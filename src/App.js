@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 import {
   BrowserRouter as Router,
   Route,
@@ -15,19 +19,32 @@ import Ailment from "./containers/Ailment";
 import Chooser from "./containers/Chooser";
 import Nutrients from "./containers/Nutrient";
 import Ingredient from "./containers/Ingredient";
+<<<<<<< HEAD
 // import Foods from "./containers/FoodsByGroup";
+=======
+import Foods from "./containers/FoodsByGroup";
+>>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 import NutriChooser from "./containers/NutriChooser";
 import FoodChooser from "./containers/FoodChooser";
 import FoodsByGroup from "./containers/FoodsByGroup";
 import User from "./containers/User";
+<<<<<<< HEAD
 // import { CardActions } from "@material-ui/core";
+=======
+import { CardActions } from "@material-ui/core";
+>>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 import { loadAilments } from "./store/actions/ailmentActions";
 import { loadIngredients } from "./store/actions/ingredientActions";
 import { loadFoodChooser } from "./store/actions/foodChooserActions";
 import { loadNutrients } from "./store/actions/nutrientActions";
 import client from "./client";
+<<<<<<< HEAD
 // import imageUrlBuilder from "@sanity/image-url";
 // import myConfigSanityClient from "./client";
+=======
+import imageUrlBuilder from "@sanity/image-url";
+import myConfigSanityClient from "./client";
+>>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 // import Recipe from "./containers/Recipe";
 
 
