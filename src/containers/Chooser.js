@@ -1,7 +1,5 @@
 import React from "react";
-// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { loadAilments } from '../store/actions/ailmentActions';
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -46,6 +44,10 @@ const imgStyle = {
   width: "11em",
 }
 
+function urlFor(_ref) {
+  return builder.image(_ref)
+}
+
 function Chooser(props) {
   const classes = useStyles();
 <<<<<<< HEAD
@@ -56,21 +58,15 @@ function Chooser(props) {
   // console.log("props for everything in chooser: ", props.everything)
 >>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 
-
   return (
-    <div>
+    <>
       <Grid
         container
         direction="row"
         justify="center"
       >
-
         {props.ailments.map((category, i) => {
-          function urlFor(_ref) {
-            return builder.image(_ref)
-          }
           return (
-
             <Grid item xs key={i}>
               <Card className={classes.root} variant="outlined">
                 <CardContent>
@@ -116,14 +112,13 @@ function Chooser(props) {
 
       </>
 
-    </div >
+    </>
   )
 };
 
 const mapStateToProps = state => {
   return {
-    ailments: state.ailments,
-    everything: state
+    ailments: state.ailments
   };
 };
 
