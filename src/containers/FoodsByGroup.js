@@ -12,7 +12,11 @@ import 'typeface-roboto';
 import client from "../client";
 import myConfigSanityClient from "../client";
 import imageUrlBuilder from "@sanity/image-url";
+<<<<<<< Updated upstream
 import { loadFoods } from "../store/actions/foodsActions";
+=======
+import { useParams } from 'react-router-dom';
+>>>>>>> Stashed changes
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -52,13 +56,19 @@ function urlFor(_ref) {
     return builder.image(_ref)
 }
 
+<<<<<<< Updated upstream
 if (!foodGroups) {
     return <div>Foodgroup doesn't exist</div>
 } else { }
+=======
+>>>>>>> Stashed changes
 function FoodsByGroup(props) {
     const classes = useStyles();
+    console.log("props in FoodsByGroups", props)
+    const { ingredients } = props;
 
 
+<<<<<<< Updated upstream
     return (
         < div >
             {props.foods.map(ingredient => {
@@ -117,16 +127,93 @@ function FoodsByGroup(props) {
                 }
             })
             }
+=======
+    // if (!foodGroups) {
+    //     return <div>No ingredients to list</div>
+    // } else { }
+    return (
+        < div >
+            <Grid
+                container
+                direction="row"
+                justify="center"
+            >
+                {ingredients.map((ingredient, i) => {
+                    return (
+                        <Grid item xs key={i}>
+                            <Card className={classes.root} variant="outlined">
+                                <CardContent>
+                                    <Link to={`/foods/${ingredient.slug.current}`}
+                                        key={ingredient}
+                                    >
+                                        <Typography className={classes.title}>
+                                            {ingredient.title}
+                                        </Typography>
+                                        <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
+                                    </Link>
+                                    <Typography variant="h6">Nutrients</Typography>
+                                    {ingredient.nutrients.map(nutrient => {
+
+                                        return (
+                                            <Link to={`/nutrients/${nutrient.toLowerCase()}`}
+                                                key={nutrient}
+                                            >
+                                                <li>{nutrient}</li>
+                                            </Link>
+                                        )
+                                    })}
+
+                                    <h4>Creative uses</h4>
+                                    {/* <ul style={{ listStyleType: "none" }}> */}
+                                    {ingredient.uses.map((uses) => {
+
+
+                                        return (
+
+
+
+                                            <li key={uses}>{uses}</li>
+
+                                        )
+                                    })}
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    )
+                })}
+
+            </Grid>
+
+
+
+>>>>>>> Stashed changes
         </div >
     )
 };
 
+<<<<<<< Updated upstream
 const mapStateToProps = state => {
     debugger
     return {
         foods: state.foods,
         foodsByGroup: state.foodGroup,
         everything: state
+=======
+const mapStateToProps = (state, props) => {
+    console.log("state in mapState:", state)
+    const foodGroup = props.match.params.id;
+    const ingredients = [];
+    // ingredients.map(state.ingredients.find(ingredient => ingredient.category === foodGroup))
+    // ingredients.push(ingredient)
+    state.ingredients.map((ingredient, i) => {
+        if (ingredient.category === foodGroup) {
+            ingredients.push(ingredient)
+        }
+    })
+    console.log("props in mapState:", props)
+    return {
+        ingredients
+>>>>>>> Stashed changes
     };
 };
 

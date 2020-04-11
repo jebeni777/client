@@ -1,13 +1,15 @@
 <<<<<<< HEAD
 import React from "react";
+<<<<<<< Updated upstream
 =======
 import React, { useEffect, useState } from "react";
 import { loadIngredients } from '../store/actions/ingredientActions';
 >>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 import Grid from "@material-ui/core/Grid";
+=======
+>>>>>>> Stashed changes
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -52,6 +54,7 @@ const imgStyle = {
 function urlFor(_ref) {
     return builder.image(_ref)
 }
+<<<<<<< Updated upstream
 =======
 =======
 >>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
@@ -72,7 +75,12 @@ function Ingredient(props) {
 >>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 
 function Ingredient({ ingredient, everything }) {
+=======
+function Ingredient(props) {
+>>>>>>> Stashed changes
     const classes = useStyles();
+    const { ingredient } = props
+    console.log("props in ingredient:", props)
 
 <<<<<<< HEAD
     if (!ingredient) {
@@ -92,7 +100,7 @@ function Ingredient({ ingredient, everything }) {
                             console.log(nutrient)
 
                             return (
-                                <Link to={{ pathname: `/nutrients/${nutrient}`, state: { here: nutrient } }}
+                                <Link to={`/nutrients/${nutrient.toLowerCase()}`}
                                     key={nutrient}
                                 >
                                     <li>{nutrient}</li>
@@ -229,14 +237,13 @@ function Ingredient({ ingredient, everything }) {
 };
 
 const mapStateToProps = (state, props) => {
-    const ingredientName = props.location.state.here;
+    const ingredientName = props.match.params.id;
     const ingredient = state.ingredients.find(ingredient => ingredient.slug.current === ingredientName);
 =======
 >>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 
     return {
-        ingredient,
-        ingredients: state.ingredients
+        ingredient
     };
 };
 
