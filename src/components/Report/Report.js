@@ -40,6 +40,10 @@ const imgStyle = {
 
 }
 
+function urlFor(_ref) {
+    return builder.image(_ref)
+}
+
 export default (props) => {
     console.log("this is begining:", props);
     const classes = useStyles();
@@ -66,10 +70,8 @@ export default (props) => {
     return (
         <div>
             {console.log("this is details: ", details)}
-            {details.map(data => {
-                function urlFor(_ref) {
-                    return builder.image(_ref)
-                }
+            {details.map((data, i) => {
+
                 { console.log("this is more data:", data) }
                 return (
                     <>
