@@ -1,5 +1,5 @@
-const LOAD_NUTRIENT_CHOOSER = "LOAD_NUTRIENT_CHOOSER";
+import { LOAD_NUTRIENTS_CHOOSER } from "./actionTypes";
 
-export function loadNutriChooser(nutrients) {
-    return { type: LOAD_NUTRIENT_CHOOSER, nutrients };
+export function loadNutrients(nutrients) {
+    return { type: LOAD_NUTRIENTS_CHOOSER, nutrients };
 }

@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import myConfigSanityClient from '../client';
 import imageUrlBuilder from "@sanity/image-url";
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -47,15 +48,19 @@ const imgStyle = {
 function urlFor(_ref) {
     return builder.image(_ref)
 }
-
-function Nutrients({ nutrient, everything }) {
+function Nutrients(props) {
     const classes = useStyles();
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
     console.log("props.everything again: ", everything)
     console.log("nutrient", nutrient)
 >>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 
+=======
+    const { nutrient } = props
+    console.log("nutrient", nutrient)
+>>>>>>> Stashed changes
     if (!nutrient) {
         return <div>Nutrient doesn't exist</div>
     } else {
@@ -130,12 +135,12 @@ function Nutrients({ nutrient, everything }) {
 };
 
 const mapStateToProps = (state, props) => {
-    const nutrientName = props.location.state.here;
-    const nutrient = state.nutrients.find(nutrient => nutrient.slug.current === nutrientName);
+    console.log("props in mapState:", props)
+    const nutrientName = props.match.params.nutrient;
+    const nutrient = state.nutrients.find(nutrient => nutrient.slug.current === nutrientName)
 
     return {
-        nutrient,
-        nutrients: state.nutrients
+        nutrient
     };
 };
 
