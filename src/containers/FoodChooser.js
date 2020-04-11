@@ -44,6 +44,7 @@ function urlFor(_ref) {
     return builder.image(_ref)
 }
 function FoodChooser(props) {
+    debugger
     const classes = useStyles();
 
     return (

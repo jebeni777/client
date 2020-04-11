@@ -61,7 +61,11 @@ function Ailment(props) {
                     {ailment.nutrients.map((nutrient, i) => {
                         console.log(nutrient)
                         return (
+<<<<<<< HEAD
                             <Link to={{ pathname: `/nutrients/${nutrient.toLowerCase()}`, state: { here: nutrient.toLowerCase() } }}
+=======
+                            <Link to={{ pathname: `/nutrients/${nutrient.toLowerCase()}`, state: { here: nutrient } }}
+>>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
                                 key={i}
                             >
                                 <li>

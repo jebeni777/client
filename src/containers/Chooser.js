@@ -48,6 +48,13 @@ const imgStyle = {
 
 function Chooser(props) {
   const classes = useStyles();
+<<<<<<< HEAD
+=======
+  const [category, setCategory] = useState([]);
+
+  console.log("props for ails in chooser: ", props.ailments)
+  // console.log("props for everything in chooser: ", props.everything)
+>>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
 
 
   return (
