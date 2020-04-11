@@ -8,6 +8,7 @@ import 'typeface-roboto';
 import imageUrlBuilder from "@sanity/image-url";
 import myConfigSanityClient from "../client";
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -38,17 +39,16 @@ const useStyles = makeStyles({
     },
 });
 
+function urlFor(_ref) {
+    return builder.image(_ref)
+}
+
 function Ailment(props) {
     const classes = useStyles();
     const ailment = props.location.state.here;
 
     console.log("props.location.state.here: ", props.location.state.here)
-    console.log("props for everything ", props.everything)
     console.log("ailment before return", ailment)
-
-    function urlFor(_ref) {
-        return builder.image(_ref)
-    }
 
     return (
         < div >
@@ -59,13 +59,17 @@ function Ailment(props) {
                     <Typography className={classes.pos} variant="h6">{ailment.body[0].children[0].text}</Typography>
                     <Typography variant="h6">Nutrients that can help</Typography>
                     {ailment.nutrients.map((nutrient, i) => {
-                        console.log(nutrient)
+                        console.log("ailment.nutrients:", nutrient)
                         return (
+<<<<<<< Updated upstream
 <<<<<<< HEAD
                             <Link to={{ pathname: `/nutrients/${nutrient.toLowerCase()}`, state: { here: nutrient.toLowerCase() } }}
 =======
                             <Link to={{ pathname: `/nutrients/${nutrient.toLowerCase()}`, state: { here: nutrient } }}
 >>>>>>> 9880f3f92b27dd04cbb62a1eebcd992eaf4f3d8e
+=======
+                            <Link to={`/nutrients/${nutrient.toLowerCase()}`}
+>>>>>>> Stashed changes
                                 key={i}
                             >
                                 <li>
