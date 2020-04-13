@@ -53,10 +53,6 @@ function urlFor(_ref) {
     return builder.image(_ref)
 }
 
-if (!foodGroups) {
-    return <div>Foodgroup doesn't exist</div>
-} else { }
-
 function FoodsByGroup(props) {
     const classes = useStyles();
     console.log("props in FoodsByGroups", props)

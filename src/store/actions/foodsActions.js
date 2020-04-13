@@ -1,5 +1,5 @@
-const LOAD_FOODS = "LOAD_FOODS";
+// const LOAD_FOODS = "LOAD_FOODS";
 
-export function loadFoods(ingredients) {
-    return { type: LOAD_FOODS, foods };
-}
+// export function loadFoods(ingredients) {
+//     return { type: LOAD_FOODS, foods };
+// }

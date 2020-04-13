@@ -105,15 +105,6 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators(
-        {
-            loadIngredients: (ingredient) => loadIngredients(ingredient)
-        },
-        dispatch
-    );
-};
-
 export default connect(
     mapStateToProps,
 )(Ingredient);
