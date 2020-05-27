@@ -8,6 +8,7 @@ import nutrients from "./nutrientReducer";
 import chooser from "./chooserReducer";
 import foodChooser from "./foodChooserReducer";
 import foodsByGroup from "./foodsByGroupReducer";
+import report from "./reportReducer";
 
 const reducers = combineReducers({
   stepCounter,
@@ -18,7 +19,8 @@ const reducers = combineReducers({
   nutrients,
   chooser,
   foodChooser,
-  foodsByGroup
+  foodsByGroup,
+  report
 });
 
 export default reducers;

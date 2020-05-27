@@ -7,6 +7,8 @@ export const LOAD_FOODS = "LOAD_FOODS";
 export const LOAD_INGREDIENTS = "LOAD_INGREDIENTS";
 export const LOAD_NUTRIENTS_CHOOSER = "LOAD_NUTRIENTS_CHOOSER";
 export const LOAD_NUTRIENTS = "LOAD_NUTRIENTS";
+export const LOAD_REPORT = "LOAD_REPORT";
+export const LOAD_USER = "LOAD_USER";
 
 
 // export const BEGIN_API_CALL = " BEGIN_API_CALL";

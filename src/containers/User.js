@@ -51,37 +51,16 @@ export default () => {
     const [showForm, setShowForm] = useState(true);
     const [report, setReport] = useState([]);
     const [ailsSelect, setAilsSelect] = useState([]);
-    const [ailments, setAilments] = useState([]);
+    // const [ailments, setAilments] = useState([]);
 
     const showReport = (e) => {
-        console.log("showReport e: ", e);
         setReport(e);
         setShowForm(false);
     }
 
     const closeReport = () => {
-        setReport(false);
+        setReport([]);
         setShowForm(true);
-    }
-
-    useEffect(() => {
-        onLoad()
-    }, [])
-    async function onLoad() {
-        try {
-            const ailment = await client.fetch(`
-        *[_type == 'ailments']{
-            title, slug, image, imageAltText, body, nutrients, foods}`)
-            console.log("ailment: ", ailment)
-            setAilments(ailment)
-            showReport(false)
-            closeReport(false)
-        } catch (e) {
-            if (e !== "No current user") {
-                alert(e)
-            }
-        }
-        // setIsLoading(false);
     }
 
     const view = useMemo(() => ailsSelect,
@@ -89,8 +68,6 @@ export default () => {
     );
 
     const handleSubmit = (ails) => {
-        console.log("inside handleSubmit")
-        console.log(ails);
         setAilsSelect(ails);
         showReport(true);
     };
@@ -112,7 +89,7 @@ export default () => {
                 <Typography className={classes.title}>There are no items to display</Typography>
             }
             {report && showReport &&
-                <Report ailments={ailsSelect}
+                <Report ailArr={ailsSelect}
                     closeReport={closeReport} />
             }
 

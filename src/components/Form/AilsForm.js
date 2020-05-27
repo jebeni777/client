@@ -60,17 +60,10 @@ export default function AilsForm(props) {
     const classes = useStyles();
     const [ailsSelect, setAilsSelect] = useState(formInitialState);
     const [ails, setAils] = useState([]);
-    console.log("this is before: ", ails);
 
     const handleChange = (e) => {
         setAilsSelect({ ...ailsSelect, [e.target.name]: !ailsSelect[e.target.name] });
     }
-    console.log(ailsSelect);
-    const checkedObject = (ailsSelect) => {
-        const entries = Object.entries(ailsSelect)
-        console.log(entries);
-    }
-    console.log("this is after: ", ails);
 
     const onSubmit = (ailsSelect) => {
         const newArr = [];
@@ -80,9 +73,7 @@ export default function AilsForm(props) {
             }
         }
         props.handleSubmit(newArr);
-        console.log(ailsSelect);
     }
-    console.log(ails);
 
     const onReset = (e) => {
         e.preventDefault();

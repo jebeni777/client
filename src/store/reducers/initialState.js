@@ -3,5 +3,6 @@ export default {
     ingredients: [],
     nutrients: [],
     foodChooser: [],
+    report: [],
 
 };
