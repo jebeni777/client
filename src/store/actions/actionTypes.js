@@ -9,7 +9,3 @@ export const LOAD_NUTRIENTS_CHOOSER = "LOAD_NUTRIENTS_CHOOSER";
 export const LOAD_NUTRIENTS = "LOAD_NUTRIENTS";
 export const LOAD_REPORT = "LOAD_REPORT";
 export const LOAD_USER = "LOAD_USER";
-
-
-// export const BEGIN_API_CALL = " BEGIN_API_CALL";
-// export const API_CALL_ERROR = "API_CALL_ERROR";
