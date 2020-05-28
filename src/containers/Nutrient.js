@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-// import { loadNutrients } from '../store/actions/nutrientActions';
-import { Link } from "react-router-dom";
+import React from "react";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -8,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import myConfigSanityClient from '../client';
 import imageUrlBuilder from "@sanity/image-url";
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
