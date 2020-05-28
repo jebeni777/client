@@ -3,6 +3,6 @@ export default {
     ingredients: [],
     nutrients: [],
     foodChooser: [],
-    foodByGroup: [],
-    foods: []
+    report: [],
+
 };

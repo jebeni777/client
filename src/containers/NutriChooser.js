@@ -1,14 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-// import { increment, decrement } from "../store/reducers/stepCounter";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-// import CardActions from "@material-ui/core/CardActions";
-// import Button from '@material-ui/core/Button';
 import Typography from "@material-ui/core/Typography";
-// import Collapse from '@material-ui/core/Collapse';
 import Grid from '@material-ui/core/Grid';
 import 'typeface-roboto';
 import myConfigSanityClient from "../client";
@@ -45,14 +41,13 @@ const imgStyle = {
 
 }
 
+function urlFor(_ref) {
+    return builder.image(_ref)
+}
+
 function NutriChooser(props) {
+    console.log("NutriChooser props", props)
     const classes = useStyles();
-    const [nutriChoose, setNutriChoose] = useState([]);
-
-    console.log("props.nutrients: ", props.nutrients)
-
-
-
     return (
         <div>
             <Grid
@@ -60,18 +55,14 @@ function NutriChooser(props) {
                 direction="row"
                 justify="center"
             >
-                {props.nutrients.map((nutrient, index) => {
-                    function urlFor(_ref) {
-                        return builder.image(_ref)
-                    }
-                    // let expanded = false;
-                    // console.log('Expanded? ', expanded)
+                {props.nutrients.map((nutrient, i) => {
+                    console.log("props.nutrient map", nutrient)
                     return (
-                        <Grid item xs>
+                        <Grid item xs key={i}>
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
-                                    <Link to={`/nutrients/${nutrient.slug.current}`}
-                                        key={nutrient.id}
+                                    <Link to={{ pathname: `/nutrients/${nutrient.slug.current}`, state: { here: nutrient } }}
+                                        key={i}
                                     >
                                         <Typography className={classes.title} >
                                             {nutrient.title}
@@ -81,7 +72,6 @@ function NutriChooser(props) {
 
                                 </CardContent>
                             </Card>
-                            {/* <NutriCard nutrient={nutrient} /> */}
                         </Grid>
                     )
                 })
@@ -91,7 +81,7 @@ function NutriChooser(props) {
     );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
     return {
         nutrients: state.nutrients,
         everything: state
@@ -101,7 +91,7 @@ const mapStateToProps = state => {
 
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
 )(NutriChooser);
 
 

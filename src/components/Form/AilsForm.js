@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
+import Typography from "@material-ui/core/Typography";
+import { primary } from '@material-ui/core/colors';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -23,12 +24,20 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 22,
+        fontSize: 26,
         padding: 10,
     },
     pos: {
         marginBottom: 17,
     },
+    top: {
+        marginTop: 17,
+    },
+    btn: {
+        margin: 17,
+        width: 50,
+        height: 30,
+    }
 
 });
 
@@ -38,7 +47,7 @@ const imgStyle = {
 
 }
 
-const initState = {
+const formInitialState = {
     bones: false,
     joints: false,
     memory: false,
@@ -48,19 +57,13 @@ const initState = {
 }
 
 export default function AilsForm(props) {
-    const [ailsSelect, setAilsSelect] = useState(initState);
+    const classes = useStyles();
+    const [ailsSelect, setAilsSelect] = useState(formInitialState);
     const [ails, setAils] = useState([]);
-    console.log("this is before: ", ails);
 
     const handleChange = (e) => {
         setAilsSelect({ ...ailsSelect, [e.target.name]: !ailsSelect[e.target.name] });
     }
-    console.log(ailsSelect);
-    const checkedObject = (ailsSelect) => {
-        const entries = Object.entries(ailsSelect)
-        console.log(entries);
-    }
-    console.log("this is after: ", ails);
 
     const onSubmit = (ailsSelect) => {
         const newArr = [];
@@ -70,9 +73,7 @@ export default function AilsForm(props) {
             }
         }
         props.handleSubmit(newArr);
-        console.log(ailsSelect);
     }
-    console.log(ails);
 
     const onReset = (e) => {
         e.preventDefault();
@@ -80,8 +81,8 @@ export default function AilsForm(props) {
         props.onReset && props.onReset(e.target);
     }
     return (
-        <FormGroup row>
-            <h1>Choose what ails you</h1>
+        <FormGroup>
+            <Typography className={classes.title}>Choose what ails you</Typography>
             <FormControlLabel
                 control={
                     <Checkbox
@@ -154,7 +155,7 @@ export default function AilsForm(props) {
                 }
                 label="Heart"
             />
-            <button onClick={() => onSubmit(ailsSelect)}>Submit</button>
+            <button className={classes.btn} onClick={() => onSubmit(ailsSelect)}>Submit</button>
         </FormGroup>
     )
 }
