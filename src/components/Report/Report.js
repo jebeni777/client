@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
-import client from '../../client';
 import imageUrlBuilder from '@sanity/image-url';
 import myConfigSanityClient from '../../client';
 import { connect } from 'react-redux';
@@ -64,24 +62,31 @@ function Report(props) {
 
             {reportAils.map((currAil, i) => {
                 return (
-                    <Card className={classes.root} variant="outlined">
+                    <Card className={classes.root} variant="outlined" key={i}>
                         <CardContent>
-                            <li key={i}>
+                            <ul style={{ listStyleType: "none" }}>
 
                                 <Typography variant="h6">
-                                    <li>
+                                    <li key={i}>
                                         {currAil.title}
                                     </li>
                                 </Typography>
 
-                                <Typography variant="h6">{currAil.foods}</Typography>
-                                <Typography variant="h6">{currAil.nutrients}</Typography>
-                            </li>
+                                <Typography variant="h6">
+                                    <li key={i}>
+                                        {currAil.foods}
+                                    </li>
+                                </Typography>
+                                <Typography variant="h6">
+                                    <li key={i}>
+                                        {currAil.nutrients}
+                                    </li>
+                                </Typography>
+                            </ul>
                         </CardContent>
                     </Card>
                 )
             }
-                // }
             )}
 
             <button onClick={props.closeReport}>Close Report</button>
