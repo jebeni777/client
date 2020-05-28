@@ -46,7 +46,6 @@ function urlFor(_ref) {
 }
 
 function NutriChooser(props) {
-    console.log("NutriChooser props", props)
     const classes = useStyles();
     return (
         <div>
@@ -56,7 +55,6 @@ function NutriChooser(props) {
                 justify="center"
             >
                 {props.nutrients.map((nutrient, i) => {
-                    console.log("props.nutrient map", nutrient)
                     return (
                         <Grid item xs key={i}>
                             <Card className={classes.root} variant="outlined">
@@ -87,8 +85,6 @@ const mapStateToProps = (state, props) => {
         everything: state
     };
 };
-
-
 
 export default connect(
     mapStateToProps,

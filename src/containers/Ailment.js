@@ -55,7 +55,6 @@ function Ailment(props) {
                     <Typography className={classes.pos} variant="h6">{ailment.body[0].children[0].text}</Typography>
                     <Typography variant="h6">Nutrients that can help</Typography>
                     {ailment.nutrients.map((nutrient, i) => {
-                        console.log("ailment.nutrients:", nutrient)
                         return (
                             <Link to={`/nutrients/${nutrient.toLowerCase()}`}
 
@@ -70,7 +69,6 @@ function Ailment(props) {
 
                     <Typography variant="h6">Helpful foods</Typography>
                     {ailment.foods.map((food, i) => {
-                        console.log(food)
                         return (
                             <li key={i}>
                                 {food}

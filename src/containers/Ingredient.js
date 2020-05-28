@@ -45,7 +45,6 @@ function urlFor(_ref) {
 function Ingredient(props) {
     const classes = useStyles();
     const { ingredient } = props
-    console.log("props in ingredient:", props)
 
     if (!ingredient) {
         return <div>Ingredient doesn't exist</div>
@@ -61,7 +60,6 @@ function Ingredient(props) {
                         <h4>Nutrients</h4>
 
                         {ingredient.nutrients.map((nutrient, i) => {
-                            console.log(nutrient)
 
                             return (
                                 <Link to={`/nutrients/${nutrient.toLowerCase()}`}

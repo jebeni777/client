@@ -61,7 +61,6 @@ function Nutrients(props) {
 
                         <Typography className={classes.top} variant="h6">Helpful foods</Typography>
                         {nutrient.ingredients.map((food, i) => {
-                            console.log(food)
                             return (
                                 <li key={i}>
 
@@ -77,7 +76,6 @@ function Nutrients(props) {
 };
 
 const mapStateToProps = (state, props) => {
-    console.log("props in mapState:", props)
     const nutrientName = props.match.params.nutrient;
     const nutrient = state.nutrients.find(nutrient => nutrient.slug.current === nutrientName)
 
@@ -86,8 +84,6 @@ const mapStateToProps = (state, props) => {
     };
 };
 
-
-
 export default connect(
-    mapStateToProps
+    mapStateToProps,
 )(Nutrients);

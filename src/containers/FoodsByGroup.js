@@ -53,7 +53,6 @@ function urlFor(_ref) {
 
 function FoodsByGroup(props) {
     const classes = useStyles();
-    console.log("props in FoodsByGroups", props)
     const { ingredients } = props;
 
     return (
@@ -106,7 +105,6 @@ function FoodsByGroup(props) {
 };
 
 const mapStateToProps = (state, props) => {
-    console.log("state in mapState:", state);
     const foodGroup = props.match.params.id;
     const ingredients = [];
     state.ingredients.map((ingredient, i) => {
@@ -114,7 +112,6 @@ const mapStateToProps = (state, props) => {
             ingredients.push(ingredient)
         }
     })
-    console.log("props in mapState:", props)
     return {
         ingredients
 
