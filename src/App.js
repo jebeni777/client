@@ -26,9 +26,6 @@ import { loadIngredients } from "./store/actions/ingredientActions";
 import { loadFoodChooser } from "./store/actions/foodChooserActions";
 import { loadNutrients } from "./store/actions/nutrientActions";
 import client from "./client";
-import imageUrlBuilder from "@sanity/image-url";
-import myConfigSanityClient from "./client";
-// import Recipe from "./containers/Recipe";
 
 
 
@@ -141,7 +138,6 @@ function App({
 }
 
 const mapStateToProps = state => {
-  // debugger
   return {
     settings: state.settings,
   };
