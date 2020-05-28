@@ -8,7 +8,6 @@ import 'typeface-roboto';
 import imageUrlBuilder from "@sanity/image-url";
 import myConfigSanityClient from "../client";
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -47,9 +46,6 @@ function Ailment(props) {
     const classes = useStyles();
     const ailment = props.location.state.here;
 
-    console.log("props.location.state.here: ", props.location.state.here)
-    console.log("ailment before return", ailment)
-
     return (
         < div >
             <Card className={classes.root} variant="outlined">
@@ -76,13 +72,9 @@ function Ailment(props) {
                     {ailment.foods.map((food, i) => {
                         console.log(food)
                         return (
-                            // <Link to={`/foods/${food}`}
-                            //     key={food}
-                            // >
                             <li key={i}>
                                 {food}
                             </li>
-                            // </Link>
                         )
                     })}
 
