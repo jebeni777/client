@@ -1,9 +1,7 @@
 import React from 'react';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import Report from '../components/Report/Report';
 import AilsForm from '../components/Form/AilsForm';
-// import FoodList from '../components/List/FoodList';
-import client from '../client';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 
@@ -39,19 +37,11 @@ const useStyles = makeStyles({
 
 });
 
-const imgStyle = {
-    height: "11em",
-    width: "11em",
-
-}
-
 export default () => {
     const classes = useStyles();
-    const [name, setName] = useState('');
     const [showForm, setShowForm] = useState(true);
     const [report, setReport] = useState([]);
     const [ailsSelect, setAilsSelect] = useState([]);
-    // const [ailments, setAilments] = useState([]);
 
     const showReport = (e) => {
         setReport(e);
@@ -64,7 +54,7 @@ export default () => {
     }
 
     const view = useMemo(() => ailsSelect,
-        [ailsSelect, name]
+        [ailsSelect]
     );
 
     const handleSubmit = (ails) => {
@@ -73,7 +63,7 @@ export default () => {
     };
 
     const clearSelect = (e) => {
-        setAilsSelect = [];
+        setAilsSelect([]);
     }
 
     return (
