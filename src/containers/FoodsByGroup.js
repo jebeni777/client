@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { loadFoodsByGroup } from '../store/actions/foodsByGroupActions';
@@ -9,11 +9,9 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import 'typeface-roboto';
-import client from "../client";
 import myConfigSanityClient from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 import { loadFoods } from "../store/actions/foodsActions";
-import { useParams } from 'react-router-dom';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -55,11 +53,8 @@ function urlFor(_ref) {
 
 function FoodsByGroup(props) {
     const classes = useStyles();
-    console.log("props in FoodsByGroups", props)
     const { ingredients } = props;
-    // if (!foodGroups) {
-    //     return <div>No ingredients to list</div>
-    // } else { }
+
     return (
         < div >
             <Grid
@@ -93,14 +88,9 @@ function FoodsByGroup(props) {
                                     })}
 
                                     <h4>Creative uses</h4>
-                                    {/* <ul style={{ listStyleType: "none" }}> */}
-                                    {ingredient.uses.map((uses) => {
-
-
+                                    {ingredient.uses.map((uses, i) => {
                                         return (
-
-                                            <li key={uses}>{uses}</li>
-
+                                            <li key={i}>{uses}</li>
                                         )
                                     })}
                                 </CardContent>
@@ -110,25 +100,18 @@ function FoodsByGroup(props) {
                 })}
 
             </Grid>
-
-
         </div >
     )
 };
 
-
 const mapStateToProps = (state, props) => {
-    console.log("state in mapState:", state);
     const foodGroup = props.match.params.id;
     const ingredients = [];
-    // ingredients.map(state.ingredients.find(ingredient => ingredient.category === foodGroup))
-    // ingredients.push(ingredient)
     state.ingredients.map((ingredient, i) => {
         if (ingredient.category === foodGroup) {
             ingredients.push(ingredient)
         }
     })
-    console.log("props in mapState:", props)
     return {
         ingredients
 

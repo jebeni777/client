@@ -2,10 +2,8 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { increment, decrement } from "../store/reducers/stepCounter";
 import video from "../assets/video.mp4";
 import 'typeface-roboto';
 
@@ -34,7 +32,7 @@ const btnStyle = {
   padding: "1.5em",
 }
 
-function Home(props) {
+export default function Home(props) {
   const classes = useStyles;
 
   return (
@@ -93,24 +91,3 @@ function Home(props) {
     </div >
   );
 };
-
-const mapStateToProps = state => {
-  return {
-    stepCounter: state.stepCounter
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      increment: () => increment(),
-      decrement: () => decrement()
-    },
-    dispatch
-  );
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
