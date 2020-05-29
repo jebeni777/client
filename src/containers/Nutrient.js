@@ -62,7 +62,7 @@ function Nutrients(props) {
                         <Typography className={classes.top} variant="h6">Helpful foods</Typography>
                         {nutrient.ingredients.map((food, i) => {
                             return (
-                                <li key={i}>
+                                <li key={i} style={{ listStyleType: "none" }}>
 
                                     {food}
                                 </li>

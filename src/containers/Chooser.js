@@ -69,7 +69,7 @@ function Chooser(props) {
                     <Typography className={classes.title}>{category.title}</Typography>
                     <img src={urlFor(category.image.asset._ref)} alt={category.imageAltText} style={imgStyle} />
                   </Link>
-                  <h5>{category.body[0].children[0].text}</h5>
+                  <Typography className={classes.pos} variant="body1">{category.body[0].children[0].text}</Typography>
                 </CardContent>
               </Card>
             </Grid>

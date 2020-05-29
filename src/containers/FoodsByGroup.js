@@ -82,7 +82,7 @@ function FoodsByGroup(props) {
                                             <Link to={`/nutrients/${nutrient.toLowerCase()}`}
                                                 key={nutrient}
                                             >
-                                                <li>{nutrient}</li>
+                                                <li style={{ listStyleType: "none" }}>{nutrient}</li>
                                             </Link>
                                         )
                                     })}
@@ -90,7 +90,7 @@ function FoodsByGroup(props) {
                                     <h4>Creative uses</h4>
                                     {ingredient.uses.map((uses, i) => {
                                         return (
-                                            <li key={i}>{uses}</li>
+                                            <li key={i} style={{ listStyleType: "none" }}>{uses}</li>
                                         )
                                     })}
                                 </CardContent>
