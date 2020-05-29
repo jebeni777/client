@@ -27,8 +27,6 @@ import { loadFoodChooser } from "./store/actions/foodChooserActions";
 import { loadNutrients } from "./store/actions/nutrientActions";
 import client from "./client";
 
-
-
 const NotFound = () => {
   return <div>NotFound</div>;
 };
