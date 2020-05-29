@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import imageUrlBuilder from '@sanity/image-url';
 import myConfigSanityClient from '../../client';
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -24,13 +25,16 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 22,
-        padding: 10,
+        fontSize: 30,
+        fontWeight: "bold",
+        padding: "0.5em"
     },
     pos: {
-        marginBottom: 17,
+        marginBottom: "1em",
     },
-
+    top: {
+        marginTop: 12,
+    },
 });
 
 const imgStyle = {
@@ -63,26 +67,33 @@ function Report(props) {
             {reportAils.map((currAil, i) => {
                 return (
                     <Card className={classes.root} variant="outlined" key={i}>
-                        <CardContent>
-                            <ul style={{ listStyleType: "none" }}>
+                        <CardContent key={i}>
+                            <Typography className={classes.title}>{currAil.title}</Typography>
+                            <Typography className={classes.pos}><img src={urlFor(currAil.image)} alt={currAil.imageAltText} /></Typography>
+                            <Typography className={classes.pos} variant="body1">{currAil.body[0].children[0].text}</Typography>
+                            <Typography variant="h6">Helpful foods</Typography>
+                            {currAil.foods.map((food, i) => {
+                                return (
+                                    <li key={i} style={{ listStyleType: "none" }}>
+                                        {food}
+                                    </li>
+                                )
+                            })}
+                            <Typography variant="h6">Nutrients that can help</Typography>
+                            {currAil.nutrients.map((nutrient, i) => {
+                                return (
+                                    <>
+                                        <Link to={`/nutrients/${nutrient.toLowerCase()}`}
 
-                                <Typography variant="h6">
-                                    <li key={i}>
-                                        {currAil.title}
-                                    </li>
-                                </Typography>
-
-                                <Typography variant="h6">
-                                    <li key={i}>
-                                        {currAil.foods}
-                                    </li>
-                                </Typography>
-                                <Typography variant="h6">
-                                    <li key={i}>
-                                        {currAil.nutrients}
-                                    </li>
-                                </Typography>
-                            </ul>
+                                            key={i}
+                                        >
+                                            <li style={{ listStyleType: "none" }}>
+                                                {nutrient}
+                                            </li>
+                                        </Link>
+                                    </>
+                                )
+                            })}
                         </CardContent>
                     </Card>
                 )
@@ -106,7 +117,8 @@ const mapStateToProps = state => {
     // })
     // console.log("props in mapState:", props)
     return {
-        ailments: state.ailments
+        ailments: state.ailments,
+        nutrients: state.nutrient
     };
 };
 

@@ -52,7 +52,7 @@ function Ailment(props) {
                 <CardContent>
                     <Typography className={classes.title}>{ailment.title}</Typography>
                     <Typography className={classes.pos}><img src={urlFor(ailment.image)} alt={ailment.imageAltText} /></Typography>
-                    <Typography className={classes.pos} variant="h6">{ailment.body[0].children[0].text}</Typography>
+                    <Typography className={classes.pos} variant="body1">{ailment.body[0].children[0].text}</Typography>
                     <Typography variant="h6">Nutrients that can help</Typography>
                     {ailment.nutrients.map((nutrient, i) => {
                         return (
