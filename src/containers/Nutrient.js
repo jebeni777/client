@@ -55,7 +55,7 @@ function Nutrients(props) {
                         <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
 
                         <Typography className={classes.pos} variant="h6">Possible Benefits</Typography>
-                        <Typography className={classes.top} variant="h6">
+                        <Typography className={classes.top} variant="body1">
                             {nutrient.body[0].children[0].text}
                         </Typography>
 
