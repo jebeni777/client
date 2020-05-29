@@ -82,14 +82,16 @@ function Report(props) {
                             <Typography variant="h6">Nutrients that can help</Typography>
                             {currAil.nutrients.map((nutrient, i) => {
                                 return (
-                                    <Link to={`/nutrients/${nutrient.toLowerCase()}`}
+                                    <>
+                                        <Link to={`/nutrients/${nutrient.toLowerCase()}`}
 
-                                        key={i}
-                                    >
-                                        <li>
-                                            {nutrient}
-                                        </li>
-                                    </Link>
+                                            key={i}
+                                        >
+                                            <li style={{ listStyleType: "none" }}>
+                                                {nutrient}
+                                            </li>
+                                        </Link>
+                                    </>
                                 )
                             })}
                         </CardContent>
