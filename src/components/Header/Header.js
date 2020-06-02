@@ -8,6 +8,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import PersonIcon from "@material-ui/icons/Person";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 
 const styles = theme => ({
@@ -51,9 +52,11 @@ const Header = props => {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <IconButton color="inherit">
-          <PersonIcon />
-        </IconButton>
+        <Link to="/user">
+          <IconButton color="inherit">
+            <PersonIcon />
+          </IconButton>
+        </Link>
       </Toolbar>
     </AppBar>
   );
