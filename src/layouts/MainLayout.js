@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 import 'typeface-roboto';
 import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+// import Sidebar from "../components/Sidebar";
 
 const drawerWidth = 240;
 
@@ -55,7 +55,7 @@ class MainLayout extends Component {
             {children}
           </main>
         </div>
-        <Sidebar open={this.state.open} drawerWidth={drawerWidth} />
+        {/* <Sidebar open={this.state.open} drawerWidth={drawerWidth} /> */}
       </Fragment>
     );
   }

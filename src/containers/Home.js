@@ -2,6 +2,9 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import { Link } from "react-router-dom";
 import video from "../assets/video.mp4";
 import 'typeface-roboto';
@@ -18,11 +21,16 @@ const useStyles = makeStyles({
     transform: 'scale(0.8)',
   },
   title: {
-    fontSize: 18,
+    fontSize: 36,
+    fontWeight: "bold",
+    paddingLeft: "3em",
   },
   pos: {
     marginBottom: 12,
   },
+  bod1: {
+    marginLeft: 12,
+  }
 
 });
 
@@ -35,58 +43,60 @@ export default function Home(props) {
   const classes = useStyles;
 
   return (
-    <div
-      style={{
-        alignItems: "center",
-        justifyContent: "center",
+    <>
+      <Grid
+        container
+        // direction="column"
+        justify="left"
+      >
+        <Grid item xs={6}>
+          <Card style={{ margin: "1em", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
+            <Typography variant="h5" >How do you feel?</Typography>
+          </Card>
+          <Card style={{ margin: "1em", padding: "1em" }}>
+            <Typography className={classes.bod1} variant="body1">
+              Foods can naturally comfort us because we are what we eat. And most of us don't want to change our diets. What if you were shown a way to add ingredients that would help your ailments to what you already eat? Choose your ailment to learn which foods naturally comfort and creative ways to add them to things you may already eat.
+          </Typography>
+          </Card>
+          <Link to="/chooser">
+            <Button
+              variant="contained"
+              color="primary"
+              name="ailments"
+              type="button"
+              style={btnStyle}
 
-      }}
-    >
-      <iframe height="250" width="350" src={video} align="right" title="video"></iframe>
-      <Typography className={classes.title}>
-        Choose your ailment to learn which foods naturally comfort and creative ways to add them to things you may already eat.
-      </Typography>
-      <Link to="/chooser">
-        <Button
-          variant="contained"
-          color="primary"
-          name="ailments"
-          type="button"
-          style={btnStyle}
-
-        >
-          What ails you?
+            >
+              What ails you?
       </Button>
-      </Link>
-      <Typography className={classes.title}>
-        Select below to go straight to ingredients.
-        </Typography>
-      <Link to="/foodChooser">
-        <Button
-          variant="contained"
-          color="primary"
-          name="foods"
-          type="button"
-          style={btnStyle}
-        >
-          Look for ingredients
+          </Link>
+          <Link to="/foodChooser">
+            <Button
+              variant="contained"
+              color="primary"
+              name="foods"
+              type="button"
+              style={btnStyle}
+            >
+              Ingredients
       </Button>
-      </Link>
-      <Typography className={classes.title}>
-        Select below to learn more about nutrients and how they contribute.
-      </Typography>
-      <Link to="/nutrients">
-        <Button
-          variant="contained"
-          color="primary"
-          name="nutrients"
-          type="button"
-          style={btnStyle}
-        >
-          Learn about nutrients?
+          </Link>
+          <Link to="/nutrients">
+            <Button
+              variant="contained"
+              color="primary"
+              name="nutrients"
+              type="button"
+              style={btnStyle}
+            >
+              Nutrients?
       </Button>
-      </Link>
-
-    </div >
+          </Link>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <iframe height="310" width="410" src={video} align="right" title="video"></iframe>
+        </Grid>
+      </Grid>
+    </>
   );
 };

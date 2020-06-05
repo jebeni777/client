@@ -1,17 +1,17 @@
 import { createMuiTheme } from "@material-ui/core/styles";
-import indigo from "@material-ui/core/colors/indigo";
+import teal from "@material-ui/core/colors/teal";
 import green from "@material-ui/core/colors/green";
 import red from "@material-ui/core/colors/red";
 
 const TOGGLETHEMEMODE = "settings/TOGGLETHEMEMODE";
 const SWAPTHEMECOLORS = "settings/SWAPTHEMECOLORS";
 
-const primaryColor = indigo;
+const primaryColor = teal;
 const secondaryColor = green;
 
 const themeConfig = {
   palette: {
-    primary: indigo,
+    primary: teal,
     secondary: green,
     error: red,
     // Used by `getContrastText()` to maximize the contrast between the background and
