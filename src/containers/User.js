@@ -49,7 +49,7 @@ export default () => {
     }
 
     const closeReport = () => {
-        setReport([]);
+        setReport("");
         setShowForm(true);
     }
 
