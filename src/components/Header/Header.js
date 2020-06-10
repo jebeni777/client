@@ -67,7 +67,7 @@ const Header = props => {
           Comfort Foods
         </Typography>
         <Link to="/">
-          <IconButton color="inherit">
+          <IconButton>
             <HomeIcon style={{ color: teal[50] }} />
           </IconButton>
         </Link>
@@ -77,8 +77,8 @@ const Header = props => {
           </Badge>
         </IconButton> */}
         <Link to="/user">
-          <IconButton color="inherit">
-            <PersonIcon />
+          <IconButton>
+            <PersonIcon style={{ color: teal[50] }} />
           </IconButton>
         </Link>
       </Toolbar>

@@ -21,13 +21,17 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 30,
+        fontSize: 24,
     },
     pos: {
         marginBottom: 12,
     },
     top: {
         marginTop: 12,
+        marginBottom: 12,
+    },
+    h6: {
+        fontSize: 16,
     }
 
 });
@@ -59,7 +63,7 @@ function Nutrients(props) {
                             {nutrient.body[0].children[0].text}
                         </Typography>
 
-                        <Typography className={classes.top} variant="h6">Helpful foods</Typography>
+                        <Typography className={classes.top} variant="body2"><b>Foods rich in {nutrient.title}</b></Typography>
                         {nutrient.ingredients.map((food, i) => {
                             return (
                                 <li key={i} style={{ listStyleType: "none" }}>
