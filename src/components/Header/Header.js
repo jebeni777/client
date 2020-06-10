@@ -27,7 +27,7 @@ const styles = theme => ({
   },
   title: {
     flexGrow: 1,
-    marginLeft: 110
+    marginLeft: 55
   }
 });
 
