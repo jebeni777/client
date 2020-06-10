@@ -7,7 +7,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import 'typeface-roboto';
-import { ReactTinyLink } from 'react-tiny-link';
 import imageUrlBuilder from "@sanity/image-url";
 import myConfigSanityClient from '../client';
 
@@ -77,34 +76,6 @@ function Chooser(props) {
         })
         }
       </Grid>
-      <>
-        <Typography className={classes.title}>More helpful information</Typography>
-        <ReactTinyLink
-          cardSize="small"
-          showGraphic={true}
-          maxLine={2}
-          minLine={1}
-          url="https://stantonmigraineprotocol.com/"
-        />
-        <br />
-        <ReactTinyLink
-          cardSize="small"
-          showGraphic={true}
-          maxLine={2}
-          minLine={1}
-          url="https://www.youtube.com/watch?v=wYRZGFFYqWo"
-        />
-        <br />
-        <ReactTinyLink
-          cardSize="small"
-          showGraphic={true}
-          maxLine={2}
-          minLine={1}
-          url="https://societyhealth.org/top-joint-health-supplement-guide/?gclid=EAIaIQobChMIxrrJ9JD_5wIVQh6tBh2Q2QQBEAAYAiAAEgIwMfD_BwE"
-        />
-
-      </>
-
     </>
   )
 };
