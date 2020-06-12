@@ -51,6 +51,7 @@ function Report(props) {
     const { ailArr } = props;
     const classes = useStyles();
 
+    console.log('props: ', props);
 
     const reportAils = [];
     props.ailments.map((ailment, i) => {
@@ -60,6 +61,36 @@ function Report(props) {
             }
         })
     })
+
+    const reportNutrients = [];
+    props.nutrients.map((nutrient, i) => {
+        reportAils.map((ail, idx) => {
+            console.log('ail: ', ail);
+
+            ail.nutrients.map((a, j) => {
+                console.log('ail.nutrients[j]: ', ail.nutrients[j]);
+                console.log('nutrient: ', nutrient);
+                if (nutrient.slug.current === ail.nutrients[j]) {
+
+                    reportNutrients.push(nutrient)
+                }
+
+
+            })
+        })
+    })
+    console.log('reportNutrients: ', reportNutrients);
+
+
+    const reportNutriFoods = [];
+    reportNutrients.map((repNutri, i) => {
+        repNutri.ingredients.map((food, idx) => {
+            console.log('food: ', food);
+            reportNutriFoods.push(food)
+
+        })
+    })
+    console.log('reportNutriFoods: ', reportNutriFoods);
 
     return (
         <div>
@@ -79,19 +110,11 @@ function Report(props) {
                                     </li>
                                 )
                             })}
-                            <Typography variant="h6">Nutrients that can help</Typography>
-                            {currAil.nutrients.map((nutrient, i) => {
+                            {reportNutriFoods.map((food, idx) => {
                                 return (
-                                    <>
-                                        <Link to={`/nutrients/${nutrient.toLowerCase()}`}
-
-                                            key={i}
-                                        >
-                                            <li style={{ listStyleType: "none" }}>
-                                                {nutrient}
-                                            </li>
-                                        </Link>
-                                    </>
+                                    <li key={i} style={{ listStyleType: "none" }}>
+                                        {food}
+                                    </li>
                                 )
                             })}
                         </CardContent>
@@ -118,7 +141,7 @@ const mapStateToProps = state => {
     // console.log("props in mapState:", props)
     return {
         ailments: state.ailments,
-        nutrients: state.nutrient
+        nutrients: state.nutrients
     };
 };
 
