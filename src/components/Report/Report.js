@@ -7,13 +7,15 @@ import imageUrlBuilder from '@sanity/image-url';
 import myConfigSanityClient from '../../client';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
         minWidth: 350,
-        maxWidth: 350,
+        maxWidth: 380,
         borderRadius: 10,
         alignContent: "center",
         backgroundColor: "#FFF",
@@ -87,44 +89,49 @@ function Report(props) {
         repNutri.ingredients.map((food, idx) => {
             console.log('food: ', food);
             reportNutriFoods.push(food)
-
         })
     })
     console.log('reportNutriFoods: ', reportNutriFoods);
 
     return (
-        <div>
-
-            {reportAils.map((currAil, i) => {
-                return (
-                    <Card className={classes.root} variant="outlined" key={i}>
-                        <CardContent key={i}>
-                            <Typography className={classes.title}>{currAil.title}</Typography>
-                            <Typography className={classes.pos}><img src={urlFor(currAil.image)} alt={currAil.imageAltText} /></Typography>
-                            <Typography className={classes.pos} variant="body1">{currAil.body[0].children[0].text}</Typography>
-                            <Typography variant="h6">Helpful foods</Typography>
-                            {currAil.foods.map((food, i) => {
-                                return (
-                                    <li key={i} style={{ listStyleType: "none" }}>
-                                        {food}
-                                    </li>
-                                )
-                            })}
-                            {reportNutriFoods.map((food, idx) => {
-                                return (
-                                    <li key={i} style={{ listStyleType: "none" }}>
-                                        {food}
-                                    </li>
-                                )
-                            })}
-                        </CardContent>
-                    </Card>
-                )
-            }
-            )}
-
-            <button onClick={props.closeReport}>Close Report</button>
-        </div>
+        <>
+            <Grid
+                container
+                direction="row"
+                justify="center"
+            >
+                {reportAils.map((currAil, i) => {
+                    return (
+                        <Grid item xs key={i}>
+                            <Card className={classes.root} variant="outlined" key={i}>
+                                <CardContent key={i}>
+                                    <Typography className={classes.title}>{currAil.title}</Typography>
+                                    <Typography className={classes.pos}><img src={urlFor(currAil.image)} alt={currAil.imageAltText} /></Typography>
+                                    <Typography className={classes.pos} variant="body1">{currAil.body[0].children[0].text}</Typography>
+                                    <Typography variant="h6">Helpful foods</Typography>
+                                    {currAil.foods.map((food, i) => {
+                                        return (
+                                            <li key={i} style={{ listStyleType: "none" }}>
+                                                {food}
+                                            </li>
+                                        )
+                                    })}
+                                    {reportNutriFoods.map((food, idx) => {
+                                        return (
+                                            <li key={i} style={{ listStyleType: "none" }}>
+                                                {food}
+                                            </li>
+                                        )
+                                    })}
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                    )
+                }
+                )}
+            </Grid>
+            <Button variant="outlined" color="primary" onClick={props.closeReport}>Close Report</Button>
+        </>
 
     )
 }

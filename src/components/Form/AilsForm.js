@@ -6,8 +6,7 @@ import { primary } from '@material-ui/core/colors';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
     root: {
@@ -155,7 +154,7 @@ export default function AilsForm(props) {
                 }
                 label="Heart"
             />
-            <button className={classes.btn} onClick={() => onSubmit(ailsSelect)}>Submit</button>
+            <Button variant="outlined" color="primary" className={classes.btn} onClick={() => onSubmit(ailsSelect)}>Submit</Button>
         </FormGroup>
     )
 }
