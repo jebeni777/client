@@ -130,7 +130,7 @@ function Report(props) {
                 }
                 )}
             </Grid>
-            <Button variant="outlined" onClick={props.closeReport}>Close Report</Button>
+            <Button variant="outlined" color="primary" onClick={props.closeReport}>Close Report</Button>
         </>
 
     )
