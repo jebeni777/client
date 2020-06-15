@@ -8,6 +8,7 @@ import myConfigSanityClient from '../../client';
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
+import Button from "@material-ui/core/Button";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -129,7 +130,7 @@ function Report(props) {
                 }
                 )}
             </Grid>
-            <button onClick={props.closeReport}>Close Report</button>
+            <Button variant="outlined" onClick={props.closeReport}>Close Report</Button>
         </>
 
     )
