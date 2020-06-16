@@ -46,8 +46,24 @@ function Ailment(props) {
     const classes = useStyles();
     const ailment = props.location.state.here;
 
+    const ailNutrients = [];
+    props.nutrients.map((nutri, idx) => {
+        ailment.nutrients.map((nutrient, i) => {
+            if (nutri.slug.current === ailment.nutrients[i].toLowerCase()) {
+                ailNutrients.push(nutri)
+            }
+        })
+    })
+
+    const nutrientFoods = [];
+    ailNutrients.map((nutrient, i) => {
+        nutrient.ingredients.map((food, idx) => {
+            nutrientFoods.push(food)
+        })
+    })
+
     return (
-        < div >
+        <>
             <Card className={classes.root} variant="outlined">
                 <CardContent>
                     <Typography className={classes.title}>{ailment.title}</Typography>
@@ -60,7 +76,7 @@ function Ailment(props) {
 
                                 key={i}
                             >
-                                <li>
+                                <li style={{ listStyleType: "none", marginLeft: 20 }}>
                                     {nutrient}
                                 </li>
                             </Link>
@@ -70,21 +86,29 @@ function Ailment(props) {
                     <Typography variant="h6">Helpful foods</Typography>
                     {ailment.foods.map((food, i) => {
                         return (
-                            <li key={i}>
+                            <li key={i} style={{ listStyleType: "none", marginLeft: 20 }}>
                                 {food}
+                            </li>
+                        )
+                    })}
+                    {nutrientFoods.map((ingre, j) => {
+                        return (
+                            <li key={j} style={{ listStyleType: "none", marginLeft: 20 }}>
+                                {ingre}
                             </li>
                         )
                     })}
 
                 </CardContent>
             </Card>
-        </div >
+        </>
     )
 };
 
 const mapStateToProps = state => {
     return {
-        ailments: state.ailment
+        ailments: state.ailment,
+        nutrients: state.nutrients
     };
 };
 

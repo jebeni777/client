@@ -90,7 +90,7 @@ export default function Home(props) {
             type="button"
             style={btnStyle}
           >
-            Nutrients?
+            Nutrients
             </Button>
         </Link>
       </Grid>

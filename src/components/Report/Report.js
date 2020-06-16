@@ -53,8 +53,6 @@ function Report(props) {
     const { ailArr } = props;
     const classes = useStyles();
 
-    console.log('props: ', props);
-
     const reportAils = [];
     props.ailments.map((ailment, i) => {
         ailArr.map((ail, idx) => {
@@ -67,31 +65,22 @@ function Report(props) {
     const reportNutrients = [];
     props.nutrients.map((nutrient, i) => {
         reportAils.map((ail, idx) => {
-            console.log('ail: ', ail);
 
             ail.nutrients.map((a, j) => {
-                console.log('ail.nutrients[j]: ', ail.nutrients[j]);
-                console.log('nutrient: ', nutrient);
                 if (nutrient.slug.current === ail.nutrients[j]) {
-
                     reportNutrients.push(nutrient)
                 }
-
-
             })
         })
     })
-    console.log('reportNutrients: ', reportNutrients);
 
 
     const reportNutriFoods = [];
     reportNutrients.map((repNutri, i) => {
         repNutri.ingredients.map((food, idx) => {
-            console.log('food: ', food);
             reportNutriFoods.push(food)
         })
     })
-    console.log('reportNutriFoods: ', reportNutriFoods);
 
     return (
         <>
