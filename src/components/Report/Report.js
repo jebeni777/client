@@ -100,16 +100,20 @@ function Report(props) {
                                     <Typography variant="h6">Helpful foods</Typography>
                                     {currAil.foods.map((food, i) => {
                                         return (
-                                            <li key={i} style={{ listStyleType: "none" }}>
-                                                {food}
-                                            </li>
+                                            <Link to={`/foods/${food}`}>
+                                                <li key={i} style={{ listStyleType: "none" }}>
+                                                    {food}
+                                                </li>
+                                            </Link>
                                         )
                                     })}
                                     {reportNutriFoods.map((food, idx) => {
                                         return (
-                                            <li key={i} style={{ listStyleType: "none" }}>
-                                                {food}
-                                            </li>
+                                            <Link to={`/foods/${food}`}>
+                                                <li key={i} style={{ listStyleType: "none" }}>
+                                                    {food}
+                                                </li>
+                                            </Link>
                                         )
                                     })}
                                 </CardContent>
