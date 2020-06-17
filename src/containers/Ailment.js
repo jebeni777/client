@@ -86,16 +86,24 @@ function Ailment(props) {
                     <Typography variant="h6">Helpful foods</Typography>
                     {ailment.foods.map((food, i) => {
                         return (
-                            <li key={i} style={{ listStyleType: "none", marginLeft: 20 }}>
-                                {food}
-                            </li>
+                            <Link to={`/foods/${food}`}
+                                key={i}
+                            >
+                                <li style={{ listStyleType: "none", marginLeft: 20 }}>
+                                    {food}
+                                </li>
+                            </Link>
                         )
                     })}
                     {nutrientFoods.map((ingre, j) => {
                         return (
-                            <li key={j} style={{ listStyleType: "none", marginLeft: 20 }}>
-                                {ingre}
-                            </li>
+                            <Link to={`/foods/${ingre}`}
+                                key={j}
+                            >
+                                <li style={{ listStyleType: "none", marginLeft: 20 }}>
+                                    {ingre}
+                                </li>
+                            </Link>
                         )
                     })}
 
