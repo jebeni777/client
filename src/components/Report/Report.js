@@ -109,8 +109,10 @@ function Report(props) {
                                     })}
                                     {reportNutriFoods.map((food, idx) => {
                                         return (
-                                            <Link to={`/foods/${food}`}>
-                                                <li key={i} style={{ listStyleType: "none" }}>
+                                            <Link to={`/foods/${food}`}
+                                                key={idx}
+                                            >
+                                                <li style={{ listStyleType: "none" }}>
                                                     {food}
                                                 </li>
                                             </Link>
