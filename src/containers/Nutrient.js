@@ -6,13 +6,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import myConfigSanityClient from '../client';
 import imageUrlBuilder from "@sanity/image-url";
 import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
-        maxWidth: 275,
+        maxWidth: 450,
 
     },
     bullet: {
@@ -64,12 +65,15 @@ function Nutrients(props) {
                         </Typography>
 
                         <Typography className={classes.top} variant="body2"><b>Foods rich in {nutrient.title}</b></Typography>
+                        <Typography variant="body2">Click a food for creative uses</Typography>
                         {nutrient.ingredients.map((food, i) => {
                             return (
-                                <li key={i} style={{ listStyleType: "none" }}>
+                                <Link to={`/foods/${food}`}>
 
-                                    {food}
-                                </li>
+                                    <li key={i} style={{ listStyleType: "none" }}>
+                                        {food}
+                                    </li>
+                                </Link>
                             )
                         })}
                     </CardContent>
