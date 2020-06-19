@@ -58,7 +58,17 @@ function Ailment(props) {
     const nutrientFoods = [];
     ailNutrients.map((nutrient, i) => {
         nutrient.ingredients.map((food, idx) => {
-            nutrientFoods.push(food)
+            let foundIng = false;
+            props.ingredients.map((ing) => {
+                if (ing.title.toLowerCase() === food) {
+                    nutrientFoods.push({text: food, slug: ing.slug.current}) ;
+                    foundIng = true;
+                } 
+            })
+           if (!foundIng) {
+               // without slug can't make proper link 
+               nutrientFoods.push({text: food, slug: "could not find"});
+           } 
         })
     })
 
@@ -97,11 +107,11 @@ function Ailment(props) {
                     })}
                     {nutrientFoods.map((ingre, j) => {
                         return (
-                            <Link to={`/foods/${ingre}`}
+                            <Link to={`/foods/${ingre.slug}`}
                                 key={j}
                             >
                                 <li style={{ listStyleType: "none", marginLeft: 20 }}>
-                                    {ingre}
+                                    {ingre.text}
                                 </li>
                             </Link>
                         )
@@ -116,7 +126,8 @@ function Ailment(props) {
 const mapStateToProps = state => {
     return {
         ailments: state.ailment,
-        nutrients: state.nutrients
+        nutrients: state.nutrients,
+        ingredients: state.ingredients
     };
 };
 
