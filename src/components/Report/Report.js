@@ -52,11 +52,15 @@ function urlFor(_ref) {
 function Report(props) {
     const { ailArr } = props;
     const classes = useStyles();
+    let items = new Set([]);
 
     const reportAils = [];
     props.ailments.map((ailment, i) => {
         ailArr.map((ail, idx) => {
             if (ailment.slug.current === ail) {
+                ailment.foods.map((ailIng) => {
+                    items.add(ailIng);
+                })
                 reportAils.push(ailment)
             }
         })
@@ -75,12 +79,28 @@ function Report(props) {
     })
 
 
-    const reportNutriFoods = [];
+    const allFoods = [];
     reportNutrients.map((repNutri, i) => {
         repNutri.ingredients.map((food, idx) => {
-            reportNutriFoods.push(food)
+            items.add(food)
         })
     })
+
+    items.forEach((item) => {
+        let foundIng = false;
+        props.ingredients.map((ing) => {
+            
+            if (ing.title.toLowerCase() === item) {
+                
+                allFoods.push({text: item, slug: ing.slug.current}) ;
+                foundIng = true;
+            } 
+        })
+        if (!foundIng) {
+            // without slug can't make proper link 
+            allFoods.push({text: item, slug: "could not find"});
+        } 
+        })
 
     return (
         <>
@@ -98,7 +118,7 @@ function Report(props) {
                                     <Typography className={classes.pos}><img src={urlFor(currAil.image)} alt={currAil.imageAltText} /></Typography>
                                     <Typography className={classes.pos} variant="body1">{currAil.body[0].children[0].text}</Typography>
                                     <Typography variant="h6">Helpful foods</Typography>
-                                    {currAil.foods.map((food, i) => {
+                                    {/* {currAil.foods.map((food, i) => {
                                         return (
                                             <Link to={`/foods/${food}`}>
                                                 <li key={i} style={{ listStyleType: "none" }}>
@@ -106,14 +126,14 @@ function Report(props) {
                                                 </li>
                                             </Link>
                                         )
-                                    })}
-                                    {reportNutriFoods.map((food, idx) => {
+                                    })} */}
+                                    {allFoods.map((food, idx) => {
                                         return (
-                                            <Link to={`/foods/${food}`}
+                                            <Link to={`/foods/${food.slug}`}
                                                 key={idx}
                                             >
-                                                <li style={{ listStyleType: "none" }}>
-                                                    {food}
+                                                <li key={food} style={{ listStyleType: "none", marginLeft: 20 }}>
+                                                    {food.text}
                                                 </li>
                                             </Link>
                                         )
@@ -143,7 +163,8 @@ const mapStateToProps = state => {
     // console.log("props in mapState:", props)
     return {
         ailments: state.ailments,
-        nutrients: state.nutrients
+        nutrients: state.nutrients,
+        ingredients: state.ingredients
     };
 };
 
