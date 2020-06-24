@@ -45,6 +45,11 @@ function urlFor(_ref) {
 function Ailment(props) {
     const classes = useStyles();
     const ailment = props.location.state.here;
+    let items = new Set([]);
+
+    ailment.foods.map((ailIng) => {
+        items.add(ailIng);
+    })
 
     const ailNutrients = [];
     props.nutrients.map((nutri, idx) => {
@@ -55,22 +60,29 @@ function Ailment(props) {
         })
     })
 
-    const nutrientFoods = [];
+    const allFoods = [];
     ailNutrients.map((nutrient, i) => {
         nutrient.ingredients.map((food, idx) => {
-            let foundIng = false;
-            props.ingredients.map((ing) => {
-                if (ing.title.toLowerCase() === food) {
-                    nutrientFoods.push({text: food, slug: ing.slug.current}) ;
-                    foundIng = true;
-                } 
-            })
-           if (!foundIng) {
-               // without slug can't make proper link 
-               nutrientFoods.push({text: food, slug: "could not find"});
-           } 
+               items.add(food);
         })
+
     })
+
+    items.forEach((item) => {
+        let foundIng = false;
+        props.ingredients.map((ing) => {
+            
+            if (ing.title.toLowerCase() === item) {
+                
+                allFoods.push({text: item, slug: ing.slug.current}) ;
+                foundIng = true;
+            } 
+        })
+        if (!foundIng) {
+            // without slug can't make proper link 
+            allFoods.push({text: item, slug: "could not find"});
+        } 
+        })
 
     return (
         <>
@@ -94,7 +106,7 @@ function Ailment(props) {
                     })}
 
                     <Typography variant="h6">Helpful foods</Typography>
-                    {ailment.foods.map((food, i) => {
+                    {/* {ailment.foods.map((food, i) => {
                         return (
                             <Link to={`/foods/${food}`}
                                 key={i}
@@ -104,8 +116,8 @@ function Ailment(props) {
                                 </li>
                             </Link>
                         )
-                    })}
-                    {nutrientFoods.map((ingre, j) => {
+                    })} */}
+                    {allFoods.map((ingre, j) => {
                         return (
                             <Link to={`/foods/${ingre.slug}`}
                                 key={j}
