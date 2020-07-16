@@ -82,7 +82,7 @@ function Ailment(props) {
             // without slug can't make proper link 
             allFoods.push({text: item, slug: "could not find"});
         } 
-        })
+    })
 
     return (
         <>

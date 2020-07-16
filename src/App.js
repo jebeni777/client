@@ -92,7 +92,7 @@ function App({
       loadFoodChooser(foodGroups)
       const ingredients = await client.fetch(`
                 *[_type == 'ingredient']{
-                    title, slug, mainImage, imageAltText, category, body, nutrients, uses}`)
+                    title, slug, mainImage, imageAltText, category->, body, nutrients, uses}`)
       loadIngredients(ingredients)
     } catch (e) {
       if (e !== "No current user") {

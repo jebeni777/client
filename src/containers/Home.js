@@ -47,8 +47,6 @@ export default function Home(props) {
   return (
     <Grid
       container
-      // direction="column"
-      justify="left"
     >
       <Grid item xs={12} sm={6} >
         <Card style={{ margin: "1em", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
