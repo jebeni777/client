@@ -7,6 +7,7 @@ import myConfigSanityClient from '../client';
 import imageUrlBuilder from "@sanity/image-url";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
+import { getObject } from '../helpers/helper';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -48,7 +49,8 @@ function urlFor(_ref) {
 }
 function Nutrients(props) {
     const classes = useStyles();
-    const { nutrient } = props
+    const { nutrient, ingredients } = props;
+
     if (!nutrient) {
         return <div>Nutrient doesn't exist</div>
     } else {
@@ -67,10 +69,13 @@ function Nutrients(props) {
                         <Typography className={classes.top} variant="body2"><b>Foods rich in {nutrient.title}</b></Typography>
                         <Typography variant="body2">Click a food for creative uses</Typography>
                         {nutrient.ingredients.map((food, i) => {
+                            const foodObj = getObject(food, ingredients);
+                            const foodSlug = foodObj ? foodObj.slug.current : 'Could not find food';
                             return (
-                                <Link to={`/foods/${food}`}>
-
-                                    <li key={i} style={{ listStyleType: "none" }}>
+                                <Link to={`/foods/${foodSlug}`}
+                                    key={i}
+                                >
+                                    <li style={{ listStyleType: "none", marginLeft: 20 }}>
                                         {food}
                                     </li>
                                 </Link>
@@ -88,6 +93,7 @@ const mapStateToProps = (state, props) => {
     const nutrient = state.nutrients.find(nutrient => nutrient.slug.current === nutrientName)
 
     return {
+        ingredients: state.ingredients,
         nutrient
     };
 };
