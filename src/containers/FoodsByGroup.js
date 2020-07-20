@@ -12,6 +12,7 @@ import 'typeface-roboto';
 import myConfigSanityClient from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 import { loadFoods } from "../store/actions/foodsActions";
+import slugify from '../helpers/slugify';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -108,7 +109,7 @@ const mapStateToProps = (state, props) => {
     const foodGroup = props.match.params.id;
     const ingredients = [];
     state.ingredients.map((ingredient, i) => {
-        if (ingredient.category === foodGroup) {
+        if (ingredient.category && ingredient.category.slug.current === foodGroup) {
             ingredients.push(ingredient)
         }
     })
@@ -121,8 +122,7 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = dispatch => {
     return bindActionCreators(
         {
-            loadFoodsByGroup: (foodsByGroup) => loadFoodsByGroup(foodsByGroup),
-            loadFoods: (foods) => loadFoods(foods)
+            loadFoodsByGroup: (foodsByGroup) => loadFoodsByGroup(foodsByGroup)
         },
         dispatch
     );
