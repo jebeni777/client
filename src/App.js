@@ -20,6 +20,7 @@ import Foods from "./containers/FoodsByGroup";
 import NutriChooser from "./containers/NutriChooser";
 import FoodChooser from "./containers/FoodChooser";
 import FoodsByGroup from "./containers/FoodsByGroup";
+import Recipe from "./containers/Recipe";
 import User from "./containers/User";
 import { loadAilments } from "./store/actions/ailmentActions";
 import { loadIngredients } from "./store/actions/ingredientActions";
@@ -66,6 +67,7 @@ function App({
   foodsByGroup,
   nutrients,
   nutriChooser,
+  recipe,
   loadAilments,
   loadNutrients,
   loadIngredients,
@@ -126,6 +128,7 @@ function App({
             <DashboardRoute path="/nutrients" exact component={NutriChooser} />
             <DashboardRoute path="/nutrients/:nutrient" exact component={Nutrients} />
             <DashboardRoute path="/setting" exact component={Setting} />
+            <DashboardRoute path="/recipe" exact component={Recipe} />
             <DashboardRoute path="/user" exact component={User} />
             <EmptyRoute component={NotFound} />
           </Switch>

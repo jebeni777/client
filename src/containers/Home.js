@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import video from "../assets/video.mp4";
 import 'typeface-roboto';
 import { ReactTinyLink } from 'react-tiny-link';
-import { fetchRecipes } from '../apis/recipeFetchApi';
+// import { fetchRecipes } from '../apis/recipeFetchApi';
 
 const useStyles = makeStyles({
   root: {
@@ -45,16 +45,16 @@ const btnStyle = {
 export default function Home(props) {
   const classes = useStyles;
 
-  const onClick = async() => {
-    await fetchRecipes();
-  }
+  // const onClick = async() => {
+  //   await fetchRecipes();
+  // }
 
   return (
     <Grid
       container
     >
       <Grid item xs={12} sm={6} >
-        <Button onClick={onClick}>Test Fetch</Button>
+        {/* <Button onClick={onClick}>Test Fetch</Button> */}
         <Card style={{ margin: "1em", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
           <Typography variant="h5" >How do you feel?</Typography>
         </Card>
