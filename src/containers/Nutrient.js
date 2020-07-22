@@ -24,9 +24,11 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 24,
+        fontWeight: "bolder",
     },
     pos: {
         marginBottom: 12,
+        fontWeight: "bolder",
     },
     top: {
         marginTop: 12,
@@ -61,13 +63,13 @@ function Nutrients(props) {
                         <Typography className={classes.title}>{nutrient.title}</Typography>
                         <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
 
-                        <Typography className={classes.pos} variant="h6">Possible Benefits</Typography>
-                        <Typography className={classes.top} variant="body1">
+                        <Typography className={classes.pos} variant="h5">Possible Benefits</Typography>
+                        <Typography className={classes.top} variant="body1"><b>
                             {nutrient.body[0].children[0].text}
-                        </Typography>
+                            </b></Typography>
 
-                        <Typography className={classes.top} variant="body2"><b>Foods rich in {nutrient.title}</b></Typography>
-                        <Typography variant="body2">Click a food for creative uses</Typography>
+                        <Typography variant="h5"><b>Foods rich in {nutrient.title}</b></Typography>
+                        <Typography variant="h5" style={{ marginBottom: 6 }}><b>Click a food for creative uses</b></Typography>
                         {nutrient.ingredients.map((food, i) => {
                             const foodObj = getObject(food, ingredients);
                             const foodSlug = foodObj ? foodObj.slug.current : 'Could not find food';
@@ -75,7 +77,7 @@ function Nutrients(props) {
                                 <Link to={`/foods/${foodSlug}`}
                                     key={i}
                                 >
-                                    <li style={{ listStyleType: "none", marginLeft: 20 }}>
+                                    <li style={{ listStyleType: "none", marginLeft: 20, fontSize: 22, fontWeight: "bolder" }}>
                                         {food}
                                     </li>
                                 </Link>

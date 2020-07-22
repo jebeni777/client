@@ -8,7 +8,7 @@ import 'typeface-roboto';
 const useStyles = makeStyles({
     root: {
       minWidth: 275,
-      maxWidth: 335,
+      maxWidth: 275,
       borderRadius: 10,
       backgroundColor: "#FFF",
       marginBottom: "1.5em"
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     },
     title: {
       fontSize: 18,
-      padding: 10,
+      paddingBottom: 5,
     },
     pos: {
       marginBottom: 17,
@@ -32,8 +32,8 @@ const useStyles = makeStyles({
   });
   
   const imgStyle = {
-    height: "11em",
-    width: "11em",
+    height: "100%",
+    width: "100%",
   }
 
 const Recipe = (props) => {
@@ -43,7 +43,7 @@ const Recipe = (props) => {
             <CardContent>
                 <a href={props.link} target="_blank">
                 <Typography className={classes.title} >{props.title}</Typography>
-                <img src={props.image} alt={props.title} style={{ height: 300, width: 300}}/>
+                <img src={props.image} alt={props.title} style={imgStyle}/>
                 </a>
 
             </CardContent>
