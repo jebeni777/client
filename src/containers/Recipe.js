@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -8,10 +7,11 @@ import 'typeface-roboto';
 
 const useStyles = makeStyles({
     root: {
-      minWidth: 200,
-      maxWidth: 350,
+      minWidth: 275,
+      maxWidth: 335,
       borderRadius: 10,
       backgroundColor: "#FFF",
+      marginBottom: "1.5em"
   
     },
     bullet: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
       transform: 'scale(0.8)',
     },
     title: {
-      fontSize: 22,
+      fontSize: 18,
       padding: 10,
     },
     pos: {
@@ -39,10 +39,10 @@ const useStyles = makeStyles({
 const Recipe = (props) => {
     const classes = useStyles();
     return (
-         <Card className={classes.root} variant="outlined">
+         <Card  className={classes.root} variant="outlined">
             <CardContent>
                 <a href={props.link} target="_blank">
-                <h2>{props.title}</h2>
+                <Typography className={classes.title} >{props.title}</Typography>
                 <img src={props.image} alt={props.title} style={{ height: 300, width: 300}}/>
                 </a>
 
