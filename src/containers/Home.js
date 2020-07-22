@@ -98,16 +98,12 @@ export default function Home(props) {
             </Button>
         </Link>
       </Grid>
-      {/* <Grid item xs={12} sm={6}>
-        <iframe height="310" width="410" src={video} align="right" title="video"></iframe>
-      </Grid> */}
 
       <Grid item xs={12} sm={6}>
         <Card style={{ margin: "1em", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
           <Typography variant="h5">More helpful information</Typography>
         </Card>
         <div style={{ marginLeft: 14, marginTop: 20 }}>
-          {/* <Typography className={classes.title}>More helpful information</Typography> */}
           <ReactTinyLink
             cardSize="small"
             showGraphic={true}
