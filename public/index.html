@@ -9,9 +9,9 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="preload" href="%PUBLIC_URL%/manifest.json"> <!--changed from rel="manifest" to improve load speed-->
+  <link rel="preload" href="%PUBLIC_URL%/favicon.ico"> <!--changed from rel="shortcut icon" to improve load speed-->
+  <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons" /> <!--changed from rel="stylesheet" to improve load speed-->
   <!-- <script src="https://kit.fontawesome.com/bc30107e4e.js" crossorigin="anonymous"></script> -->
   <!--
       Notice the use of %PUBLIC_URL% in the tags above.
