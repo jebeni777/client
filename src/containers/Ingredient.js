@@ -61,6 +61,7 @@ function Ingredient(props) {
     const API_ID = '33fca76c';
     const API_KEY = '39f634430116065e2b0fc40a08e396f3';
     const [recipe, setRecipe] = useState();
+    const [news, setNews] = useState();
 
 
     if (!ingredient) {
@@ -72,6 +73,20 @@ function Ingredient(props) {
             axios.get(recipeSearch)
             .then(response => setRecipe(response.data) )
         };
+
+        fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/spelling/AutoComplete?text=celery", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+		"x-rapidapi-key": "ade59aa0a9msheb645e23343bc3fp194ef2jsn89bda80f105a"
+	}
+})
+.then(response => {
+	console.log(response);
+})
+.catch(err => {
+	console.log(err);
+});
 
         return (
             < div >
@@ -115,7 +130,7 @@ function Ingredient(props) {
                     </CardContent>
                 </Card>
                 </Grid>
-                <Hidden xsDown>
+                {/* <Hidden xsDown>
                 <Grid item xs>
                             <Card style={{ margin: "0 0 12 0", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
                                 <Typography variant="h5">More helpful information</Typography>
@@ -130,7 +145,7 @@ function Ingredient(props) {
                         />
                         </div>
                         </Grid>
-                        </Hidden>
+                        </Hidden> */}
                         </Grid>
                         <Grid
                     container
