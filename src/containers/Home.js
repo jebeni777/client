@@ -64,6 +64,7 @@ export default function Home(props) {
         </Card>
         <Link to="/chooser" style={{ textDecoration: 'none' }} >
           <Button
+            aria-label="Ailment Chooser"
             variant="contained"
             color="primary"
             name="ailments"
@@ -76,6 +77,7 @@ export default function Home(props) {
         </Link>
         <Link to="/foodChooser" style={{ textDecoration: 'none' }} >
           <Button
+            aria-label="Food Chooser"
             variant="contained"
             color="primary"
             name="foods"
@@ -87,6 +89,7 @@ export default function Home(props) {
         </Link>
         <Link to="/nutrients" style={{ textDecoration: 'none' }}>
           <Button
+            aria-label="Nutrients"
             variant="contained"
             color="primary"
             name="nutrients"

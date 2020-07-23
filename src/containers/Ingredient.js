@@ -120,7 +120,9 @@ function Ingredient(props) {
                                 <li key={i} style={{ listStyleType: "none" }}>{uses}</li>
                             )
                         })}
-                    <Button className={classes.btn}
+                    <Button 
+                        aria-label="Recipes"
+                        className={classes.btn}
                         onClick={getRecipe}
                         variant="outlined"
                         color="primary"

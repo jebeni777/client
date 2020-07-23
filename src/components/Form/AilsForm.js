@@ -154,7 +154,7 @@ export default function AilsForm(props) {
                 }
                 label="Heart"
             />
-            <Button variant="outlined" color="primary" className={classes.btn} onClick={() => onSubmit(ailsSelect)}>Submit</Button>
+            <Button aria-label="Submit" variant="outlined" color="primary" className={classes.btn} onClick={() => onSubmit(ailsSelect)}>Submit</Button>
         </FormGroup>
     )
 }
