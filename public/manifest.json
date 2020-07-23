@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Comfort Foods",
+  "name": "Comfort foods: latest news, nutritional value, and recipe links",
+  "description": "Find foods and recipes that help comfort particular ailments",
   "icons": [
     {
       "src": "favicon.ico",
