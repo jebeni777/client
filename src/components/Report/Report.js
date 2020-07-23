@@ -145,7 +145,7 @@ function Report(props) {
                 }
                 )}
             </Grid>
-            <Button variant="outlined" color="primary" onClick={props.closeReport}>Close Report</Button>
+            <Button aria-label="Close Report" variant="outlined" color="primary" onClick={props.closeReport}>Close Report</Button>
         </>
 
     )
