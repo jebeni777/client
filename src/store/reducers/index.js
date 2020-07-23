@@ -1,5 +1,4 @@
 import stepCounter from "./stepCounter";
-import settings from "./settings";
 import { combineReducers } from "redux";
 import ailments from "./ailmentReducer";
 import ingredients from "./ingredientReducer";
@@ -12,7 +11,6 @@ import report from "./reportReducer";
 
 const reducers = combineReducers({
   stepCounter,
-  settings,
   ailments,
   ingredients,
   nutriChooser,

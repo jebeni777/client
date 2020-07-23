@@ -6,10 +6,12 @@ import {
   Switch
 } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { MuiThemeProvider } from "@material-ui/core/styles";
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import teal from "@material-ui/core/colors/teal";
+import green from "@material-ui/core/colors/green";
+import red from "@material-ui/core/colors/red";
 import { connect } from "react-redux";
 import Home from "./containers/Home";
-import Setting from "./containers/Setting";
 import MainLayout from "./layouts/MainLayout";
 import EmptyLayout from "./layouts/EmptyLayout";
 import Ailment from "./containers/Ailment";
@@ -27,6 +29,21 @@ import { loadIngredients } from "./store/actions/ingredientActions";
 import { loadFoodChooser } from "./store/actions/foodChooserActions";
 import { loadNutrients } from "./store/actions/nutrientActions";
 import client from "./client";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: teal,
+    secondary: green,
+    error: red,
+    // Used by `getContrastText()` to maximize the contrast between the background and
+    // the text.
+    contrastThreshold: 3,
+    // Used to shift a color's luminance by approximately
+    // two indexes within its tonal palette.
+    // E.g., shift from Red 500 to Red 300 or Red 700.
+    tonalOffset: 0.2
+  }
+});
 
 const NotFound = () => {
   return <div>NotFound</div>;
@@ -104,13 +121,11 @@ function App({
     // setIsLoading(false);
   };
 
-  const { settings } = props;
-
   return (
 
     // <Route path={`nutrients/:nutrientName`} render={({ match }) => { const { nutrientName } = match.params    return <Nutrient nutrientName={nutrientName} />          }}       />
 
-    <MuiThemeProvider theme={settings.theme}>
+    <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <div style={{ height: "100vh" }}>
         <Router>
@@ -127,7 +142,6 @@ function App({
 
             <DashboardRoute path="/nutrients" exact component={NutriChooser} />
             <DashboardRoute path="/nutrients/:nutrient" exact component={Nutrients} />
-            <DashboardRoute path="/setting" exact component={Setting} />
             <DashboardRoute path="/recipe" exact component={Recipe} />
             <DashboardRoute path="/user" exact component={User} />
             <EmptyRoute component={NotFound} />
@@ -137,12 +151,6 @@ function App({
     </MuiThemeProvider>
   );
 }
-
-const mapStateToProps = state => {
-  return {
-    settings: state.settings,
-  };
-};
 
 const mapDispatchToProps = dispatch => {
   return (
@@ -154,9 +162,8 @@ const mapDispatchToProps = dispatch => {
 
     }
   );
-};
+}
 
-export default connect(
-  mapStateToProps,
+export default connect(null,
   mapDispatchToProps
 )(App);

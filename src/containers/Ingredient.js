@@ -21,8 +21,10 @@ const builder = imageUrlBuilder(myConfigSanityClient);
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
-        maxWidth: 275,
-        marginBottom: "1.5em"
+      maxWidth: 275,
+      borderRadius: 10,
+      backgroundColor: "#FFF",
+      marginBottom: "1.5em"
 
     },
     bullet: {
@@ -59,6 +61,7 @@ function Ingredient(props) {
     const API_ID = '33fca76c';
     const API_KEY = '39f634430116065e2b0fc40a08e396f3';
     const [recipe, setRecipe] = useState();
+    const [news, setNews] = useState();
 
 
     if (!ingredient) {
@@ -71,12 +74,25 @@ function Ingredient(props) {
             .then(response => setRecipe(response.data) )
         };
 
+        fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/spelling/AutoComplete?text=celery", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+		"x-rapidapi-key": "ade59aa0a9msheb645e23343bc3fp194ef2jsn89bda80f105a"
+	}
+})
+.then(response => {
+	console.log(response);
+})
+.catch(err => {
+	console.log(err);
+});
+
         return (
             < div >
              <Grid
                     container
                     direction="row"
-                    // justify="center"
                 >
                         <Grid item xs>
                 <Card className={classes.root} variant="outlined">
@@ -85,7 +101,7 @@ function Ingredient(props) {
                         <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
                         <Typography className={classes.title}>Possible benefits</Typography>
                         {ingredient.body[0].children[0].text}
-                        <h4>Nutrients</h4>
+                        <Typography className={classes.title} >Nutrients</Typography>
 
                         {ingredient.nutrients.map((nutrient, i) => {
 
@@ -98,7 +114,7 @@ function Ingredient(props) {
                             )
                         })}
 
-                        <h4>Creative uses</h4>
+                        <Typography className={classes.title}>Creative uses</Typography>
                         {ingredient.uses.map((uses, i) => {
                             return (
                                 <li key={i} style={{ listStyleType: "none" }}>{uses}</li>
@@ -114,12 +130,12 @@ function Ingredient(props) {
                     </CardContent>
                 </Card>
                 </Grid>
-                <Hidden xsDown>
+                {/* <Hidden xsDown>
                 <Grid item xs>
-                            <Card style={{ margin: "1em", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
+                            <Card style={{ margin: "0 0 12 0", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
                                 <Typography variant="h5">More helpful information</Typography>
                             </Card>
-                            <div className={classes.pos}>
+                        <div style={{marginTop: 12 }}>  
                         <ReactTinyLink
                             cardSize="small"
                             showGraphic={true}
@@ -129,12 +145,11 @@ function Ingredient(props) {
                         />
                         </div>
                         </Grid>
-                        </Hidden>
+                        </Hidden> */}
                         </Grid>
                         <Grid
                     container
                     direction="row"
-                    // justify="center"
                     alignContent="space-around"
                 >
                  {recipe && recipe.hits.map((x, i)=> (
@@ -142,10 +157,6 @@ function Ingredient(props) {
                             <Recipe title={x.recipe.label} image={x.recipe.image} link={x.recipe.url} />
                             </Grid>
                         ))}
-                        
-                        {/* </Grid>
-                        </Grid> */}
-                    
                 </Grid>
             </div >
         )
