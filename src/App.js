@@ -97,22 +97,24 @@ function App({
   }, [])
   async function onLoad() {
     try {
-      const ailments = await client.fetch(`
+      const ailments = client.fetch(`
         *[_type == 'ailments']{
           title, slug, image, imageAltText, body, nutrients, foods}`)
-      loadAilments(ailments)
-      const nutrients = await client.fetch(`
+      const nutrients = client.fetch(`
             *[_type == 'nutrient']{
                 title, slug, mainImage, imageAltText, ingredients, body}`)
-      loadNutrients(nutrients)
-      const foodGroups = await client.fetch(`
+      
+      const foodGroups = client.fetch(`
             *[_type == 'categories-foods']{
                 title, slug, image, imageAltText}`)
-      loadFoodChooser(foodGroups)
-      const ingredients = await client.fetch(`
+      
+      const ingredients = client.fetch(`
                 *[_type == 'ingredient']{
                     title, slug, mainImage, imageAltText, category->, body, nutrients, uses}`)
-      loadIngredients(ingredients)
+      loadFoodChooser(await foodGroups)
+      loadNutrients(await nutrients)
+      loadAilments(await ailments)
+      loadIngredients(await ingredients)
     } catch (e) {
       if (e !== "No current user") {
         alert(e)
