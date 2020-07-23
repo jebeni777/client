@@ -67,7 +67,7 @@ const Header = props => {
           Comfort Foods
         </Typography>
         <Link to="/">
-          <IconButton>
+          <IconButton aria-label="Home">
             <HomeIcon style={{ color: teal[50] }} />
           </IconButton>
         </Link>
@@ -77,7 +77,7 @@ const Header = props => {
           </Badge>
         </IconButton> */}
         <Link to="/user">
-          <IconButton>
+          <IconButton aria-label="User Form Report">
             <PersonIcon style={{ color: teal[50] }} />
           </IconButton>
         </Link>
