@@ -1,4 +1,4 @@
-import stepCounter from "./stepCounter";
+
 import { combineReducers } from "redux";
 import ailments from "./ailmentReducer";
 import ingredients from "./ingredientReducer";
@@ -10,7 +10,6 @@ import foodsByGroup from "./foodsByGroupReducer";
 import report from "./reportReducer";
 
 const reducers = combineReducers({
-  stepCounter,
   ailments,
   ingredients,
   nutriChooser,
