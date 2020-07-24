@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,8 +11,8 @@ import 'typeface-roboto';
 import { connect } from 'react-redux';
 import myConfigSanityClient from '../client';
 import imageUrlBuilder from "@sanity/image-url";
-// import { fetchRecipes } from '../apis/recipeFetchApi';
 import Recipe from "./Recipe";
+import NewsIngredient from "./News/NewsIngredient";
 import axios from "axios";
 import { ReactTinyLink } from "react-tiny-link";
 
@@ -42,6 +42,10 @@ const useStyles = makeStyles({
     },
     btn: {
         marginTop: 6,  
+    },
+    list: {
+        width: '100%',
+        maxWidth: '55ch',
     }
 });
 
@@ -60,9 +64,23 @@ function Ingredient(props) {
     const { ingredient } = props;
     const API_ID = '33fca76c';
     const API_KEY = '39f634430116065e2b0fc40a08e396f3';
+    const NEWS_TOKEN = '3d11e59e2a6e1f7f309a039b5609d493';
     const [recipe, setRecipe] = useState();
     const [news, setNews] = useState();
 
+    useEffect(() => {
+        let aborted = false;
+        if (ingredient) {
+            const newsSearch = `https://gnews.io/api/v3/search?q=${ingredient.title}&token=${NEWS_TOKEN}&max=2`;
+            const getNews = () => {
+                axios.get(newsSearch)
+                .then(response => aborted || setNews(response.data) )
+            };
+            getNews();
+       }
+       
+       return () => aborted = true;
+    }, [ingredient]);
 
     if (!ingredient) {
         return <div>Ingredient doesn't exist</div>
@@ -74,82 +92,79 @@ function Ingredient(props) {
             .then(response => setRecipe(response.data) )
         };
 
-        fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/spelling/AutoComplete?text=celery", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-		"x-rapidapi-key": "ade59aa0a9msheb645e23343bc3fp194ef2jsn89bda80f105a"
-	}
-})
-.then(response => {
-	console.log(response);
-})
-.catch(err => {
-	console.log(err);
-});
-
         return (
             < div >
-             <Grid
+                <Grid
                     container
                     direction="row"
                 >
-                        <Grid item xs>
-                <Card className={classes.root} variant="outlined">
-                    <CardContent>
-                        <Typography className={classes.title}>{ingredient.title}</Typography>
-                        <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
-                        <Typography className={classes.title}>Possible benefits</Typography>
-                        {ingredient.body[0].children[0].text}
-                        <Typography className={classes.title} >Nutrients</Typography>
+                    <Grid item xs>
+                        <Card className={classes.root} variant="outlined">
+                            <CardContent>
+                                <Typography className={classes.title}>{ingredient.title}</Typography>
+                                <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
+                                <Typography className={classes.title}>Possible benefits</Typography>
+                                {ingredient.body[0].children[0].text}
+                                <Typography className={classes.title} >Nutrients</Typography>
 
-                        {ingredient.nutrients.map((nutrient, i) => {
+                                {ingredient.nutrients.map((nutrient, i) => {
 
-                            return (
-                                <Link to={`/nutrients/${nutrient.toLowerCase()}`}
-                                    key={nutrient}
+                                    return (
+                                        <Link to={`/nutrients/${nutrient.toLowerCase()}`}
+                                            key={nutrient}
+                                        >
+                                            <li style={{ listStyleType: "none" }}>{nutrient}</li>
+                                        </Link>
+                                    )
+                                })}
+
+                                <Typography className={classes.title}>Creative uses</Typography>
+                                {ingredient.uses.map((uses, i) => {
+                                    return (
+                                        <li key={i} style={{ listStyleType: "none" }}>{uses}</li>
+                                    )
+                                })}
+                                <Button 
+                                    aria-label="Recipes"
+                                    className={classes.btn}
+                                    onClick={getRecipe}
+                                    variant="outlined"
+                                    color="primary"
                                 >
-                                    <li style={{ listStyleType: "none" }}>{nutrient}</li>
-                                </Link>
-                            )
-                        })}
-
-                        <Typography className={classes.title}>Creative uses</Typography>
-                        {ingredient.uses.map((uses, i) => {
-                            return (
-                                <li key={i} style={{ listStyleType: "none" }}>{uses}</li>
-                            )
-                        })}
-                    <Button 
-                        aria-label="Recipes"
-                        className={classes.btn}
-                        onClick={getRecipe}
-                        variant="outlined"
-                        color="primary"
-                    >
-                        Recipes
-                    </Button>
-                    </CardContent>
-                </Card>
+                                    Recipes
+                                </Button>
+                                {/* <Button 
+                                    aria-label="News"
+                                    className={classes.btn}
+                                    onClick={getNews}
+                                    variant="outlined"
+                                    color="primary"
+                                >
+                                    Latest News
+                                </Button> */}
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    
+                    <Grid item xs >
+                        <Card style={{ margin: "0 0 12 0", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
+                            <Typography variant="h5">Latest News on {ingredient.title}</Typography>
+                        </Card>
+                        
+                        {news && news.articles.map((y, j)=> (
+                            <List className={classes.list} >
+                                <NewsIngredient key={j} 
+                                    title={y.title} 
+                                    link={y.url} 
+                                    image={y.image}
+                                    desc={y.description}
+                                    date={y.publishedAt}
+                                />
+                            </List>
+                        ))}       
+                    </Grid>
                 </Grid>
-                {/* <Hidden xsDown>
-                <Grid item xs>
-                            <Card style={{ margin: "0 0 12 0", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
-                                <Typography variant="h5">More helpful information</Typography>
-                            </Card>
-                        <div style={{marginTop: 12 }}>  
-                        <ReactTinyLink
-                            cardSize="small"
-                            showGraphic={true}
-                            maxLine={2}
-                            minLine={1}
-                            url="https://nutrition.org/2019-popular-nutrition/"
-                        />
-                        </div>
-                        </Grid>
-                        </Hidden> */}
-                        </Grid>
-                        <Grid
+                <Grid
                     container
                     direction="row"
                     alignContent="space-around"
