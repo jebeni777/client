@@ -125,8 +125,6 @@ function App({
 
   return (
 
-    // <Route path={`nutrients/:nutrientName`} render={({ match }) => { const { nutrientName } = match.params    return <Nutrient nutrientName={nutrientName} />          }}       />
-
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
       <div style={{ height: "100vh" }}>
