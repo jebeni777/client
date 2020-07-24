@@ -12,7 +12,7 @@ import 'typeface-roboto';
 import myConfigSanityClient from "../client";
 import imageUrlBuilder from "@sanity/image-url";
 import { loadFoods } from "../store/actions/foodsActions";
-import slugify from '../helpers/slugify';
+
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
