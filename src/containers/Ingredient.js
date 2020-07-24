@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import Hidden from "@material-ui/core/Hidden";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import 'typeface-roboto';
@@ -48,6 +42,10 @@ const useStyles = makeStyles({
     },
     btn: {
         marginTop: 6,  
+    },
+    list: {
+        width: '100%',
+        maxWidth: '55ch',
     }
 });
 
@@ -73,7 +71,7 @@ function Ingredient(props) {
     useEffect(() => {
         let aborted = false;
         if (ingredient) {
-            const newsSearch = `https://gnews.io/api/v3/search?q=${ingredient.title}&token=${NEWS_TOKEN}&max=10`;
+            const newsSearch = `https://gnews.io/api/v3/search?q=${ingredient.title}&token=${NEWS_TOKEN}&max=2`;
             const getNews = () => {
                 axios.get(newsSearch)
                 .then(response => aborted || setNews(response.data) )
@@ -154,9 +152,15 @@ function Ingredient(props) {
                         </Card>
                         
                         {news && news.articles.map((y, j)=> (
-                            
-                            <NewsIngredient key={j} title={y.title} link={y.url} />
-                        
+                            <List className={classes.list} >
+                                <NewsIngredient key={j} 
+                                    title={y.title} 
+                                    link={y.url} 
+                                    image={y.image}
+                                    desc={y.description}
+                                    date={y.publishedAt}
+                                />
+                            </List>
                         ))}       
                     </Grid>
                 </Grid>
