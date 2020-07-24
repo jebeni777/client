@@ -2,11 +2,8 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
-import MenuIcon from "@material-ui/icons/Menu";
 import SvgIcon from '@material-ui/core/SvgIcon';
 import teal from '@material-ui/core/colors/teal'
-// import NotificationsIcon from "@material-ui/icons/Notifications";
 import PersonIcon from "@material-ui/icons/Person";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
@@ -45,7 +42,7 @@ function HomeIcon(props) {
 }
 
 const Header = props => {
-  const { classes, handleToggleDrawer } = props;
+  const { classes } = props;
   return (
     <AppBar position="fixed">
       <Toolbar disableGutters={true} classes={{ root: classes.toolbarRoot }}>
@@ -57,6 +54,7 @@ const Header = props => {
         >
           <MenuIcon />
         </IconButton> */}
+        
         <Typography
           variant="body1"
           component="h1"
@@ -64,8 +62,13 @@ const Header = props => {
           noWrap
           className={classes.title}
         >
+          <Link to="/"
+            style={{ textDecoration: "none", color: teal[50]}}
+          >
           Comfort Foods
+          </Link>
         </Typography>
+
         <Link to="/">
           <IconButton aria-label="Home">
             <HomeIcon style={{ color: teal[50] }} />
