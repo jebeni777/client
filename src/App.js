@@ -23,6 +23,7 @@ import NutriChooser from "./containers/NutriChooser";
 import FoodChooser from "./containers/FoodChooser";
 import FoodsByGroup from "./containers/FoodsByGroup";
 import NewsIngredient from "./containers/News/NewsIngredient";
+import NewsNutrient from "./containers/News/NewsNutrient";
 import Recipe from "./containers/Recipe";
 import User from "./containers/User";
 import { loadAilments } from "./store/actions/ailmentActions";
@@ -84,6 +85,7 @@ function App({
   foods,
   foodsByGroup,
   newsIngredient,
+  newsNutrient,
   nutrients,
   nutriChooser,
   recipe,
@@ -146,6 +148,7 @@ function App({
             <DashboardRoute path="/nutrients/:nutrient" exact component={Nutrients} />
 
             <DashboardRoute path="/newsIngredient" exact component={NewsIngredient} />
+            <DashboardRoute path="/newsNutrient" exact component={NewsNutrient} />
             <DashboardRoute path="/recipe" exact component={Recipe} />
             <DashboardRoute path="/user" exact component={User} />
             <EmptyRoute component={NotFound} />

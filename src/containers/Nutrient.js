@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from '@material-ui/core/styles';
+import List from "@material-ui/core/List";
 import myConfigSanityClient from '../client';
 import imageUrlBuilder from "@sanity/image-url";
 import { connect } from 'react-redux';
 import { Link } from "react-router-dom";
 import { getObject } from '../helpers/helper';
+import NewsNutrient from '../containers/News/NewsNutrient';
+import axios from 'axios';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -36,6 +40,10 @@ const useStyles = makeStyles({
     },
     h6: {
         fontSize: 16,
+    },
+    list: {
+        width: '100%',
+        maxWidth: '55ch',
     }
 
 });
@@ -52,39 +60,79 @@ function urlFor(_ref) {
 function Nutrients(props) {
     const classes = useStyles();
     const { nutrient, ingredients } = props;
+    const NEWS_TOKEN = '3d11e59e2a6e1f7f309a039b5609d493';
+    const [news, setNews] = useState();
+
+    useEffect(() => {
+        let aborted = false;
+        if (nutrient) {
+            const newsSearch = `https://gnews.io/api/v3/search?q=${nutrient.title}&token=${NEWS_TOKEN}&max=2`;
+            const getNews = () => {
+                axios.get(newsSearch)
+                .then(response => aborted || setNews(response.data) )
+            };
+            getNews();
+       }
+       
+       return () => aborted = true;
+    }, [nutrient]);
 
     if (!nutrient) {
         return <div>Nutrient doesn't exist</div>
     } else {
         return (
             < div >
-                <Card className={classes.root} variant="outlined">
-                    <CardContent>
-                        <Typography className={classes.title}>{nutrient.title}</Typography>
-                        <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
+                <Grid
+                    container
+                    direction="row"
+                >
+                    <Grid item xs>
+                        <Card className={classes.root} variant="outlined">
+                            <CardContent>
+                                <Typography className={classes.title}>{nutrient.title}</Typography>
+                                <img src={urlFor(nutrient.mainImage.asset._ref)} alt={nutrient.imageAltText} style={imgStyle} />
 
-                        <Typography className={classes.pos} variant="h5">Possible Benefits</Typography>
-                        <Typography className={classes.top} variant="body1"><b>
-                            {nutrient.body[0].children[0].text}
-                            </b></Typography>
+                                <Typography className={classes.pos} variant="h5">Possible Benefits</Typography>
+                                <Typography className={classes.top} variant="body1"><b>
+                                    {nutrient.body[0].children[0].text}
+                                    </b></Typography>
 
-                        <Typography variant="h5"><b>Foods rich in {nutrient.title}</b></Typography>
-                        <Typography variant="h5" style={{ marginBottom: 6 }}><b>Click a food for creative uses</b></Typography>
-                        {nutrient.ingredients.map((food, i) => {
-                            const foodObj = getObject(food, ingredients);
-                            const foodSlug = foodObj ? foodObj.slug.current : 'Could not find food';
-                            return (
-                                <Link to={`/foods/${foodSlug}`}
-                                    key={i}
-                                >
-                                    <li style={{ listStyleType: "none", marginLeft: 20, fontSize: 22, fontWeight: "bolder" }}>
-                                        {food}
-                                    </li>
-                                </Link>
-                            )
-                        })}
-                    </CardContent>
-                </Card>
+                                <Typography variant="h5"><b>Foods rich in {nutrient.title}</b></Typography>
+                                <Typography variant="h5" style={{ marginBottom: 6 }}><b>Click a food for creative uses</b></Typography>
+                                {nutrient.ingredients.map((food, i) => {
+                                    const foodObj = getObject(food, ingredients);
+                                    const foodSlug = foodObj ? foodObj.slug.current : 'Could not find food';
+                                    return (
+                                        <Link to={`/foods/${foodSlug}`}
+                                            key={i}
+                                        >
+                                            <li style={{ listStyleType: "none", marginLeft: 20, fontSize: 22, fontWeight: "bolder" }}>
+                                                {food}
+                                            </li>
+                                        </Link>
+                                    )
+                                })}
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid item xs >
+                        <Card style={{ margin: "0 0 12 0", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
+                            <Typography variant="h5">Latest News on {nutrient.title}</Typography>
+                        </Card>
+                        
+                        {news && news.articles.map((y, j)=> (
+                            <List className={classes.list} >
+                                <NewsNutrient key={j} 
+                                    title={y.title} 
+                                    link={y.url} 
+                                    image={y.image}
+                                    desc={y.description}
+                                    date={y.publishedAt}
+                                />
+                            </List>
+                        ))}       
+                    </Grid>
+                </Grid>
             </div >
         )
     }
