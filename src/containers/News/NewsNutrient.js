@@ -6,6 +6,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -23,6 +24,7 @@ const NewsNutrient = (props) => {
     return (
         <>
             <ListItem alignItems="flex-start">
+                <a href={props.link} target="_blank">
                 <ListItemAvatar>
                     <Avatar alt="News Image" src={props.image} />
                 </ListItemAvatar>
@@ -42,6 +44,7 @@ const NewsNutrient = (props) => {
                         </React.Fragment>
                       }
                 />
+                </a>
             </ListItem>
             <Divider variant="inset" component="li" />
         </>
