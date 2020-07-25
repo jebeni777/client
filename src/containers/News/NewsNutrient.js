@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     },
   });
 
-const NewsIngredient = (props) => {
+const NewsNutrient = (props) => {
     const classes = useStyles();
 
     return (
@@ -49,4 +49,4 @@ const NewsIngredient = (props) => {
     )
 }
 
-export default NewsIngredient;
+export default NewsNutrient;

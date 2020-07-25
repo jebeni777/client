@@ -133,15 +133,6 @@ function Ingredient(props) {
                                 >
                                     Recipes
                                 </Button>
-                                {/* <Button 
-                                    aria-label="News"
-                                    className={classes.btn}
-                                    onClick={getNews}
-                                    variant="outlined"
-                                    color="primary"
-                                >
-                                    Latest News
-                                </Button> */}
                             </CardContent>
                         </Card>
                     </Grid>
@@ -152,7 +143,7 @@ function Ingredient(props) {
                         </Card>
                         
                         {news && news.articles.map((y, j)=> (
-                            <List className={classes.list} >
+                            <List className={classes.list} key={j}>
                                 <NewsIngredient key={j} 
                                     title={y.title} 
                                     link={y.url} 
