@@ -21,10 +21,7 @@ const builder = imageUrlBuilder(myConfigSanityClient);
 const useStyles = makeStyles({
     root: {
         minWidth: 275,
-      maxWidth: 275,
-      borderRadius: 10,
-      backgroundColor: "#FFF",
-      marginBottom: "1.5em"
+        maxWidth: 450,
 
     },
     bullet: {
@@ -33,26 +30,44 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 22,
-        fontWeight: "bold",
-        margin: "12 0 12 0",
+        fontSize: 24,
+        fontWeight: "bolder",
     },
     pos: {
         margin: "12 0 12 0",
+        fontWeight: "bolder",
     },
-    btn: {
-        marginTop: 6,  
+    top: {
+        fontSize: 16,
+        fontWeight: "bolder",
+        marginTop: 12,
+        marginBottom: 12,
+    },
+    h6: {
+        fontSize: 16,
+        fontWeight: 'bolder',
+    },
+    links: {
+        listStyleType: "none",
+        fontSize: 22,
+        fontWeight: "bolder",
     },
     list: {
         width: '100%',
         maxWidth: '55ch',
+    },
+    btn: {
+        marginTop: 12,
     }
+
 });
 
 const imgStyle = {
     height: "8em",
     width: "8em",
+
 };
+
 
 function urlFor(_ref) {
     return builder.image(_ref)
@@ -104,7 +119,7 @@ function Ingredient(props) {
                                 <Typography className={classes.title}>{ingredient.title}</Typography>
                                 <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
                                 <Typography className={classes.title}>Possible benefits</Typography>
-                                {ingredient.body[0].children[0].text}
+                                <Typography className={classes.top}>{ingredient.body[0].children[0].text}</Typography>
                                 <Typography className={classes.title} >Nutrients</Typography>
 
                                 {ingredient.nutrients.map((nutrient, i) => {
@@ -113,7 +128,7 @@ function Ingredient(props) {
                                         <Link to={`/nutrients/${nutrient.toLowerCase()}`}
                                             key={nutrient}
                                         >
-                                            <li style={{ listStyleType: "none" }}>{nutrient}</li>
+                                            <Typography className={classes.links} >  <li style={{ listStyleType: "none" }}>{nutrient}</li></Typography>
                                         </Link>
                                     )
                                 })}
@@ -121,7 +136,7 @@ function Ingredient(props) {
                                 <Typography className={classes.title}>Creative uses</Typography>
                                 {ingredient.uses.map((uses, i) => {
                                     return (
-                                        <li key={i} style={{ listStyleType: "none" }}>{uses}</li>
+                                        <Typography className={classes.h6} ><li key={i} style={{ listStyleType: "none" }}>{uses}</li></Typography>
                                     )
                                 })}
                                 <Button 
