@@ -35,6 +35,7 @@ const useStyles = makeStyles({
         fontWeight: "bolder",
     },
     top: {
+        fontWeight: 16,
         marginTop: 12,
         marginBottom: 12,
     },
