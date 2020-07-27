@@ -43,6 +43,12 @@ const useStyles = makeStyles({
         marginTop: 12,
         marginBottom: 12,
     },
+    news: {
+        margin: "0 0 12 0",
+        padding: "1em",
+        backgroundColor: "#533e2d",
+        color: "white",
+    },
     h6: {
         fontSize: 16,
         fontWeight: 'bolder',
@@ -136,7 +142,7 @@ function Ingredient(props) {
                                 <Typography className={classes.title}>Creative uses</Typography>
                                 {ingredient.uses.map((uses, i) => {
                                     return (
-                                        <Typography className={classes.h6} ><li key={i} style={{ listStyleType: "none" }}>{uses}</li></Typography>
+                                        <Typography className={classes.h6} key={i}>{uses}</Typography>
                                     )
                                 })}
                                 <Button 
@@ -153,7 +159,7 @@ function Ingredient(props) {
                     </Grid>
                     
                     <Grid item xs >
-                        <Card style={{ margin: "0 0 12 0", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
+                        <Card className={classes.news}>
                             <Typography variant="h5">Latest News on {ingredient.title}</Typography>
                         </Card>
                         

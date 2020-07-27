@@ -16,6 +16,9 @@ const useStyles = makeStyles({
     inline: {
       display: 'inline',
     },
+    divide: {
+      maxWidth: '36ch',
+    }
   });
 
 const NewsNutrient = (props) => {
@@ -40,7 +43,6 @@ const NewsNutrient = (props) => {
                           >
                             {props.date.slice(0,10)}
                           </Typography>
-                          {/* {props.desc} */}
                         </React.Fragment>
                       }
                 />

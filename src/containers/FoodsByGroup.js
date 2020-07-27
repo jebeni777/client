@@ -32,13 +32,26 @@ const useStyles = makeStyles({
         transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 22,
+        fontSize: 24,
+        fontWeight: 'bolder',
     },
     pos: {
         marginBottom: 0,
     },
     top: {
+        fontWeight: 16,
         marginTop: 12,
+        marginBottom: 12,
+    },
+    h6: {
+        fontSize: 16,
+        fontWeight: 'bolder',
+        listStyleType: "none",
+    },
+    list: {
+        listStyleType: "none",
+        fontSize: 22,
+        fontWeight: "bolder",
     },
 });
 
@@ -83,15 +96,15 @@ function FoodsByGroup(props) {
                                             <Link to={`/nutrients/${nutrient.toLowerCase()}`}
                                                 key={nutrient}
                                             >
-                                                <li style={{ listStyleType: "none" }}>{nutrient}</li>
+                                                <Typography className={classes.list} ><li>{nutrient}</li></Typography>
                                             </Link>
                                         )
                                     })}
 
-                                    <h4>Creative uses</h4>
+                                    <Typography className={classes.title} >Creative uses</Typography>
                                     {ingredient.uses.map((uses, i) => {
                                         return (
-                                            <li key={i} style={{ listStyleType: "none" }}>{uses}</li>
+                                            <Typography className={classes.h6} ><li key={i}>{uses}</li></Typography>
                                         )
                                     })}
                                 </CardContent>

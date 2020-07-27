@@ -39,14 +39,20 @@ const useStyles = makeStyles({
         marginTop: 12,
         marginBottom: 12,
     },
+    news: {
+        margin: "0 0 12 0",
+        padding: "1em",
+        backgroundColor: "#533e2d",
+        color: "white",
+    },
     h6: {
         fontSize: 16,
     },
     list: {
-        width: '100%',
-        maxWidth: '55ch',
-    }
-
+        listStyleType: "none",
+        fontSize: 22,
+        fontWeight: "bolder",
+    },
 });
 
 const imgStyle = {
@@ -107,9 +113,9 @@ function Nutrients(props) {
                                         <Link to={`/foods/${foodSlug}`}
                                             key={i}
                                         >
-                                            <li style={{ listStyleType: "none", marginLeft: 20, fontSize: 22, fontWeight: "bolder" }}>
+                                            <Typography className={classes.list} >
                                                 {food}
-                                            </li>
+                                            </Typography>
                                         </Link>
                                     )
                                 })}
@@ -117,7 +123,7 @@ function Nutrients(props) {
                         </Card>
                     </Grid>
                     <Grid item xs >
-                        <Card style={{ margin: "0 0 12 0", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
+                        <Card className={classes.news}>
                             <Typography variant="h5">Latest News on {nutrient.title}</Typography>
                         </Card>
                         

@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     },
     title: {
         fontSize: 30,
-        fontWeight: "bold",
+        fontWeight: "bolder",
         padding: "0.5em"
     },
     pos: {
