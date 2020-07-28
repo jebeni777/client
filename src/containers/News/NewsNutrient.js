@@ -48,7 +48,7 @@ const NewsNutrient = (props) => {
                 />
                 </a>
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider component="li" />
         </>
     
     )
