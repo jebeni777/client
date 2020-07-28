@@ -5,6 +5,7 @@ import {
   Route,
   Switch
 } from "react-router-dom";
+import ScrollToTop from "./components/ScrollToTop";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import teal from "@material-ui/core/colors/teal";
@@ -133,6 +134,7 @@ function App({
       <CssBaseline />
       <div style={{ height: "100vh" }}>
         <Router>
+          <ScrollToTop />
           <Switch>
             <DashboardRoute exact path="/" component={Home} />
 
