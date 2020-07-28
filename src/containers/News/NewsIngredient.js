@@ -39,13 +39,12 @@ const NewsIngredient = (props) => {
                           >
                             {props.date.slice(0,10)}
                           </Typography>
-                          {/* {props.desc} */}
                         </React.Fragment>
                       }
                 />
                 </a>
             </ListItem>
-            <Divider variant="inset" component="li" />
+            <Divider  component="li" />
         </>
     
     )
