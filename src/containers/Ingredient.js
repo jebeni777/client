@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -88,6 +88,14 @@ function Ingredient(props) {
     const NEWS_TOKEN = '3d11e59e2a6e1f7f309a039b5609d493';
     const [recipe, setRecipe] = useState();
     const [news, setNews] = useState();
+    const divRecipe = useRef(null);
+
+    useEffect(() => {
+        const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop) 
+            if (recipe) {
+                scrollToRef(divRecipe);
+            }
+    }, [recipe])
 
     useEffect(() => {
         let aborted = false;
@@ -112,6 +120,7 @@ function Ingredient(props) {
             axios.get(recipeSearch)
             .then(response => setRecipe(response.data) )
         };
+
 
         return (
             < div >
@@ -176,21 +185,26 @@ function Ingredient(props) {
                         ))}       
                     </Grid>
                 </Grid>
+                <div ref={divRecipe}>
                 <Grid
                     container
                     direction="row"
                     alignContent="space-around"
                 >
+
                  {recipe && recipe.hits.map((x, i)=> (
+                     
                     <Grid item xs key={i}>
                             <Recipe title={x.recipe.label} image={x.recipe.image} link={x.recipe.url} />
                             </Grid>
                         ))}
                 </Grid>
+                </div>
             </div >
         )
     }
 };
+
 
 const mapStateToProps = (state, props) => {
     const ingredientName = props.match.params.id;
