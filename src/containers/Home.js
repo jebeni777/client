@@ -44,16 +44,13 @@ const btnStyle = {
 export default function Home(props) {
   const classes = useStyles;
 
-  // const onClick = async() => {
-  //   await fetchRecipes();
-  // }
 
   return (
     <Grid
       container
     >
       <Grid item xs={12} sm={6} >
-        {/* <Button onClick={onClick}>Test Fetch</Button> */}
+
         <Card style={{ margin: "1em", padding: "1em", backgroundColor: "#533e2d", color: "white" }}>
           <Typography variant="h5" >How do you feel?</Typography>
         </Card>

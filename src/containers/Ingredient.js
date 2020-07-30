@@ -49,6 +49,13 @@ const useStyles = makeStyles({
         backgroundColor: "#533e2d",
         color: "white",
     },
+    views: {
+        margin: "12 0 12 0",
+        padding: "1em",
+        backgroundColor: "#533e2d",
+        color: "white", 
+        maxWidth: '40%',
+    },
     h6: {
         fontSize: 16,
         fontWeight: 'bolder',
@@ -82,7 +89,7 @@ function urlFor(_ref) {
 
 function Ingredient(props) {
     const classes = useStyles();
-    const { ingredient } = props;
+    const { ingredient, ingredients } = props;
     const API_ID = '33fca76c';
     const API_KEY = '39f634430116065e2b0fc40a08e396f3';
     const NEWS_TOKEN = '3d11e59e2a6e1f7f309a039b5609d493';
@@ -95,11 +102,12 @@ function Ingredient(props) {
             if (recipe) {
                 scrollToRef(divRecipe);
             }
-    }, [recipe])
+        }, [recipe]);
 
     useEffect(() => {
         let aborted = false;
         if (ingredient) {
+            
             const newsSearch = `https://gnews.io/api/v3/search?q=${ingredient.title}&token=${NEWS_TOKEN}&max=2`;
             const getNews = () => {
                 axios.get(newsSearch)
@@ -113,7 +121,32 @@ function Ingredient(props) {
 
     if (!ingredient) {
         return <div>Ingredient doesn't exist</div>
-    } else {
+    } else { 
+        let timestamp = Date.now();
+        let name = ingredient.title;
+
+        let ingNTime = {name, timestamp};
+
+        var oldViewed = JSON.parse(localStorage.viewed) || [];
+        var filteredViewed = oldViewed.filter(v => v.name !== name);
+        filteredViewed.unshift(ingNTime);
+        filteredViewed = filteredViewed.slice(0, 5);
+        
+        localStorage.viewed = JSON.stringify(filteredViewed);
+
+        var ingredientsViewed = filteredViewed.map((x, i) => {
+            return ingredients.find(ingredient => ingredient.title === x.name);
+        })
+
+        // let image = urlFor(ingredient.mainImage.asset._ref);
+        // var oldViewed = new Map(JSON.parse(localStorage.myMap));
+        // let myMap = new Map();
+        // myMap.set(['name', name, timestamp])
+        // myMap.set('timestamp', timestamp)
+        // localStorage.myMap = JSON.stringify([...myMap]);
+    
+        // var viewed = new Map(JSON.parse(localStorage.myMap));
+        
         const recipeSearch = `https://api.edamam.com/search?q=${ingredient.title}&app_id=${API_ID}&app_key=${API_KEY}&from=0&to=24`;
 
         const getRecipe = () => {
@@ -168,7 +201,7 @@ function Ingredient(props) {
                     </Grid>
                     
                     <Grid item xs >
-                        <Card className={classes.news}>
+                        <Card className={classes.views}>
                             <Typography variant="h5">Latest News on {ingredient.title}</Typography>
                         </Card>
                         
@@ -186,20 +219,34 @@ function Ingredient(props) {
                     </Grid>
                 </Grid>
                 <div ref={divRecipe}>
-                <Grid
-                    container
-                    direction="row"
-                    alignContent="space-around"
-                >
-
-                 {recipe && recipe.hits.map((x, i)=> (
-                     
-                    <Grid item xs key={i}>
-                            <Recipe title={x.recipe.label} image={x.recipe.image} link={x.recipe.url} />
+                    <Card className={classes.views}>
+                            <Typography variant="h5">Recipes for {ingredient.title}</Typography>
+                    </Card>
+                    <Grid
+                        container
+                        direction="row"
+                        alignContent="space-around"
+                    >
+                        {recipe && recipe.hits.map((x, i)=> (
+                            <Grid item xs key={i}>
+                                <Recipe title={x.recipe.label} image={x.recipe.image} link={x.recipe.url} />
                             </Grid>
                         ))}
-                </Grid>
+                    </Grid>
+                        
                 </div>
+               {ingredientsViewed.map((z, i) => {
+                    return (
+                        <Grid item xs key={i}>
+                            <Card className={classes.root} variant="outlined">
+                                <CardContent>
+                                <Typography className={classes.title}>{z.title}</Typography>
+                                    <img src={urlFor(z.mainImage.asset._ref)} alt={z.imageAltText} style={imgStyle} />
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                   )
+               }) }
             </div >
         )
     }
@@ -211,7 +258,8 @@ const mapStateToProps = (state, props) => {
     const ingredient = state.ingredients.find(ingredient => ingredient.slug.current === ingredientName);
 
     return {
-        ingredient
+        ingredient,
+        ingredients: state.ingredients
     };
 };
 
