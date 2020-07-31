@@ -139,7 +139,7 @@ function Ingredient(props) {
 
         var ingredientsViewed = filteredViewed.map((x, i) => {
             return ingredients.find(ingredient => ingredient.title === x.name);
-        })
+        }).filter(v => v)
         
         const recipeSearch = `https://api.edamam.com/search?q=${ingredient.title}&app_id=${API_ID}&app_key=${API_KEY}&from=0&to=12`;
 
@@ -238,9 +238,10 @@ function Ingredient(props) {
                         direction="row"
                         alignContent="space-around"
                     >
-                        {ingredientsViewed &&  ingredientsViewed.map((z, j) => (
                         
-                            <Grid item xs key={j}>
+                        {ingredientsViewed.map((z, j) => (
+                        
+                            <Grid item xs >
                                 <Card className={classes.visited} variant="outlined">
                                     <CardContent>
                                         <Link to={`/foods/${z.slug.current}`}
@@ -254,6 +255,8 @@ function Ingredient(props) {
                             </Grid>
                         
                         ))}
+                        
+                        
                     </Grid>
                </div>
             </div >
