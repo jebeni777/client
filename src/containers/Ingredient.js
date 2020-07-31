@@ -24,11 +24,14 @@ const useStyles = makeStyles({
         maxWidth: 450,
 
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
+    visited: {
+        minWidth: 170,
+        maxWidth: 170,
+        borderRadius: 10,
+        alignContent: "center",
+        backgroundColor: "#FFF",
+    
+      },
     title: {
         fontSize: 24,
         fontWeight: "bolder",
@@ -108,7 +111,7 @@ function Ingredient(props) {
         let aborted = false;
         if (ingredient) {
             
-            const newsSearch = `https://gnews.io/api/v3/search?q=${ingredient.title}&token=${NEWS_TOKEN}&max=2`;
+            const newsSearch = `https://gnews.io/api/v3/search?q=${ingredient.title}&token=${NEWS_TOKEN}&max=3`;
             const getNews = () => {
                 axios.get(newsSearch)
                 .then(response => aborted || setNews(response.data) )
@@ -130,24 +133,15 @@ function Ingredient(props) {
         var oldViewed = JSON.parse(localStorage.viewed) || [];
         var filteredViewed = oldViewed.filter(v => v.name !== name);
         filteredViewed.unshift(ingNTime);
-        filteredViewed = filteredViewed.slice(0, 5);
+        filteredViewed = filteredViewed.slice(0, 8);
         
         localStorage.viewed = JSON.stringify(filteredViewed);
 
         var ingredientsViewed = filteredViewed.map((x, i) => {
             return ingredients.find(ingredient => ingredient.title === x.name);
         })
-
-        // let image = urlFor(ingredient.mainImage.asset._ref);
-        // var oldViewed = new Map(JSON.parse(localStorage.myMap));
-        // let myMap = new Map();
-        // myMap.set(['name', name, timestamp])
-        // myMap.set('timestamp', timestamp)
-        // localStorage.myMap = JSON.stringify([...myMap]);
-    
-        // var viewed = new Map(JSON.parse(localStorage.myMap));
         
-        const recipeSearch = `https://api.edamam.com/search?q=${ingredient.title}&app_id=${API_ID}&app_key=${API_KEY}&from=0&to=24`;
+        const recipeSearch = `https://api.edamam.com/search?q=${ingredient.title}&app_id=${API_ID}&app_key=${API_KEY}&from=0&to=12`;
 
         const getRecipe = () => {
             axios.get(recipeSearch)
@@ -220,14 +214,14 @@ function Ingredient(props) {
                 </Grid>
                 <div ref={divRecipe}>
                     <Card className={classes.views}>
-                            <Typography variant="h5">Recipes for {ingredient.title}</Typography>
+                        <Typography variant="h5">Recipes for {ingredient.title}</Typography>
                     </Card>
                     <Grid
                         container
                         direction="row"
                         alignContent="space-around"
                     >
-                        {recipe && recipe.hits.map((x, i)=> (
+                        {recipe && recipe.hits.map((x, i) => (
                             <Grid item xs key={i}>
                                 <Recipe title={x.recipe.label} image={x.recipe.image} link={x.recipe.url} />
                             </Grid>
@@ -235,18 +229,33 @@ function Ingredient(props) {
                     </Grid>
                         
                 </div>
-               {ingredientsViewed.map((z, i) => {
-                    return (
-                        <Grid item xs key={i}>
-                            <Card className={classes.root} variant="outlined">
-                                <CardContent>
-                                <Typography className={classes.title}>{z.title}</Typography>
-                                    <img src={urlFor(z.mainImage.asset._ref)} alt={z.imageAltText} style={imgStyle} />
-                                </CardContent>
-                            </Card>
-                        </Grid>
-                   )
-               }) }
+                <div >
+                    <Card className={classes.views}>
+                            <Typography variant="h5">Recently Viewed</Typography>
+                    </Card>
+                    <Grid 
+                        container
+                        direction="row"
+                        alignContent="space-around"
+                    >
+                        {ingredientsViewed &&  ingredientsViewed.map((z, j) => (
+                        
+                            <Grid item xs key={j}>
+                                <Card className={classes.visited} variant="outlined">
+                                    <CardContent>
+                                        <Link to={`/foods/${z.slug.current}`}
+                                        key={ingredient}
+                                        >
+                                            <Typography className={classes.title}>{z.title}</Typography>
+                                            <img src={urlFor(z.mainImage.asset._ref)} alt={z.imageAltText} style={imgStyle} />
+                                        </Link>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        
+                        ))}
+                    </Grid>
+               </div>
             </div >
         )
     }
