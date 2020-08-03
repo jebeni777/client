@@ -104,7 +104,7 @@ function FoodsByGroup(props) {
                                     <Typography className={classes.title} >Creative uses</Typography>
                                     {ingredient.uses.map((uses, i) => {
                                         return (
-                                            <Typography className={classes.h6} ><li key={i}>{uses}</li></Typography>
+                                            <Typography className={classes.h6} key={i} ><li>{uses}</li></Typography>
                                         )
                                     })}
                                 </CardContent>
