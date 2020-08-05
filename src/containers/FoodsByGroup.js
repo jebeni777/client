@@ -90,11 +90,11 @@ function FoodsByGroup(props) {
                                         <img src={urlFor(ingredient.mainImage.asset._ref)} alt={ingredient.imageAltText} style={imgStyle} />
                                     </Link>
                                     <Typography variant="h6">Nutrients</Typography>
-                                    {ingredient.nutrients.map(nutrient => {
+                                    {ingredient.nutrients.map((nutrient, i) => {
 
                                         return (
                                             <Link to={`/nutrients/${nutrient.toLowerCase()}`}
-                                                key={nutrient}
+                                                key={i}
                                             >
                                                 <Typography className={classes.list} ><li>{nutrient}</li></Typography>
                                             </Link>
