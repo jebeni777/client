@@ -10,4 +10,4 @@ describe('this is a test', () => {
         // such as make sure the "Choose an ailment..." button displays
 
     })
-} ) 
+})
