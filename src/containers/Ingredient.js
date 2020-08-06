@@ -14,7 +14,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import Recipe from "./Recipe";
 import NewsIngredient from "./News/NewsIngredient";
 import axios from "axios";
-import { ReactTinyLink } from "react-tiny-link";
+import RecentlyViewed from "../components/RecentlyViewed";
+import useRecent from "../helpers/useRecent";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -99,6 +100,13 @@ function Ingredient(props) {
     const [recipe, setRecipe] = useState();
     const [news, setNews] = useState();
     const divRecipe = useRef(null);
+    const [recent, setRecent] = useRecent("ingredient");
+
+    useEffect(() => {
+        if (ingredient) {
+            setRecent(ingredient)
+        }
+    }, [ingredient]);
 
     useEffect(() => {
         const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop) 
@@ -125,21 +133,6 @@ function Ingredient(props) {
     if (!ingredient) {
         return <div>Ingredient doesn't exist</div>
     } else { 
-        let timestamp = Date.now();
-        let name = ingredient.title;
-
-        let ingNTime = {name, timestamp};
-
-        var oldViewed = JSON.parse(localStorage.viewed) || [];
-        var filteredViewed = oldViewed.filter(v => v.name !== name);
-        filteredViewed.unshift(ingNTime);
-        filteredViewed = filteredViewed.slice(0, 8);
-        
-        localStorage.viewed = JSON.stringify(filteredViewed);
-
-        var ingredientsViewed = filteredViewed.map((x, i) => {
-            return ingredients.find(ingredient => ingredient.title === x.name);
-        }).filter(v => v)
         
         const recipeSearch = `https://api.edamam.com/search?q=${ingredient.title}&app_id=${API_ID}&app_key=${API_KEY}&from=0&to=12`;
 
@@ -230,7 +223,8 @@ function Ingredient(props) {
                         
                 </div>
                 <div >
-                    <Card className={classes.views}>
+                    <RecentlyViewed items={recent} />
+                    {/* <Card className={classes.views}>
                             <Typography variant="h5">Recently Viewed</Typography>
                     </Card>
                     <Grid 
@@ -257,7 +251,7 @@ function Ingredient(props) {
                         ))}
                         
                         
-                    </Grid>
+                    </Grid> */}
                </div>
             </div >
         )
