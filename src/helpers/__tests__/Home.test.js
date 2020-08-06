@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Home from './Home';
+import Home from '../../containers/Home';
 
 describe('this is a test', () => {
     // this is where your tests go
@@ -10,4 +10,4 @@ describe('this is a test', () => {
         // such as make sure the "Choose an ailment..." button displays
 
     })
-} ) 
+})
