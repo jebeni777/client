@@ -68,6 +68,7 @@ function RecentlyViewed({items}) {
                             <CardContent>
                                 <Typography>{item.title}</Typography>
                                 <img src={urlFor(item.mainImage.asset._ref)} alt={item.imageAltText} style={imgStyle} />
+                                <Typography>Recently viewed <br />{moment(item.time).fromNow()}</Typography>
                             </CardContent>
                         </Card>
                     </Grid>
