@@ -15,7 +15,7 @@ const useRecent = (key) => {
     ];
     setRecent(newRecent);
   };
-  return [recent, addRecent];
+  return [recent.slice(0, 8), addRecent];
 };
 
 export default useRecent;
