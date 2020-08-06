@@ -106,6 +106,7 @@ function Ingredient(props) {
     const [recent, setRecent] = useRecent("ingredient");
     const [showRecipes, setShowRecipes] = useState(false);
 
+
     useEffect(() => {
         if (ingredient) {
             setRecent(ingredient)
@@ -144,12 +145,16 @@ function Ingredient(props) {
         const getRecipe = () => {
             axios.get(recipeSearch)
             .then(response => setRecipe(response.data) )
+
             showRecipes();
         };
 
         const showRecipes = () => {
             document.getElementById("results").style.visibility="visible";
-        }
+        };
+
+
+
 
         return (
             < div >
@@ -215,7 +220,9 @@ function Ingredient(props) {
                     </Grid>
                 </Grid>
                 <div ref={divRecipe} className={classes.hide} id="results">
+
                     <Card className={classes.views}>
+
                         <Typography variant="h5">Recipes for {ingredient.title}</Typography>
                     </Card>
                     <Grid
