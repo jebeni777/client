@@ -75,6 +75,9 @@ const useStyles = makeStyles({
     },
     btn: {
         marginTop: 12,
+    },
+    hide: {
+        visibility: "hidden",
     }
 
 });
@@ -101,6 +104,7 @@ function Ingredient(props) {
     const [news, setNews] = useState();
     const divRecipe = useRef(null);
     const [recent, setRecent] = useRecent("ingredient");
+    const [showRecipe, setShowRecipe] = useState(false);
 
     useEffect(() => {
         if (ingredient) {
@@ -111,6 +115,7 @@ function Ingredient(props) {
     useEffect(() => {
         const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop) 
             if (recipe) {
+                setShowRecipe(true);
                 scrollToRef(divRecipe);
             }
         }, [recipe]);
@@ -139,8 +144,12 @@ function Ingredient(props) {
         const getRecipe = () => {
             axios.get(recipeSearch)
             .then(response => setRecipe(response.data) )
+            showResults();
         };
 
+        const showResults = () => {
+            document.getElementById("results").style.visibility = "visible"; 
+        }
 
         return (
             < div >
@@ -205,8 +214,10 @@ function Ingredient(props) {
                         ))}       
                     </Grid>
                 </Grid>
-                <div ref={divRecipe}>
-                    <Card className={classes.views}>
+                <div ref={divRecipe} className={classes.hide} id="results">
+                    <Card 
+                        className={classes.views}
+                    >
                         <Typography variant="h5">Recipes for {ingredient.title}</Typography>
                     </Card>
                     <Grid
