@@ -106,17 +106,7 @@ function Ailment(props) {
                     })}
 
                     <Typography variant="h6">Helpful foods</Typography>
-                    {/* {ailment.foods.map((food, i) => {
-                        return (
-                            <Link to={`/foods/${food}`}
-                                key={i}
-                            >
-                                <li style={{ listStyleType: "none", marginLeft: 20 }}>
-                                    {food}
-                                </li>
-                            </Link>
-                        )
-                    })} */}
+                    
                     {allFoods.map((ingre, j) => {
                         return (
                             <Link to={`/foods/${ingre.slug}`}

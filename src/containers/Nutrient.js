@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 import { getObject } from '../helpers/helper';
 import NewsNutrient from '../containers/News/NewsNutrient';
 import axios from 'axios';
+import RecentlyViewed from "../components/RecentlyViewed";
+import useRecent from "../helpers/useRecent";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
@@ -69,6 +71,13 @@ function Nutrients(props) {
     const { nutrient, ingredients } = props;
     const NEWS_TOKEN = '3d11e59e2a6e1f7f309a039b5609d493';
     const [news, setNews] = useState();
+    const [recent, setRecent] = useRecent("nutrient");
+
+    useEffect(() => {
+        if (nutrient) {
+            setRecent(nutrient)
+        }
+    }, [nutrient]);
 
     useEffect(() => {
         let aborted = false;
@@ -140,6 +149,9 @@ function Nutrients(props) {
                         ))}       
                     </Grid>
                 </Grid>
+                <div >
+                    <RecentlyViewed items={recent} />
+               </div>
             </div >
         )
     }
