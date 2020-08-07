@@ -153,9 +153,6 @@ function Ingredient(props) {
             document.getElementById("results").style.visibility="visible";
         };
 
-
-
-
         return (
             < div >
                 <Grid
@@ -240,34 +237,6 @@ function Ingredient(props) {
                 </div>
                 <div >
                     <RecentlyViewed items={recent} />
-                    {/* <Card className={classes.views}>
-                            <Typography variant="h5">Recently Viewed</Typography>
-                    </Card>
-                    <Grid 
-                        container
-                        direction="row"
-                        alignContent="space-around"
-                    >
-                        
-                        {ingredientsViewed.map((z, j) => (
-                        
-                            <Grid item xs >
-                                <Card className={classes.visited} variant="outlined">
-                                    <CardContent>
-                                        <Link to={`/foods/${z.slug.current}`}
-                                        key={ingredient}
-                                        >
-                                            <Typography className={classes.title}>{z.title}</Typography>
-                                            <img src={urlFor(z.mainImage.asset._ref)} alt={z.imageAltText} style={imgStyle} />
-                                        </Link>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
-                        
-                        ))}
-                        
-                        
-                    </Grid> */}
                </div>
             </div >
         )
