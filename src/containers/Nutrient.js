@@ -23,13 +23,8 @@ const useStyles = makeStyles({
         maxWidth: "100%",
 
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
     title: {
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: "bolder",
     },
     pos: {

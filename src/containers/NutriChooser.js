@@ -23,7 +23,7 @@ const useStyles = makeStyles({
         marginBottom: 0,
     },
     title: {
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: "bolder",
     },
     pos: {

@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     
     },
     title: {
-        fontSize: 24,
+        fontSize: 30,
         fontWeight: "bolder",
     },
     views: {

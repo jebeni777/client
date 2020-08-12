@@ -23,10 +23,14 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontSize: 30,
         fontWeight: "bolder",
-        padding: "1rem"
     },
     pos: {
         marginBottom: "1rem",
+    },
+    list: {
+        listStyleType: "none",
+        fontSize: 22,
+        fontWeight: "bolder",
     },
 }));
 
@@ -88,30 +92,30 @@ function Ailment(props) {
                     <Typography className={classes.title}>{ailment.title}</Typography>
                     <img src={urlFor(ailment.image)} alt={ailment.imageAltText} style={imgStyle} />
                     <Typography className={classes.pos} variant="body1">{ailment.body[0].children[0].text}</Typography>
-                    <Typography variant="h6">Nutrients that can help</Typography>
+                    <Typography className={classes.title}>Nutrients that can help</Typography>
                     {ailment.nutrients.map((nutrient, i) => {
                         return (
                             <Link to={`/nutrients/${nutrient.toLowerCase()}`}
 
                                 key={i}
                             >
-                                <li style={{ listStyleType: "none", marginLeft: 20 }}>
+                                <Typography className={classes.list}><li style={{ listStyleType: "none", marginLeft: 20 }}>
                                     {nutrient}
-                                </li>
+                                </li></Typography>
                             </Link>
                         )
                     })}
 
-                    <Typography variant="h6">Helpful foods</Typography>
+                    <Typography className={classes.title}>Helpful foods</Typography>
                     
                     {allFoods.map((ingre, j) => {
                         return (
                             <Link to={`/foods/${ingre.slug}`}
                                 key={j}
                             >
-                                <li style={{ listStyleType: "none", marginLeft: 20 }}>
+                                <Typography className={classes.list}><li style={{ listStyleType: "none", marginLeft: 20 }}>
                                     {ingre.text}
-                                </li>
+                                </li></Typography>
                             </Link>
                         )
                     })}
