@@ -19,8 +19,8 @@ const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
-        maxWidth: 450,
+        minWidth: "100%",
+        maxWidth: "100%",
 
     },
     bullet: {

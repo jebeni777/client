@@ -23,15 +23,17 @@ const useStyles = makeStyles(theme => ({
     title: {
         fontSize: 30,
         fontWeight: "bolder",
-        padding: "0.5em"
+        padding: "1rem"
     },
     pos: {
-        marginBottom: "1em",
-    },
-    top: {
-        marginTop: 12,
+        marginBottom: "1rem",
     },
 }));
+
+const imgStyle = {
+    height: "11rem",
+    width: "11rem",
+  }
 
 function urlFor(_ref) {
     return builder.image(_ref)
@@ -84,7 +86,7 @@ function Ailment(props) {
             <Card className={classes.root} variant="outlined">
                 <CardContent>
                     <Typography className={classes.title}>{ailment.title}</Typography>
-                    <Typography className={classes.pos}><img src={urlFor(ailment.image)} alt={ailment.imageAltText} /></Typography>
+                    <img src={urlFor(ailment.image)} alt={ailment.imageAltText} style={imgStyle} />
                     <Typography className={classes.pos} variant="body1">{ailment.body[0].children[0].text}</Typography>
                     <Typography variant="h6">Nutrients that can help</Typography>
                     {ailment.nutrients.map((nutrient, i) => {

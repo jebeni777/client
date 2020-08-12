@@ -39,8 +39,8 @@ const useStyles = makeStyles({
 });
 
 const imgStyle = {
-  height: "11em",
-  width: "11em",
+  height: "11rem",
+  width: "11rem",
 }
 
 function urlFor(_ref) {

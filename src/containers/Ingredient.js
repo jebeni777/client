@@ -22,9 +22,10 @@ const builder = imageUrlBuilder(myConfigSanityClient);
 const useStyles = makeStyles(theme => ({
     root: {
         minWidth: "100%",
-        [theme.breakpoints.up('sm')]: {
-            maxWidth: 450,
-        },
+        maxWidth: "100%",
+        // [theme.breakpoints.up('sm')]: {
+        //     maxWidth: 450,
+        // },
     },
     visited: {
         minWidth: "100%",
