@@ -35,8 +35,8 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: "#FFF",
     
       },
-    title: {
-        fontSize: 24,
+      title: {
+        fontSize: 30,
         fontWeight: "bolder",
     },
     pos: {

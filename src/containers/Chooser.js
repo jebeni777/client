@@ -14,22 +14,18 @@ const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
   root: {
-    minWidth: "100%",
-    maxWidth: "100%",
+    minWidth: 210,
+    maxWidth: 210,
+    minHeight: "100%",
     borderRadius: 10,
     alignContent: "center",
     backgroundColor: "#FFF",
-
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
+    marginBottom: 0,
+},
   title: {
-    fontSize: 22,
-    padding: 10,
-  },
+    fontSize: 30,
+    fontWeight: "bolder",
+},
   pos: {
     marginBottom: 17,
   },
