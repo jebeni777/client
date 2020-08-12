@@ -14,13 +14,13 @@ const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
     root: {
-        minWidth: "100%",
-        maxWidth: "100%",
+        minWidth: 160,
+        maxWidth: 160,
         minHeight: "100%",
         borderRadius: 10,
         alignContent: "center",
         backgroundColor: "#FFF",
-        marginBottom: 12,
+        marginBottom: 0,
     },
     title: {
         fontSize: 24,
