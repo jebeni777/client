@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import 'typeface-roboto';
 import imageUrlBuilder from "@sanity/image-url";
 import myConfigSanityClient from "../client";
@@ -11,19 +11,14 @@ import { connect } from 'react-redux';
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
-        minWidth: 275,
-        maxWidth: 900,
+        minWidth: "100%",
+        maxWidth: "100%",
         borderRadius: 10,
         alignContent: "center",
         backgroundColor: "#FFF",
 
-    },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
     },
     title: {
         fontSize: 30,
@@ -36,7 +31,7 @@ const useStyles = makeStyles({
     top: {
         marginTop: 12,
     },
-});
+}));
 
 function urlFor(_ref) {
     return builder.image(_ref)

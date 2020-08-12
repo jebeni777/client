@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import 'typeface-roboto';
 import { connect } from 'react-redux';
@@ -19,15 +19,16 @@ import useRecent from "../helpers/useRecent";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
-        minWidth: 275,
-        maxWidth: 450,
-
+        minWidth: "100%",
+        [theme.breakpoints.up('sm')]: {
+            maxWidth: 450,
+        },
     },
     visited: {
-        minWidth: 170,
-        maxWidth: 170,
+        minWidth: "100%",
+        maxWidth: "100%",
         borderRadius: 10,
         alignContent: "center",
         backgroundColor: "#FFF",
@@ -48,17 +49,18 @@ const useStyles = makeStyles({
         marginBottom: 12,
     },
     news: {
-        margin: "0 0 12 0",
+        margin: "12 0 12 0",
         padding: "1em",
         backgroundColor: "#533e2d",
         color: "white",
+        maxWidth: '100%',
     },
     views: {
         margin: "12 0 12 0",
         padding: "1em",
         backgroundColor: "#533e2d",
         color: "white", 
-        maxWidth: '40%',
+        
     },
     h6: {
         fontSize: 16,
@@ -80,7 +82,7 @@ const useStyles = makeStyles({
         visibility: "hidden",
     }
 
-});
+}));
 
 const imgStyle = {
     height: "8em",
@@ -199,7 +201,7 @@ function Ingredient(props) {
                     </Grid>
                     
                     <Grid item xs >
-                        <Card className={classes.views}>
+                        <Card className={classes.news}>
                             <Typography variant="h5">Latest News on {ingredient.title}</Typography>
                         </Card>
                         

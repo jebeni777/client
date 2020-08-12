@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import 'typeface-roboto';
 import myConfigSanityClient from '../client';
 import imageUrlBuilder from "@sanity/image-url";
@@ -11,7 +11,8 @@ import moment from "moment";
 
 const builder = imageUrlBuilder(myConfigSanityClient);
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+    
     visited: {
         minWidth: 170,
         maxWidth: 170,
@@ -29,10 +30,10 @@ const useStyles = makeStyles({
         padding: "1em",
         backgroundColor: "#533e2d",
         color: "white", 
-        maxWidth: '40%',
+        maxWidth: '100%',
     },
 
-});
+}));
 
 const imgStyle = {
     height: "8em",

@@ -14,8 +14,8 @@ const builder = imageUrlBuilder(myConfigSanityClient);
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 200,
-    maxWidth: 200,
+    minWidth: "100%",
+    maxWidth: "100%",
     borderRadius: 10,
     alignContent: "center",
     backgroundColor: "#FFF",
